@@ -1,0 +1,27 @@
+import React from 'react';
+import CustomButton from './CustomButton';
+import { FaBeer } from 'react-icons/fa';
+
+const App: React.FC = () => {
+  return (
+    <div style={{ padding: '10px' }}>
+      <CustomButton onClick={() => alert('Button clicked!')} icon={<FaBeer />}>
+        Styled Button
+      </CustomButton>
+
+      <CustomButton onClick={() => alert('Button clicked!')} icon={<FaBeer />} unstyled>
+        Unstyled Button
+      </CustomButton>
+
+      <CustomButton href="https://example.com" className="mt-4">
+        Styled Link
+      </CustomButton>
+
+      <CustomButton href="https://example.com" className="mt-4" unstyled>
+        Unstyled Link
+      </CustomButton>
+    </div>
+  );
+};
+
+export default App;

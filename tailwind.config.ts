@@ -21,19 +21,23 @@ const config = {
     extend: {
       backgroundImage: {
         "custom-gradient":
-          "linear-gradient(176deg, rgba(168, 192, 255, 0.90) -6.53%, rgba(109, 109, 196, 0.90) 27.56%, rgba(63, 43, 150, 0.90) 54.34%)",
+          "linear-gradient(109deg, rgba(168, 192, 255, 0.90) 12.88%, rgba(90, 82, 177, 0.90) 60.68%, rgba(63, 43, 150, 0.90) 87.02%)",
       },
       backgroundColor: {
         "custom-gradient":
-          "linear-gradient(176deg, rgba(168, 192, 255, 0.90) -6.53%, rgba(109, 109, 196, 0.90) 27.56%, rgba(63, 43, 150, 0.90) 54.34%)",
+          "linear-gradient(109deg, rgba(168, 192, 255, 0.90) 12.88%, rgba(90, 82, 177, 0.90) 60.68%, rgba(63, 43, 150, 0.90) 87.02%)",
       },
       textColor: {
         "custom-gradient":
-          "linear-gradient(176deg, rgba(168, 192, 255, 0.90) -6.53%, rgba(109, 109, 196, 0.90) 27.56%, rgba(63, 43, 150, 0.90) 54.34%)",
+          "linear-gradient(109deg, rgba(168, 192, 255, 0.90) 12.88%, rgba(90, 82, 177, 0.90) 60.68%, rgba(63, 43, 150, 0.90) 87.02%)",
       },
       borderColor: {
         "custom-gradient":
-          "linear-gradient(176deg, rgba(168, 192, 255, 0.90) -6.53%, rgba(109, 109, 196, 0.90) 27.56%, rgba(63, 43, 150, 0.90) 54.34%)",
+          "linear-gradient(109deg, rgba(168, 192, 255, 0.90) 12.88%, rgba(90, 82, 177, 0.90) 60.68%, rgba(63, 43, 150, 0.90) 87.02%)",
+      },
+      boxShadow: {
+        "custom-shadow":
+          "1px 2px 12.5px 0px rgba(109, 109, 196, 0.45), 0px 0px 4px 0px rgba(111, 111, 111, 0.25) inset",
       },
 
       fontFamily: {

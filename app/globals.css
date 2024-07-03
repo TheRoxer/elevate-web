@@ -6,6 +6,37 @@ body {
   background-color: #161623;
   color: white;
 }
+h1 {
+  color: #fff;
+  font-feature-settings: "clig" off, "liga" off;
+  font-size: 60px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 68px; /* 113.333% */
+  letter-spacing: 4.8px;
+  width: 780px;
+}
+
+.text-gradient {
+  background: var(
+    --brand,
+    linear-gradient(
+      109deg,
+      rgba(168, 192, 255, 0.9) 12.88%,
+      rgba(90, 82, 177, 0.9) 60.68%,
+      rgba(63, 43, 150, 0.9) 87.02%
+    )
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-feature-settings: "clig" off, "liga" off;
+  font-size: 60px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 68px;
+  letter-spacing: 4.8px;
+}
 
 @layer base {
   :root {

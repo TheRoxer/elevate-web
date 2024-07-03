@@ -22,7 +22,7 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   const buttonClasses = classNames(
     {
-      "inline-flex items-center gap-2.5 p-3 justify-center rounded-lg bg-custom-gradient shadow-custom-shadow":
+      "inline-flex items-center gap-2.5 px-5 py-3 justify-center rounded-lg bg-custom-gradient shadow-custom-shadow":
         !unstyled,
     },
     className

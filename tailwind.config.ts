@@ -19,8 +19,25 @@ const config = {
       },
     },
     extend: {
+      backgroundImage: {
+        "custom-gradient":
+          "linear-gradient(176deg, rgba(168, 192, 255, 0.90) -6.53%, rgba(109, 109, 196, 0.90) 27.56%, rgba(63, 43, 150, 0.90) 54.34%)",
+      },
+      backgroundColor: {
+        "custom-gradient":
+          "linear-gradient(176deg, rgba(168, 192, 255, 0.90) -6.53%, rgba(109, 109, 196, 0.90) 27.56%, rgba(63, 43, 150, 0.90) 54.34%)",
+      },
+      textColor: {
+        "custom-gradient":
+          "linear-gradient(176deg, rgba(168, 192, 255, 0.90) -6.53%, rgba(109, 109, 196, 0.90) 27.56%, rgba(63, 43, 150, 0.90) 54.34%)",
+      },
+      borderColor: {
+        "custom-gradient":
+          "linear-gradient(176deg, rgba(168, 192, 255, 0.90) -6.53%, rgba(109, 109, 196, 0.90) 27.56%, rgba(63, 43, 150, 0.90) 54.34%)",
+      },
+
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
+        sans: ["var(--font-outfit)", ...fontFamily.sans],
       },
       colors: {
         border: "hsl(var(--border))",

@@ -21,12 +21,13 @@ const Button: React.FC<ButtonProps> = ({
   unstyled,
 }) => {
   const buttonClasses = classNames(
-    {
-      "inline-flex items-center gap-2.5 px-5 py-3 justify-center rounded-lg bg-custom-gradient shadow-custom-shadow":
-        !unstyled,
-    },
+    unstyled
+      ? "text-white hover:text-color transition-colors duration-300"
+      : "inline-flex items-center gap-2.5 px-5 py-3 justify-center rounded-lg bg-custom-gradient shadow-custom-shadow hover:shadow-custom-shadow-2 ransition-colors duration-300 ease-in-out",
     className
   );
+
+  className = "text-white hover:text-color transition-colors duration-300";
 
   if (href) {
     return (

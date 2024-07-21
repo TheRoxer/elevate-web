@@ -5,8 +5,8 @@ import Image from "next/image";
 
 const Hero = () => {
   return (
-    <div className="w-[1200px] flex flex-col mt-24 items-center justify-center min-h-screen">
-      <div className="flex flex-row gap-12 pr-20">
+    <div className="max-w-[1200px] w-full flex flex-col mt-24 items-center justify-center min-h-screen">
+      <div className="flex flex-row gap-12 w-[950px]">
         <Image
           src="/images/line.png"
           alt="line"
@@ -34,6 +34,7 @@ const Hero = () => {
         alt="line"
         width={1200}
         height={472}
+        layout="responsive"
       ></Image>
     </div>
   );

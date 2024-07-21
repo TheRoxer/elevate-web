@@ -38,6 +38,8 @@ const config = {
       boxShadow: {
         "custom-shadow":
           "1px 2px 12.5px 0px rgba(109, 109, 196, 0.45), 0px 0px 4px 0px rgba(111, 111, 111, 0.25) inset",
+        "custom-shadow-2":
+          "1px 2px 31.4px 0px #6D6DC4, 0px 0px 4px 0px rgba(111, 111, 111, 0.25) inset",
       },
 
       fontFamily: {
@@ -77,6 +79,7 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        color: "#5D59AE",
       },
       borderRadius: {
         lg: "var(--radius)",

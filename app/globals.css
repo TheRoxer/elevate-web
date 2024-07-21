@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* * {
+  border: 1px solid red;
+} */
+
 body {
   background-color: #161623;
   color: white;
@@ -86,6 +90,9 @@ h1 {
 }
 
 @layer base {
+  * {
+    @apply border-border;
+  }
   body {
     @apply bg-background text-foreground;
   }

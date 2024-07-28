@@ -26,6 +26,7 @@ const config = {
       backgroundColor: {
         "custom-gradient":
           "linear-gradient(109deg, rgba(168, 192, 255, 0.90) 12.88%, rgba(90, 82, 177, 0.90) 60.68%, rgba(63, 43, 150, 0.90) 87.02%)",
+        card: "rgba(32, 29, 44, 0.70);",
       },
       textColor: {
         "custom-gradient":

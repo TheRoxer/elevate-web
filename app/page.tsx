@@ -1,13 +1,15 @@
 import Navbar from "@/components/landing/Navbar";
 import Hero from "@/sections/Hero";
+import Services from "@/sections/Services";
 
 export default function Home() {
   return (
     <>
-      <main className="flex flex-col justify-start items-center h-[calc(100vh-2rem)] mt-8">
-        <div className="flex flex-col justify-start items-center w-1200px h-[calc(100vh-2rem)] mt-8">
+      <main className="flex flex-col justify-start items-center mt-8">
+        <div className="flex flex-col justify-start items-center w-1200px pb-8 mt-8">
           <Navbar />
           <Hero />
+          <Services />
         </div>
       </main>
     </>

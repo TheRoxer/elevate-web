@@ -3,8 +3,13 @@ import Button from "./Button";
 
 const Navbar = () => {
   return (
-    <div className="flex w-[100%] justify-between items-center">
-      <Image src="/images/logo.png" alt="logo" width={183} height={38}></Image>
+    <div className="flex w-[calc(100%+2rem)] justify-between items-center px-4">
+      <Image
+        src="/images/logo.png"
+        alt="logo"
+        width={183 * 1.2}
+        height={38 * 1.2}
+      ></Image>
       <ul className="flex justify-center items-center gap-5">
         <li>
           <a

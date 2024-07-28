@@ -6,9 +6,9 @@ import Image from "next/image";
 const Hero = () => {
   return (
     <div className="max-w-[1200px] w-full flex flex-col mt-24 items-center justify-center min-h-screen">
-      <div className="flex flex-row gap-12 w-[950px]">
+      <div className="flex flex-row gap-12 w-[950px] ">
         <Image
-          src="/images/line.png"
+          src="/decorators/line-1.png"
           alt="line"
           width={37}
           height={363}
@@ -36,6 +36,14 @@ const Hero = () => {
         height={472}
         layout="responsive"
       ></Image>
+      <div className="flex flex-row gap-12 w-[920px] ">
+        <Image
+          src="/decorators/line-2.svg"
+          alt="line"
+          width={237 * 2}
+          height={426 * 2}
+        ></Image>
+      </div>
     </div>
   );
 };

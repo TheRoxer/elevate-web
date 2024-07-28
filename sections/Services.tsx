@@ -1,5 +1,6 @@
 import { admin, ux, web } from "../lib/icons";
 import Card from "@/components/landing/ServicesCard";
+import Image from "next/image";
 
 const Hero = () => {
   return (
@@ -31,6 +32,14 @@ const Hero = () => {
           rowspan={1}
         />
       </div>
+
+      <Image
+        src="/decorators/line-3.svg"
+        alt="line"
+        width={5 * 1.4}
+        height={292 * 1.4}
+        className="mt-12"
+      ></Image>
     </div>
   );
 };

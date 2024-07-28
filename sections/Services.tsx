@@ -1,3 +1,6 @@
+import { admin, ux, web } from "../lib/icons";
+import Card from "@/components/landing/ServicesCard";
+
 const Hero = () => {
   return (
     <div className="max-w-[1200px] w-full flex flex-col mt-8 items-center justify-center">
@@ -5,10 +8,28 @@ const Hero = () => {
         Learn about our <span className="text-gradient">services</span>
       </h2>
 
-      <div className="w-[1040px] mx-auto grid grid-rows-2 grid-cols-5 gap-4 mt-8">
-        <div className="row-span-1 col-span-5 h-[300px] rounded-xl border-2 border-slate-400/10 bg-card p-4 dark:bg-neutral-900"></div>
-        <div className="row-span-1 col-span-3 h-[300px] rounded-xl border-2 border-slate-400/10 bg-card p-4 dark:bg-neutral-900"></div>
-        <div className="row-span-1 col-span-2 h-[300px] rounded-xl border-2 border-slate-400/10 bg-card p-4 dark:bg-neutral-900"></div>
+      <div className="w-[1040px] mx-auto grid grid-rows-2 grid-cols-5 gap-6 mt-8">
+        <Card
+          title="Web Development"
+          description="We build websites that serve as powerful marketing tools and bring memorable brand experiences."
+          icon={web}
+          colspan={5}
+          rowspan={1}
+        />
+        <Card
+          title="UI/UX Design"
+          description="We design user-friendly interfaces that increase user satisfaction and drive conversions."
+          icon={ux}
+          colspan={3}
+          rowspan={1}
+        />
+        <Card
+          title="Administration"
+          description="We provide a wide range of administrative services to help businesses run smoothly."
+          icon={admin}
+          colspan={2}
+          rowspan={1}
+        />
       </div>
     </div>
   );

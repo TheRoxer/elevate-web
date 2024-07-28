@@ -43,6 +43,15 @@ h2 {
   letter-spacing: 3.2px;
 }
 
+h3 {
+  color: #fff;
+  font-feature-settings: "clig" off, "liga" off;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 53px; /* 132.5% */
+}
+
 .text-gradient {
   background: var(
     --brand,

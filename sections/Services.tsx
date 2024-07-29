@@ -2,7 +2,7 @@ import { admin, ux, web } from "../lib/icons";
 import Card from "@/components/landing/ServicesCard";
 import Image from "next/image";
 
-const Hero = () => {
+const Services = () => {
   return (
     <div className="max-w-[1200px] w-full flex flex-col mt-8 items-center justify-center">
       <h2 className="w-96 mt-6">
@@ -44,4 +44,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default Services;

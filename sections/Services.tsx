@@ -1,6 +1,6 @@
 import { admin, ux, web } from "../lib/icons";
-import Card from "@/components/landing/ServicesCard";
 import Image from "next/image";
+import IconButton from "@/components/landing/IconButton";
 
 const Services = () => {
   return (
@@ -10,27 +10,50 @@ const Services = () => {
       </h2>
 
       <div className="w-[1040px] mx-auto grid grid-rows-2 grid-cols-5 gap-6 mt-8">
-        <Card
-          title="Web Development"
-          description="We build websites that serve as powerful marketing tools and bring memorable brand experiences."
-          icon={web}
-          colspan={5}
-          rowspan={1}
-        />
-        <Card
-          title="UI/UX Design"
-          description="We design user-friendly interfaces that increase user satisfaction and drive conversions."
-          icon={ux}
-          colspan={3}
-          rowspan={1}
-        />
-        <Card
-          title="Administration"
-          description="We provide a wide range of administrative services to help businesses run smoothly."
-          icon={admin}
-          colspan={2}
-          rowspan={1}
-        />
+        <div
+          className={`col-span-5 row-span-1 h-[310px] rounded-[20px] border-2 border-slate-400/10 bg-card p-4 dark:bg-neutral-900`}
+        >
+          <div className="flex flex-col gap-2 space h-full justify-between">
+            <IconButton icon={web} target="_blank" />
+            <div className="w-[350px]">
+              <p className="text-[25px]  font-semibold">Web Development</p>
+              <p className="text-sm text-neutral-400">
+                We build websites that serve as powerful marketing tools and
+                bring memorable brand experiences.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          className={`col-span-3 row-span-1 h-[310px] rounded-[20px] border-2 border-slate-400/10 bg-card p-4 dark:bg-neutral-900`}
+        >
+          <div className="flex flex-col gap-2 space h-full justify-between">
+            <IconButton icon={ux} target="_blank" />
+            <div className="w-[350px]">
+              <p className="text-[25px]  font-semibold">UI/UX Design</p>
+              <p className="text-sm text-neutral-400">
+                We design user-friendly interfaces that increase user
+                satisfaction and drive conversions.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          className={`col-span-2 row-span-1 h-[310px] rounded-[20px] border-2 border-slate-400/10 bg-card p-4 dark:bg-neutral-900`}
+        >
+          <div className="flex flex-col gap-2 space h-full justify-between">
+            <IconButton icon={admin} target="_blank" />
+            <div className="w-[350px]">
+              <p className="text-[25px]  font-semibold">Administration</p>
+              <p className="text-sm text-neutral-400">
+                We provide a wide range of administrative services to help
+                businesses run smoothly.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <Image

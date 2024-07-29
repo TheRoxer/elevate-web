@@ -34,7 +34,6 @@ const Hero = () => {
         alt="line"
         width={1200}
         height={472}
-        layout="responsive"
       ></Image>
       <div className="flex flex-row gap-12 w-[920px] ">
         <Image

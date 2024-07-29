@@ -37,7 +37,7 @@ const Hero = () => {
       ></Image>
       <div className="flex flex-row gap-12 w-[920px] ">
         <Image
-          src="/decorators/line-2.svg"
+          src="/decorators/line-2.png"
           alt="line"
           width={237 * 2}
           height={426 * 2}

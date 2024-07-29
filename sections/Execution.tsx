@@ -4,13 +4,13 @@ const Execution = () => {
   return (
     <div
       id="execution"
-      className="max-w-[1200px] w-full flex flex-col mt-8 items-center justify-center"
+      className="max-w-[1200px] w-full flex flex-col mt-4 items-center justify-center"
     >
-      <h2 className="w-[400px] mt-6">
+      <h2 className="w-[400px] ">
         How the <span className="text-gradient">execution</span> takes place
       </h2>
 
-      <div className="pt-8">
+      <div className="pt-20">
         <div className=" w-[950px] rounded-[20px] border-2 border-slate-400/10 bg-card p-12  dark:bg-neutral-900">
           <div className="w-full h-full flex flex-row justify-between items-center">
             <Image

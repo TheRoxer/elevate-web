@@ -60,11 +60,11 @@ const Services = () => {
       </div>
 
       <Image
-        src="/decorators/line-3.svg"
+        src="/decorators/line-3.png"
         alt="line"
-        width={5 * 1.4}
-        height={292 * 1.4}
-        className="mt-12"
+        width={50}
+        height={250}
+        className="mt-16"
       ></Image>
     </div>
   );

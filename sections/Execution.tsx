@@ -107,6 +107,15 @@ const Execution = () => {
           </div>
         </div>
       </div>
+
+      <div className="w-[565px]">
+        <Image
+          src="/decorators/line-4.png"
+          alt="line"
+          width={259.34 * 1.3}
+          height={162.66 * 1.3}
+        ></Image>
+      </div>
     </div>
   );
 };

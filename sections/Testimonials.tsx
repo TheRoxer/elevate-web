@@ -11,19 +11,12 @@ import Image from "next/image";
 
 const Testimonials = () => {
   return (
-    <div className="max-w-[1200px] w-full flex flex-col mt-8 items-center justify-center">
-      <Image
-        src="/decorators/line-3.svg"
-        alt="line"
-        width={5 * 1.4}
-        height={292 * 1.4}
-        className="mt-12"
-      ></Image>
-      <h2 className="w-[400px] mt-6">
+    <div className="max-w-[1200px] w-full flex flex-col mt-12 items-center justify-center">
+      <h2 className="w-[400px] text-center ">
         What clients say <span className="text-gradient">about us</span>
       </h2>
 
-      <Carousel className="max-w-[700px]">
+      <Carousel className="max-w-[700px] mt-8">
         <CarouselContent>
           <CarouselItem>
             <TestimonialsCard

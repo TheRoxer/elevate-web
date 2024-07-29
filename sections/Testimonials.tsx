@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {
   Carousel,
@@ -8,67 +10,82 @@ import {
 } from "@/components/ui/carousel";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+
 const Testimonials = () => {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+  });
+
   return (
     <div
       id="testimonials"
       className="max-w-[1200px] w-full flex flex-col mt-12 items-center justify-center"
     >
-      <h2 className="w-[400px] text-center ">
-        What clients say <span className="text-gradient">about us</span>
-      </h2>
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
+        transition={{ duration: 0.75 }}
+        className="w-full flex flex-col mt-8 items-center justify-center"
+      >
+        <h2 className="w-[400px] text-center ">
+          What clients say <span className="text-gradient">about us</span>
+        </h2>
 
-      <Carousel className="max-w-[1200px] mt-8">
-        <CarouselContent>
-          <CarouselItem className="basis-1/3">
-            <TestimonialsCard
-              name="John Doe"
-              position="CEO at Company"
-              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+        <Carousel className="max-w-[1200px] mt-8">
+          <CarouselContent>
+            <CarouselItem className="basis-1/3">
+              <TestimonialsCard
+                name="John Doe"
+                position="CEO at Company"
+                text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
               do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-              image="/images/dude.png"
-            />
-          </CarouselItem>
-          <CarouselItem className="basis-1/3">
-            <TestimonialsCard
-              name="John Doe"
-              position="CEO at Company"
-              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                image="/images/dude.png"
+              />
+            </CarouselItem>
+            <CarouselItem className="basis-1/3">
+              <TestimonialsCard
+                name="John Doe"
+                position="CEO at Company"
+                text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
               do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-              image="/images/dude.png"
-            />
-          </CarouselItem>
-          <CarouselItem className="basis-1/3">
-            <TestimonialsCard
-              name="John Doe"
-              position="CEO at Company"
-              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                image="/images/dude.png"
+              />
+            </CarouselItem>
+            <CarouselItem className="basis-1/3">
+              <TestimonialsCard
+                name="John Doe"
+                position="CEO at Company"
+                text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
               do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-              image="/images/dude.png"
-            />
-          </CarouselItem>
-          <CarouselItem className="basis-1/3">
-            <TestimonialsCard
-              name="John Doe"
-              position="CEO at Company"
-              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                image="/images/dude.png"
+              />
+            </CarouselItem>
+            <CarouselItem className="basis-1/3">
+              <TestimonialsCard
+                name="John Doe"
+                position="CEO at Company"
+                text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
               do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-              image="/images/dude.png"
-            />
-          </CarouselItem>
-          <CarouselItem className="basis-1/3">
-            <TestimonialsCard
-              name="John Doe"
-              position="CEO at Company"
-              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                image="/images/dude.png"
+              />
+            </CarouselItem>
+            <CarouselItem className="basis-1/3">
+              <TestimonialsCard
+                name="John Doe"
+                position="CEO at Company"
+                text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
               do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-              image="/images/dude.png"
-            />
-          </CarouselItem>
-        </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel>
+                image="/images/dude.png"
+              />
+            </CarouselItem>
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      </motion.div>
     </div>
   );
 };

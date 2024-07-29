@@ -52,6 +52,16 @@ h3 {
   line-height: 53px; /* 132.5% */
 }
 
+hr {
+  opacity: 0.5;
+  background: linear-gradient(
+    90deg,
+    rgba(35, 33, 47, 0) 6.12%,
+    #434054 50.42%,
+    rgba(35, 33, 47, 0) 94.71%
+  );
+}
+
 .text-gradient {
   background: var(
     --brand,

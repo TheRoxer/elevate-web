@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Carousel,
   CarouselContent,
@@ -5,20 +6,21 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Image from "next/image";
 
 const Testimonials = () => {
   return (
-    <div className="max-w-[1200px] w-full flex flex-col mt-12 items-center justify-center">
+    <div
+      id="testimonials"
+      className="max-w-[1200px] w-full flex flex-col mt-12 items-center justify-center"
+    >
       <h2 className="w-[400px] text-center ">
         What clients say <span className="text-gradient">about us</span>
       </h2>
 
-      <Carousel className="max-w-[700px] mt-8">
+      <Carousel className="max-w-[1200px] mt-8">
         <CarouselContent>
-          <CarouselItem>
+          <CarouselItem className="basis-1/3">
             <TestimonialsCard
               name="John Doe"
               position="CEO at Company"
@@ -27,7 +29,7 @@ const Testimonials = () => {
               image="/images/dude.png"
             />
           </CarouselItem>
-          <CarouselItem>
+          <CarouselItem className="basis-1/3">
             <TestimonialsCard
               name="John Doe"
               position="CEO at Company"
@@ -36,7 +38,25 @@ const Testimonials = () => {
               image="/images/dude.png"
             />
           </CarouselItem>
-          <CarouselItem>
+          <CarouselItem className="basis-1/3">
+            <TestimonialsCard
+              name="John Doe"
+              position="CEO at Company"
+              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+              do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+              image="/images/dude.png"
+            />
+          </CarouselItem>
+          <CarouselItem className="basis-1/3">
+            <TestimonialsCard
+              name="John Doe"
+              position="CEO at Company"
+              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+              do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+              image="/images/dude.png"
+            />
+          </CarouselItem>
+          <CarouselItem className="basis-1/3">
             <TestimonialsCard
               name="John Doe"
               position="CEO at Company"
@@ -70,7 +90,7 @@ const TestimonialsCard: React.FC<TestimonialsCardProps> = ({
 }) => {
   return (
     <div
-      className="flex flex-col items-start w-[700px] h-[280px]
+      className="flex flex-col items-start  h-[280px]
       rounded-[20px] border-2 border-slate-400/10 bg-card p-8  dark:bg-neutral-900
      "
     >

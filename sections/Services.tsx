@@ -4,7 +4,10 @@ import IconButton from "@/components/landing/IconButton";
 
 const Services = () => {
   return (
-    <div className="max-w-[1200px] w-full flex flex-col mt-8 items-center justify-center">
+    <div
+      id="services"
+      className="max-w-[1200px] w-full flex flex-col mt-8 items-center justify-center"
+    >
       <h2 className="w-96 mt-6">
         Learn about our <span className="text-gradient">services</span>
       </h2>

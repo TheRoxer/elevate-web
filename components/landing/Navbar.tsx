@@ -21,26 +21,26 @@ const Navbar = () => {
         </li>
         <li>
           <a
-            href="/#features"
+            href="/#services"
             className="text-white hover:text-color transition-colors duration-300"
           >
-            Features
+            Services
           </a>
         </li>
         <li>
           <a
-            href="/#stories"
+            href="/#execution"
             className="text-white hover:text-color transition-colors duration-300"
           >
-            Our stories
+            Execution
           </a>
         </li>
         <li>
           <a
-            href="/#opinions"
+            href="/#testimonials"
             className="text-white hover:text-color transition-colors duration-300"
           >
-            Opinions
+            Testimonials
           </a>
         </li>
       </ul>

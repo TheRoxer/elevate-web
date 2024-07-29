@@ -2,7 +2,10 @@ import Image from "next/image";
 
 const Execution = () => {
   return (
-    <div className="max-w-[1200px] w-full flex flex-col mt-8 items-center justify-center">
+    <div
+      id="execution"
+      className="max-w-[1200px] w-full flex flex-col mt-8 items-center justify-center"
+    >
       <h2 className="w-[400px] mt-6">
         How the <span className="text-gradient">execution</span> takes place
       </h2>

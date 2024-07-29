@@ -8,7 +8,11 @@ interface TextWriteProps {
 }
 
 export function TextWrite({ children, className }: TextWriteProps) {
-  const renderChildren = (child, index, baseDelay) => {
+  const renderChildren = (
+    child: React.ReactNode,
+    index: number,
+    baseDelay: number
+  ): React.ReactNode => {
     if (typeof child === "string") {
       const totalDuration = child.length * 0.05; // Calculate total duration for initial text
       return child.split("").map((char, charIndex) => (
@@ -36,16 +40,11 @@ export function TextWrite({ children, className }: TextWriteProps) {
         children: React.Children.map(
           child.props.children,
           (nestedChild, nestedIndex) =>
-            renderChildren(
-              nestedChild,
-              nestedIndex,
-              baseDelay + totalDuration // Use total duration as base delay for nested content
-            )
+            renderChildren(nestedChild, nestedIndex, baseDelay + totalDuration)
         ),
       });
-    } else {
-      return child;
     }
+    return null;
   };
 
   return (
@@ -56,8 +55,3 @@ export function TextWrite({ children, className }: TextWriteProps) {
     </h1>
   );
 }
-
-TextWrite.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
-};

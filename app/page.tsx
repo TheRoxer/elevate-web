@@ -1,6 +1,7 @@
 import Navbar from "@/components/landing/Navbar";
 import Hero from "@/sections/Hero";
 import Services from "@/sections/Services";
+import Execution from "@/sections/Execution";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
           <Navbar />
           <Hero />
           <Services />
+          <Execution />
         </div>
       </main>
     </>

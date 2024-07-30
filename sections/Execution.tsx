@@ -27,7 +27,15 @@ const Execution = () => {
         </h2>
 
         <div className="mt-12">
-          <div className=" w-[950px] rounded-[20px] border-2 border-slate-400/10 bg-card p-12  dark:bg-neutral-900">
+          <div className=" w-[950px] rounded-[20px] border-2 border-slate-400/10 bg-card p-12  dark:bg-neutral-900 relative">
+            <div
+              className="absolute -top-12 -left-20 w-72 h-80 rotate-45 bg-color rounded-full filter blur-2xl opacity-70 -z-10 "
+              style={{
+                background:
+                  "linear-gradient(176deg, rgba(168, 192, 255, 0.63) -6.53%, rgba(109, 109, 196, 0.63) 27.56%, rgba(63, 43, 150, 0.63) 54.34%)",
+              }}
+            ></div>
+
             <div className="w-full h-full flex flex-row justify-between items-center">
               <Image
                 src="/images/img-placeholder-1.png"
@@ -63,7 +71,15 @@ const Execution = () => {
         />
 
         <div className="">
-          <div className=" w-[950px] rounded-[20px] border-2 border-slate-400/10 bg-card p-12  dark:bg-neutral-900">
+          <div className=" w-[950px] rounded-[20px] border-2 border-slate-400/10 bg-card p-12  dark:bg-neutral-900 relative">
+            <div
+              className="absolute top-18 -right-20 w-72 h-80 rotate-45 bg-color rounded-full filter blur-2xl opacity-70 -z-10 "
+              style={{
+                background:
+                  "linear-gradient(176deg, rgba(168, 192, 255, 0.63) -6.53%, rgba(109, 109, 196, 0.63) 27.56%, rgba(63, 43, 150, 0.63) 54.34%)",
+              }}
+            ></div>
+
             <div className="w-full h-full flex flex-row justify-between items-center">
               <div className="flex flex-col w-[280px] items-end">
                 <p className="text-[25px]  font-semibold">Application</p>
@@ -99,7 +115,15 @@ const Execution = () => {
         />
 
         <div className="">
-          <div className=" w-[950px] rounded-[20px] border-2 border-slate-400/10 bg-card p-12  dark:bg-neutral-900">
+          <div className=" w-[950px] rounded-[20px] border-2 border-slate-400/10 bg-card p-12  dark:bg-neutral-900 relative">
+            <div
+              className="absolute top-12 -left-20 w-72 h-80 rotate-45 bg-color rounded-full filter blur-2xl opacity-70 -z-10 "
+              style={{
+                background:
+                  "linear-gradient(176deg, rgba(168, 192, 255, 0.63) -6.53%, rgba(109, 109, 196, 0.63) 27.56%, rgba(63, 43, 150, 0.63) 54.34%)",
+              }}
+            ></div>
+
             <div className="w-full h-full flex flex-row justify-between items-center">
               <Image
                 src="/images/img-placeholder-3.png"

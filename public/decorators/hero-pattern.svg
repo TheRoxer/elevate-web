@@ -1,0 +1,70 @@
+<svg width="986" height="448" viewBox="0 0 986 448" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g opacity="0.6">
+<mask id="mask0_321_13" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="986" height="448">
+<rect width="985.236" height="448" fill="url(#paint0_radial_321_13)"/>
+</mask>
+<g mask="url(#mask0_321_13)">
+<rect x="-17.9715" y="-8.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="75.0285" y="-8.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="168.029" y="-8.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="261.029" y="-8.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="354.029" y="-8.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="447.029" y="-8.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="540.029" y="-8.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="633.029" y="-8.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="726.029" y="-8.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="819.029" y="-8.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="912.029" y="-8.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="-17.9715" y="84.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="75.0285" y="84.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="168.029" y="84.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="261.029" y="84.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="354.029" y="84.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="447.029" y="84.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="540.029" y="84.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="633.029" y="84.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="726.029" y="84.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="819.029" y="84.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="912.029" y="84.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="-17.9715" y="177.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="75.0285" y="177.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="168.029" y="177.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="261.029" y="177.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="354.029" y="177.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="447.029" y="177.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="540.029" y="177.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="633.029" y="177.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="726.029" y="177.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="819.029" y="177.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="912.029" y="177.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="-17.9715" y="270.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="75.0285" y="270.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="168.029" y="270.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="261.029" y="270.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="354.029" y="270.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="447.029" y="270.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="540.029" y="270.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="633.029" y="270.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="726.029" y="270.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="819.029" y="270.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="912.029" y="270.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="-17.9715" y="363.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="75.0285" y="363.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="168.029" y="363.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="261.029" y="363.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="354.029" y="363.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="447.029" y="363.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="540.029" y="363.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="633.029" y="363.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="726.029" y="363.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="819.029" y="363.5" width="93" height="93" stroke="#6B6571"/>
+<rect x="912.029" y="363.5" width="93" height="93" stroke="#6B6571"/>
+</g>
+</g>
+<defs>
+<radialGradient id="paint0_radial_321_13" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(492.618 224) rotate(90) scale(276.142 607.287)">
+<stop stop-color="#D9D9D9" stop-opacity="0.4"/>
+<stop offset="0.802083" stop-color="#D9D9D9" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>

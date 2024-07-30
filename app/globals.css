@@ -101,6 +101,15 @@ hr {
   background-color: #2d2d41;
 }
 
+@layer utilities {
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+}
+
 @layer base {
   :root {
     --gradient: linear-gradient(to top left, #4776e6, #8e54e9);

@@ -25,7 +25,7 @@ const Navbar = () => {
   return (
     <div
       className={`flex justify-between items-center p-6 fixed top-4 w-[calc(64%+2rem)] 
-        transition-colors duration-600 ease-in rounded-[20px] border-2 border-b-2  ${
+        transition-colors duration-600 ease-in rounded-[20px] border-2 border-b-2 z-50  ${
           scrolled ? "bg-card  border-slate-400/10 " : "border-transparent"
         }`}
     >

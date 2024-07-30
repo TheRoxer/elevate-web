@@ -1,9 +1,34 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Button from "./Button";
 
 const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <div className="flex w-[calc(100%+2rem)] justify-between items-center px-4">
+    <div
+      className={`flex justify-between items-center p-6 fixed top-4 w-[calc(64%+2rem)] 
+        transition-colors duration-600 ease-in rounded-[20px] border-2 border-b-2  ${
+          scrolled ? "bg-card  border-slate-400/10 " : "border-transparent"
+        }`}
+    >
       <Image
         src="/images/logo.png"
         alt="logo"

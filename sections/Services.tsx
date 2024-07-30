@@ -10,7 +10,7 @@ import { useInView } from "react-intersection-observer";
 
 const Services = () => {
   const [ref, inView] = useInView({
-    triggerOnce: true,
+    triggerOnce: false,
   });
 
   return (
@@ -20,9 +20,9 @@ const Services = () => {
     >
       <motion.div
         ref={ref}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
-        transition={{ duration: 0.75 }}
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 40 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
         className="w-full flex flex-col items-center justify-center"
       >
         <h2 className="w-96 mt-4">
@@ -59,7 +59,6 @@ const Services = () => {
               </div>
             </div>
           </div>
-
           <div
             className={`col-span-3 row-span-1 h-[310px] rounded-[20px] border-2 border-slate-400/10 bg-card p-4 dark:bg-neutral-900`}
           >
@@ -74,7 +73,6 @@ const Services = () => {
               </div>
             </div>
           </div>
-
           <div
             className={`col-span-2 row-span-1 h-[310px] rounded-[20px] border-2 border-slate-400/10 bg-card p-4 dark:bg-neutral-900`}
           >

@@ -7,7 +7,7 @@ import { useInView } from "react-intersection-observer";
 
 const Execution = () => {
   const [ref, inView] = useInView({
-    triggerOnce: true,
+    triggerOnce: false,
   });
 
   return (
@@ -17,9 +17,9 @@ const Execution = () => {
     >
       <motion.div
         ref={ref}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
-        transition={{ duration: 0.75 }}
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 40 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
         className="w-full flex flex-col mt-8 items-center justify-center"
       >
         <h2 className="w-[400px] ">

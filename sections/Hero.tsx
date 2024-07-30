@@ -66,7 +66,7 @@ const Hero = () => {
             height={472}
           ></Image>
           <div
-            className="absolute -top-12 -right-20 w-72 h-80 rotate-45 bg-color rounded-full filter blur-2xl opacity-70 -z-10 "
+            className="absolute -top-12 -right-20 w-72 h-80  bg-color rounded-full filter blur-2xl opacity-70 -z-10"
             style={{
               background:
                 "linear-gradient(176deg, rgba(168, 192, 255, 0.63) -6.53%, rgba(109, 109, 196, 0.63) 27.56%, rgba(63, 43, 150, 0.63) 54.34%)",

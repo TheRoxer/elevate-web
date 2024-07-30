@@ -21,20 +21,20 @@ const Testimonials = () => {
   return (
     <div
       id="testimonials"
-      className="max-w-[1200px] w-full flex flex-col mt-12 items-center justify-center"
+      className="max-w-[1200px] w-full flex flex-col  items-center justify-center"
     >
       <motion.div
         ref={ref}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
         transition={{ duration: 0.75 }}
-        className="w-full flex flex-col mt-8 items-center justify-center"
+        className="w-full flex flex-col mt-4 items-center justify-center"
       >
-        <h2 className="w-[400px] text-center ">
+        <h2 className="w-[450px] text-center ml-8 ">
           What clients say <span className="text-gradient">about us</span>
         </h2>
 
-        <Carousel className="max-w-[1200px] mt-8">
+        <Carousel className="max-w-[1200px] mt-12">
           <CarouselContent>
             <CarouselItem className="basis-1/3">
               <TestimonialsCard

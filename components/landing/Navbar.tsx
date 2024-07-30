@@ -74,7 +74,7 @@ const Navbar = () => {
         <Button href="https://example.com" unstyled>
           Panel
         </Button>
-        <Button href="https://example.com">Learn More</Button>
+        <Button href="/#services">Learn More</Button>
       </div>
     </div>
   );

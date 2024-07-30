@@ -16,20 +16,20 @@ const Services = () => {
   return (
     <div
       id="services"
-      className="max-w-[1200px] w-full flex flex-col mt-8 items-center justify-center"
+      className="max-w-[1200px] w-full flex flex-col items-center justify-center"
     >
       <motion.div
         ref={ref}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
         transition={{ duration: 0.75 }}
-        className="w-full flex flex-col mt-8 items-center justify-center"
+        className="w-full flex flex-col items-center justify-center"
       >
-        <h2 className="w-96 mt-6">
+        <h2 className="w-96 mt-4">
           Learn about our <span className="text-gradient">services</span>
         </h2>
 
-        <div className="w-[1040px] mx-auto grid grid-rows-2 grid-cols-5 gap-6 mt-8 ">
+        <div className="w-[1040px] mx-auto grid grid-rows-2 grid-cols-5 gap-6 mt-12 ">
           <div
             className={`col-span-5 row-span-1 h-[310px] rounded-[20px] border-2 border-slate-400/10 bg-card p-4 dark:bg-neutral-900`}
           >

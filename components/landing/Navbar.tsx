@@ -29,12 +29,15 @@ const Navbar = () => {
           scrolled ? "bg-card  border-slate-400/10 " : "border-transparent"
         }`}
     >
-      <Image
-        src="/images/logo.png"
-        alt="logo"
-        width={183 * 1.2}
-        height={38 * 1.2}
-      ></Image>
+      <a href="#">
+        <Image
+          src="/images/logo.png"
+          alt="logo"
+          width={183 * 1.2}
+          height={38 * 1.2}
+        ></Image>
+      </a>
+
       <ul className="flex justify-center items-center gap-5">
         <li>
           <a
@@ -71,8 +74,8 @@ const Navbar = () => {
       </ul>
 
       <div className="flex justify-center items-center gap-[35px]">
-        <Button href="https://example.com" unstyled>
-          Panel
+        <Button href="/dashboard/panel" unstyled>
+          Login
         </Button>
         <Button href="/#services">Learn More</Button>
       </div>

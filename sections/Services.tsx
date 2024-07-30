@@ -10,7 +10,7 @@ import { useInView } from "react-intersection-observer";
 
 const Services = () => {
   const [ref, inView] = useInView({
-    triggerOnce: false,
+    triggerOnce: true,
   });
 
   return (

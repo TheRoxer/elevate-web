@@ -33,26 +33,26 @@ export const admin = (
             id="Vector"
             d="M22.0191 8.58003V15.42C22.0191 16.54 21.4191 17.58 20.4491 18.15L14.5091 21.58C13.5391 22.14 12.3391 22.14 11.3591 21.58L5.41912 18.15C4.44912 17.59 3.84912 16.55 3.84912 15.42V8.58003C3.84912 7.46003 4.44912 6.41999 5.41912 5.84999L11.3591 2.42C12.3291 1.86 13.5291 1.86 14.5091 2.42L20.4491 5.84999C21.4191 6.41999 22.0191 7.45003 22.0191 8.58003Z"
             stroke="white"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <g id="User Icon_2">
             <path
               id="Vector_2"
               d="M12.9389 11C14.2257 11 15.2689 9.95681 15.2689 8.66998C15.2689 7.38316 14.2257 6.34003 12.9389 6.34003C11.6521 6.34003 10.6089 7.38316 10.6089 8.66998C10.6089 9.95681 11.6521 11 12.9389 11Z"
               stroke="white"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
             <path
               id="Vector_3"
               d="M16.939 16.66C16.939 14.86 15.149 13.4 12.939 13.4C10.729 13.4 8.93896 14.86 8.93896 16.66"
               stroke="white"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </g>
         </g>
@@ -76,38 +76,38 @@ export const ux = (
             id="Vector"
             d="M3.49994 20.5C4.32994 21.33 5.66994 21.33 6.49994 20.5L19.4999 7.5C20.3299 6.67 20.3299 5.33 19.4999 4.5C18.6699 3.67 17.3299 3.67 16.4999 4.5L3.49994 17.5C2.66994 18.33 2.66994 19.67 3.49994 20.5Z"
             stroke="white"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             id="Vector_2"
             d="M18.01 8.99L15.01 5.99"
             stroke="white"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             id="Vector_3"
             d="M8.5 2.44L10 2L9.56 3.5L10 5L8.5 4.56L7 5L7.44 3.5L7 2L8.5 2.44Z"
             stroke="white"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             id="Vector_4"
             d="M4.5 8.44L6 8L5.56 9.5L6 11L4.5 10.56L3 11L3.44 9.5L3 8L4.5 8.44Z"
             stroke="white"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             id="Vector_5"
             d="M19.5 13.44L21 13L20.56 14.5L21 16L19.5 15.56L18 16L18.44 14.5L18 13L19.5 13.44Z"
             stroke="white"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </g>
       </g>
@@ -129,41 +129,41 @@ export const web = (
           id="Vector"
           d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
           stroke="white"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           id="Vector_2"
           d="M8.0001 3H9.0001C7.0501 8.84 7.0501 15.16 9.0001 21H8.0001"
           stroke="white"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           id="Vector_3"
           d="M15 3C16.95 8.84 16.95 15.16 15 21"
           stroke="white"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           id="Vector_4"
           d="M3 16V15C8.84 16.95 15.16 16.95 21 15V16"
           stroke="white"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           id="Vector_5"
           d="M3 9.00001C8.84 7.05001 15.16 7.05001 21 9.00001"
           stroke="white"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </g>
     </g>

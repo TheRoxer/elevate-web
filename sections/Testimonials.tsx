@@ -9,9 +9,9 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import Autoplay from "embla-carousel-autoplay";
 
 const Testimonials = () => {
   const [ref, inView] = useInView({
@@ -33,8 +33,17 @@ const Testimonials = () => {
         <h2 className="w-[450px] text-center ml-8 ">
           What clients say <span className="text-gradient">about us</span>
         </h2>
-
-        <Carousel className="max-w-[1200px] mt-12 relative">
+        <Carousel
+          className="max-w-[1200px] mt-12 relative "
+          plugins={[
+            Autoplay({
+              delay: 3000,
+            }),
+          ]}
+          opts={{
+            loop: true,
+          }}
+        >
           {/* <div
             className="absolute -top-24 left-28 w-52 h-52 bg-purple-300 rounded-full mix-blend-normal filter blur-xl opacity-70 animate-blob"
             style={{

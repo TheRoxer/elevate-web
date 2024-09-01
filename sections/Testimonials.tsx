@@ -30,7 +30,7 @@ const Testimonials = () => {
         transition={{ duration: 0.5, delay: 0.4 }}
         className="w-full flex flex-col mt-4 items-center justify-center"
       >
-        <h2 className="w-[450px] text-center ml-8 ">
+        <h2 id="h2" className="w-[450px] text-center ml-8 ">
           What clients say <span className="text-gradient">about us</span>
         </h2>
         <Carousel
@@ -132,7 +132,7 @@ const TestimonialsCard: React.FC<TestimonialsCardProps> = ({
   return (
     <div
       className="flex flex-col items-start  h-[280px]
-      rounded-[20px] border-2 border-slate-400/10 bg-card p-8  dark:bg-neutral-900
+      rounded-[20px] border-2 border-slate-400/10 bg-card-landing p-8  dark:bg-neutral-900
      "
     >
       <div className="flex flex-col w-[350px] justify-between h-full">

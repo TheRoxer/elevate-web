@@ -25,7 +25,7 @@ const Services = () => {
         transition={{ duration: 0.5, delay: 0.4 }}
         className="w-full flex flex-col items-center justify-center"
       >
-        <h2 className="w-96 mt-4">
+        <h2 id="h2" className="w-96 mt-4">
           Learn about our <span className="text-gradient">services</span>
         </h2>
 

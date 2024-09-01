@@ -26,7 +26,9 @@ const Navbar = () => {
     <div
       className={`flex justify-between items-center p-6 fixed top-4 w-[calc(64%+2rem)] 
         transition-colors duration-600 ease-in rounded-[20px] border-2 border-b-2 z-50 backdrop-blur  ${
-          scrolled ? "bg-card  border-slate-400/10 " : "border-transparent"
+          scrolled
+            ? "bg-card-landing  border-slate-400/10 "
+            : "border-transparent"
         }`}
     >
       <a href="#">
@@ -74,7 +76,7 @@ const Navbar = () => {
       </ul>
 
       <div className="flex justify-center items-center gap-[35px]">
-        <Button href="/dashboard/panel" unstyled>
+        <Button href="/auth/signin" unstyled>
           Login
         </Button>
         <Button href="/#services">Learn More</Button>

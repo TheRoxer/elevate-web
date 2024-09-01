@@ -22,12 +22,12 @@ const Execution = () => {
         transition={{ duration: 0.5, delay: 0.4 }}
         className="w-full flex flex-col mt-8 items-center justify-center"
       >
-        <h2 className="w-[400px] ">
+        <h2 id="h2" className="w-[400px] ">
           How the <span className="text-gradient">execution</span> takes place
         </h2>
 
         <div className="mt-12">
-          <div className=" w-[950px] rounded-[20px] border-2 border-slate-400/10 bg-card p-12  dark:bg-neutral-900 relative">
+          <div className=" w-[950px] rounded-[20px] border-2 border-slate-400/10 bg-card-landing-landing p-12  dark:bg-neutral-900 relative">
             <div
               className="absolute -top-12 -left-20 w-72 h-80 rotate-45 bg-color rounded-full filter blur-2xl opacity-70 -z-10 "
               style={{
@@ -71,7 +71,7 @@ const Execution = () => {
         />
 
         <div className="">
-          <div className=" w-[950px] rounded-[20px] border-2 border-slate-400/10 bg-card p-12  dark:bg-neutral-900 relative">
+          <div className=" w-[950px] rounded-[20px] border-2 border-slate-400/10 bg-card-landing p-12  dark:bg-neutral-900 relative">
             <div
               className="absolute top-18 -right-20 w-72 h-80 rotate-45 bg-color rounded-full filter blur-2xl opacity-70 -z-10 "
               style={{
@@ -115,7 +115,7 @@ const Execution = () => {
         />
 
         <div className="">
-          <div className=" w-[950px] rounded-[20px] border-2 border-slate-400/10 bg-card p-12  dark:bg-neutral-900 relative">
+          <div className=" w-[950px] rounded-[20px] border-2 border-slate-400/10 bg-card-landing p-12  dark:bg-neutral-900 relative">
             <div
               className="absolute top-12 -left-20 w-72 h-80 rotate-45 bg-color rounded-full filter blur-2xl opacity-70 -z-10 "
               style={{

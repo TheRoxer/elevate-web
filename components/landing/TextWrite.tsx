@@ -46,7 +46,7 @@ export function TextWrite({ children, className }: TextWriteProps) {
   };
 
   return (
-    <h1 className={className}>
+    <h1 className={className} id="h1">
       {React.Children.map(children, (child, index) =>
         renderChildren(child, index, 0)
       )}

@@ -23,7 +23,7 @@ const Button: React.FC<ButtonProps> = ({
   const buttonClasses = classNames(
     unstyled
       ? "text-white hover:text-color transition-colors duration-300"
-      : "inline-flex items-center gap-2.5 px-5 py-3 justify-center rounded-lg bg-custom-gradient shadow-custom-shadow hover:shadow-custom-shadow-2 ransition-colors duration-300 ease-in-out",
+      : "inline-flex items-center gap-2.5 px-5 py-3 justify-center rounded-lg bg-custom-gradient shadow-custom-shadow hover:shadow-custom-shadow-2 ransition-colors duration-300 ease-in-out max-h-12",
     className
   );
 

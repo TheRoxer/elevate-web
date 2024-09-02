@@ -132,7 +132,7 @@ const TestimonialsCard: React.FC<TestimonialsCardProps> = ({
   return (
     <div
       className="flex flex-col items-start  h-[280px]
-      rounded-[20px] border-2 border-slate-400/10 bg-card-landing p-8  dark:bg-neutral-900
+      rounded-[20px] border-2 border-slate-400/10 bg-card-landing p-8  
      "
     >
       <div className="flex flex-col w-[350px] justify-between h-full">

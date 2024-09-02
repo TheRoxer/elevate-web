@@ -46,14 +46,14 @@ const Services = () => {
           ></div>
 
           <div
-            className={`col-span-5 row-span-1 h-[310px] rounded-[20px] border-2 border-slate-400/10 p-4 dark:bg-neutral-900
+            className={`col-span-5 row-span-1 h-[310px] rounded-[20px] border-2 border-slate-400/10 p-6 
               bg-[url(/images/services-bg-1.png)] bg-cover bg-center bg-no-repeat`}
           >
             <div className="flex flex-col gap-2 space h-full justify-between">
               <IconButton icon={web} target="_blank" />
               <div className="w-[400px]">
-                <p className="text-[30px]  font-semibold">Web Development</p>
-                <p className="text-md text-neutral-300">
+                <p className="text-[25px]  font-semibold">Web Development</p>
+                <p className="text-[15px] text-neutral-300">
                   We build websites that serve as powerful marketing tools and
                   bring memorable brand experiences.
                 </p>
@@ -61,14 +61,14 @@ const Services = () => {
             </div>
           </div>
           <div
-            className={`col-span-3 row-span-1 h-[310px] rounded-[20px] border-2 border-slate-400/10 p-4 dark:bg-neutral-900
+            className={`col-span-3 row-span-1 h-[310px] rounded-[20px] border-2 border-slate-400/10 p-6 
               bg-[url(/images/services-bg-2.png)] bg-cover bg-center bg-no-repeat`}
           >
             <div className="flex flex-col gap-2 space h-full justify-between">
               <IconButton icon={ux} target="_blank" />
               <div className="w-[350px]">
-                <p className="text-[30px]  font-semibold">UI/UX Design</p>
-                <p className="text-md text-neutral-300">
+                <p className="text-[25px]  font-semibold">UI/UX Design</p>
+                <p className="text-[15px] text-neutral-300">
                   We design user-friendly interfaces that increase user
                   satisfaction and drive conversions.
                 </p>
@@ -76,14 +76,14 @@ const Services = () => {
             </div>
           </div>
           <div
-            className={`col-span-2 row-span-1 h-[310px] rounded-[20px] border-2 border-slate-400/10 p-4 dark:bg-neutral-900
+            className={`col-span-2 row-span-1 h-[310px] rounded-[20px] border-2 border-slate-400/10 p-6 
               bg-[url(/images/services-bg-3.png)] bg-cover bg-center bg-no-repeat`}
           >
             <div className="flex flex-col gap-2 space h-full justify-between">
               <IconButton icon={admin} target="_blank" />
               <div className="w-[350px]">
-                <p className="text-[30px]  font-semibold">Administration</p>
-                <p className="text-md text-neutral-300">
+                <p className="text-[25px]  font-semibold">Administration</p>
+                <p className="text-[15px] text-neutral-300">
                   We provide a wide range of administrative services to help
                   businesses run smoothly.
                 </p>

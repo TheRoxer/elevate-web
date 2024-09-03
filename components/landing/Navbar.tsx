@@ -98,7 +98,7 @@ const Navbar = () => {
         <Button href="/#services">Learn More</Button>
         <Sheet>
           <SheetTrigger asChild>
-            <ShadcnButton variant="null" size="icon" className="xl:hidden">
+            <ShadcnButton variant="ghost" size="icon" className="xl:hidden">
               <MenuIcon className="h-6 w-6" />
               <span className="sr-only">Toggle navigation menu</span>
             </ShadcnButton>

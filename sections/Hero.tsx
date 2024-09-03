@@ -32,10 +32,10 @@ const Hero = () => {
             alt="line"
             width={37}
             height={363}
-            className="mt-5"
-          ></Image>
-          <div className="flex justify-start flex-col gap-[3.75rem] relative">
-            <TextWrite className="w-[750px]">
+            className="mt-5 w-[28.6px] h-[285.4] lg:w-[37px] lg:h-[363px]"
+          />
+          <div className="flex justify-start flex-col gap-[1rem] lg:gap-[3.75rem] relative max-w-[550px] lg:max-w-[750px]">
+            <TextWrite>
               We take our job to the{" "}
               <span className="text-gradient">Next Level</span>
             </TextWrite>
@@ -60,6 +60,7 @@ const Hero = () => {
         </div>
         <div className="relative">
           <Image
+            className="px-4 w-[1040px] h-[406px] lg:w-[1200px] lg:h-[472px]"
             src="/images/card.png"
             alt="line"
             width={1200}
@@ -85,8 +86,9 @@ const Hero = () => {
           <Image
             src="/decorators/line-2.png"
             alt="line"
-            width={237 * 2}
-            height={426 * 2}
+            width={471}
+            height={295}
+            className="w-[376px] h lg:w-[471px] lg:h-[232]"
           ></Image>
         </div>
       </motion.div>

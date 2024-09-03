@@ -35,6 +35,15 @@ body {
   width: 750px;
 }
 
+@media (max-width: 1024px) {
+  #h1 {
+    font-size: 40px;
+    line-height: 53px;
+    letter-spacing: 3.2px;
+    width: 100%;
+  }
+}
+
 #h2 {
   color: #fff;
   text-align: center;

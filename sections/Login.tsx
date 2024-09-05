@@ -40,16 +40,18 @@ export function LoginForm() {
             </div>
             <Input id="password" type="password" required />
           </div>
-          <Button type="submit" className="w-full">
-            Login
-          </Button>
+          <Link href="/dashboard/panel">
+            <Button type="submit" className="w-full">
+              Login
+            </Button>
+          </Link>
           <Button variant="outline" className="w-full">
             Login with Google
           </Button>
         </div>
         <div className="mt-4 text-center text-sm">
           Don&apos;t have an account?{" "}
-          <Link href="#" className="underline">
+          <Link href="/auth/signup" className="underline">
             Sign up
           </Link>
         </div>

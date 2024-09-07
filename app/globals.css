@@ -35,6 +35,28 @@ body {
   width: 750px;
 }
 
+@media (max-width: 1235px) {
+  #decorator {
+    /* display: none !important; */
+    right: 5rem;
+  }
+}
+@media (max-width: 680px) {
+  #decorator {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1000px) {
+  #decorator2 {
+    display: none !important;
+  }
+}
+
+/* #decorator {
+  display: flex;
+} */
+
 @media (max-width: 1024px) {
   #h1 {
     font-size: 48px;

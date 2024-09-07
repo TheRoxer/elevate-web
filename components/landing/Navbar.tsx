@@ -53,11 +53,11 @@ const Navbar = () => {
           alt="logo"
           width={219.6}
           height={45.6}
-          className="w-[183px] h-[38] lg:w-[219.6px] lg:h-[45.6px]"
+          className="w-[183px] h-[38] md:w-[219.6px] md:h-[45.6px]"
         ></Image>
       </a>
 
-      <ul className="justify-center items-center gap-5 hidden xl:flex">
+      <ul className="justify-center items-center gap-5 hidden lg:flex">
         <li>
           <a
             href="/#"
@@ -101,7 +101,7 @@ const Navbar = () => {
         </Button>
         <Sheet>
           <SheetTrigger asChild>
-            <ShadcnButton variant="ghost" size="icon" className="xl:hidden">
+            <ShadcnButton variant="ghost" size="icon" className="lg:hidden">
               <MenuIcon className="h-6 w-6" />
               <span className="sr-only">Toggle navigation menu</span>
             </ShadcnButton>
@@ -153,6 +153,15 @@ const Navbar = () => {
                   prefetch={false}
                 >
                   Testimonials
+                </Link>
+              </SheetClose>
+              <SheetClose asChild>
+                <Link
+                  href="/auth/signin"
+                  className="flex w-full items-center py-2 text-lg "
+                  prefetch={false}
+                >
+                  Login
                 </Link>
               </SheetClose>
             </div>

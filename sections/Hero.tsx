@@ -36,7 +36,7 @@ const Hero = () => {
           />
           <div className="flex justify-start flex-col gap-7 lg:gap-[3.75rem] relative ">
             {/* max-w-[550px] lg:max-w-[750px] */}
-            <TextWrite className=" whitespace-pre-line max-w-[228.9px] sm:w-[750px] sm:max-w-[750px]">
+            <TextWrite className=" whitespace-pre-line max-w-[240.9px] sm:w-[750px] sm:max-w-[750px]">
               We take our job to the
               <span className="text-gradient whitespace-pre-line">
                 Next Level
@@ -61,7 +61,7 @@ const Hero = () => {
             ></div>
           </div>
         </div>
-        <div className="relative w-[90%]">
+        <div className="relative w-[90%] px-2">
           <Image
             className=""
             src="/images/card.png"
@@ -69,7 +69,8 @@ const Hero = () => {
             width={1200}
             height={472}
           ></Image>
-          {/* <div
+          <div
+            id="decorator"
             className="absolute -top-12 -right-20 w-72 h-80  bg-color rounded-full filter blur-2xl opacity-70 -z-10"
             style={{
               background:
@@ -77,12 +78,13 @@ const Hero = () => {
             }}
           ></div>
           <div
+            id="decorator2"
             className="absolute -bottom-20 -left-20 w-72 h-72 bg-color rounded-full filter blur-2xl opacity-70 -z-10"
             style={{
               background:
                 "linear-gradient(176deg, rgba(168, 192, 255, 0.63) -6.53%, rgba(109, 109, 196, 0.63) 27.56%, rgba(63, 43, 150, 0.63) 54.34%)",
             }}
-          ></div> */}
+          ></div>
         </div>
 
         <div className="hidden flex-row gap-12 max-w-[920px] w-[90%] pl-6 md:flex  ">

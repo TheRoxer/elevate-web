@@ -26,7 +26,7 @@ const Hero = () => {
           bg-[url('/decorators/hero-pattern.svg')] bg-no-repeat bg-[top_-60px_center]
         "
       >
-        <div className="flex flex-row gap-12 max-w-[950px] w-[90%] pl-4">
+        <div className="flex flex-row gap-4 md:gap-12 max-w-[950px] w-[90%] pl-4">
           <Image
             src="/decorators/line-1.png"
             alt="line"
@@ -34,9 +34,9 @@ const Hero = () => {
             height={363}
             className="mt-5 w-[28.6px] h-[285.4] lg:w-[37px] lg:h-[363px]"
           />
-          <div className="flex justify-start flex-col gap-[1rem] lg:gap-[3.75rem] relative ">
+          <div className="flex justify-start flex-col gap-7 lg:gap-[3.75rem] relative ">
             {/* max-w-[550px] lg:max-w-[750px] */}
-            <TextWrite className=" whitespace-pre-line max-w-[235.9px] sm:w-[750px] sm:max-w-[750px]">
+            <TextWrite className=" whitespace-pre-line max-w-[228.9px] sm:w-[750px] sm:max-w-[750px]">
               We take our job to the
               <span className="text-gradient whitespace-pre-line">
                 Next Level

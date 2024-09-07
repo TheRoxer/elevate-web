@@ -8,14 +8,14 @@ import Footer from "@/sections/Footer";
 export default function Home() {
   return (
     <>
-      <main className="flex flex-col justify-start items-center mt-8">
+      <main className="flex flex-col justify-start items-center mt-8 w-full">
         <div className="flex flex-col justify-start items-center w-1200px pb-8 mt-8">
           <Navbar />
           <Hero />
-          <Services />
-          <Execution />
-          <Testimonials />
-          <Footer />
+          {/* <Services /> */}
+          {/* <Execution /> */}
+          {/* <Testimonials /> */}
+          {/* <Footer /> */}
         </div>
       </main>
     </>

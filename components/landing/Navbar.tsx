@@ -40,7 +40,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`flex justify-between items-center p-6 fixed top-4 w-[calc(64%+2rem)] 
+      className={`flex justify-between items-center p-6 fixed top-4 w-[calc(100%-2rem)] xl:w-[calc(64%+2rem)] 
         transition-colors duration-600 ease-in rounded-[20px] border-2 border-b-2 z-50 backdrop-blur  ${
           scrolled
             ? "bg-card-landing  border-slate-400/10 "
@@ -51,8 +51,9 @@ const Navbar = () => {
         <Image
           src="/images/logo.png"
           alt="logo"
-          width={183 * 1.2}
-          height={38 * 1.2}
+          width={219.6}
+          height={45.6}
+          className="w-[183px] h-[38] lg:w-[219.6px] lg:h-[45.6px]"
         ></Image>
       </a>
 
@@ -92,10 +93,12 @@ const Navbar = () => {
       </ul>
 
       <div className="flex justify-center items-center gap-[35px]">
-        <Button href="/auth/signin" unstyled>
+        <Button href="/auth/signin" unstyled className="hidden md:flex">
           Login
         </Button>
-        <Button href="/#services">Learn More</Button>
+        <Button href="/#services" className="hidden sm:flex">
+          Learn More
+        </Button>
         <Sheet>
           <SheetTrigger asChild>
             <ShadcnButton variant="ghost" size="icon" className="xl:hidden">

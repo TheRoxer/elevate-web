@@ -16,7 +16,7 @@ const Services = () => {
   return (
     <div
       id="services"
-      className="max-w-[1200px] w-full flex flex-col items-center justify-center"
+      className="max-w-[1200px] w-[80vw] flex flex-col items-center justify-center"
     >
       <motion.div
         ref={ref}
@@ -29,7 +29,7 @@ const Services = () => {
           Learn about our <span className="text-gradient">services</span>
         </h2>
 
-        <div className="w-[1040px] mx-auto grid grid-rows-2 grid-cols-5 gap-6 mt-12 relative">
+        <div className="w-[1040px] mx-auto grid grid-rows-2 grid-cols-5 gap-6 mt-12 relative ">
           <div
             className="absolute -bottom-40 -right-20 w-72 h-80 rotate-45 bg-color rounded-full filter blur-2xl opacity-70 -z-10 "
             style={{
@@ -60,6 +60,7 @@ const Services = () => {
               </div>
             </div>
           </div>
+
           <div
             className={`col-span-3 row-span-1 h-[310px] rounded-[20px] border-2 border-slate-400/10 p-6 
               bg-[url(/images/services-bg-2.png)] bg-cover bg-center bg-no-repeat`}
@@ -75,6 +76,7 @@ const Services = () => {
               </div>
             </div>
           </div>
+
           <div
             className={`col-span-2 row-span-1 h-[310px] rounded-[20px] border-2 border-slate-400/10 p-6 
               bg-[url(/images/services-bg-3.png)] bg-cover bg-center bg-no-repeat`}

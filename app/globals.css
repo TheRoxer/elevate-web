@@ -37,7 +37,16 @@ body {
 
 @media (max-width: 1024px) {
   #h1 {
-    font-size: 40px;
+    font-size: 48px;
+    line-height: 53px;
+    letter-spacing: 3.2px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 840px) {
+  #h1 {
+    font-size: 35px;
     line-height: 53px;
     letter-spacing: 3.2px;
     width: 100%;

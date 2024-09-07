@@ -15,7 +15,7 @@ const Hero = () => {
   });
 
   return (
-    <div className="max-w-[1200px] w-full flex flex-col mt-24 items-center justify-center min-h-screen">
+    <div className="max-w-[1200px] w-full flex flex-col mt-24 items-center justify-start min-h-screen">
       <motion.div
         ref={ref}
         initial={{ opacity: 0 }}
@@ -26,7 +26,7 @@ const Hero = () => {
           bg-[url('/decorators/hero-pattern.svg')] bg-no-repeat bg-[top_-60px_center]
         "
       >
-        <div className="flex flex-row gap-12 w-[950px]">
+        <div className="flex flex-row gap-12 max-w-[950px] w-[90%] pl-4">
           <Image
             src="/decorators/line-1.png"
             alt="line"
@@ -34,10 +34,13 @@ const Hero = () => {
             height={363}
             className="mt-5 w-[28.6px] h-[285.4] lg:w-[37px] lg:h-[363px]"
           />
-          <div className="flex justify-start flex-col gap-[1rem] lg:gap-[3.75rem] relative max-w-[550px] lg:max-w-[750px]">
-            <TextWrite>
-              We take our job to the{" "}
-              <span className="text-gradient">Next Level</span>
+          <div className="flex justify-start flex-col gap-[1rem] lg:gap-[3.75rem] relative ">
+            {/* max-w-[550px] lg:max-w-[750px] */}
+            <TextWrite className=" whitespace-pre-line max-w-[235.9px] sm:w-[750px] sm:max-w-[750px]">
+              We take our job to the
+              <span className="text-gradient whitespace-pre-line">
+                Next Level
+              </span>
             </TextWrite>
 
             <div className="flex flex-row gap-5">
@@ -58,15 +61,15 @@ const Hero = () => {
             ></div>
           </div>
         </div>
-        <div className="relative">
+        <div className="relative w-[90%]">
           <Image
-            className="px-4 w-[1040px] h-[406px] lg:w-[1200px] lg:h-[472px]"
+            className=""
             src="/images/card.png"
             alt="line"
             width={1200}
             height={472}
           ></Image>
-          <div
+          {/* <div
             className="absolute -top-12 -right-20 w-72 h-80  bg-color rounded-full filter blur-2xl opacity-70 -z-10"
             style={{
               background:
@@ -79,16 +82,16 @@ const Hero = () => {
               background:
                 "linear-gradient(176deg, rgba(168, 192, 255, 0.63) -6.53%, rgba(109, 109, 196, 0.63) 27.56%, rgba(63, 43, 150, 0.63) 54.34%)",
             }}
-          ></div>
+          ></div> */}
         </div>
 
-        <div className="flex flex-row gap-12 w-[920px] ">
+        <div className="hidden flex-row gap-12 max-w-[920px] w-[90%] pl-6 md:flex  ">
           <Image
             src="/decorators/line-2.png"
             alt="line"
             width={471}
             height={295}
-            className="w-[376px] h lg:w-[471px] lg:h-[232]"
+            className="w-[51.5%]"
           ></Image>
         </div>
       </motion.div>

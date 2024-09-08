@@ -15,7 +15,7 @@ const Hero = () => {
   });
 
   return (
-    <div className="max-w-[1200px] w-full flex flex-col mt-24 items-center justify-start min-h-screen">
+    <div className="max-w-[1200px] w-full flex flex-col mt-16 items-center justify-start min-h-screen">
       <motion.div
         ref={ref}
         initial={{ opacity: 0 }}

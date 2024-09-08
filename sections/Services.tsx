@@ -16,7 +16,7 @@ const Services = () => {
   return (
     <div
       id="services"
-      className="max-w-[1200px] w-[90vw] lg:w-[80vw] flex flex-col items-center justify-center"
+      className="max-w-[1200px] w-[80vw] md:w-[90vw] lg:w-[80vw] flex flex-col items-center justify-center"
     >
       <motion.div
         ref={ref}
@@ -47,7 +47,7 @@ const Services = () => {
 
           <div
             className={`col-span-5 row-span-1 h-[310px] rounded-[20px] border-2 border-slate-400/10 p-6 
-              bg-[url(/images/services-bg-1.png)] bg-cover bg-center bg-no-repeat`}
+              bg-[#201d2cc8] md:bg-[url(/images/services-bg-1.png)] bg-cover bg-center bg-no-repeat`}
           >
             <div className="flex flex-col gap-2 space h-full justify-between">
               <IconButton icon={web} target="_blank" />
@@ -63,7 +63,7 @@ const Services = () => {
 
           <div
             className={`col-span-5 md:col-span-3 row-span-1 h-[310px] rounded-[20px] border-2 border-slate-400/10 p-6 
-              bg-[url(/images/services-bg-2.png)] bg-cover bg-center bg-no-repeat`}
+              bg-[#201d2cc8] md:bg-[url(/images/services-bg-2.png)] bg-cover bg-center bg-no-repeat`}
           >
             <div className="flex flex-col gap-2 space h-full justify-between">
               <IconButton icon={ux} target="_blank" />
@@ -79,7 +79,7 @@ const Services = () => {
 
           <div
             className={`col-span-5 md:col-span-2 row-span-1 h-[310px] rounded-[20px] border-2 border-slate-400/10 p-6 
-              bg-[url(/images/services-bg-3.png)] bg-cover bg-center bg-no-repeat`}
+              bg-[#201d2cc8] md:bg-[url(/images/services-bg-3.png)] bg-cover bg-center bg-no-repeat`}
           >
             <div className="flex flex-col gap-2 space h-full justify-between">
               <IconButton icon={admin} target="_blank" />

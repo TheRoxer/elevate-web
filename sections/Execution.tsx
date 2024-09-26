@@ -22,43 +22,41 @@ const Execution = () => {
         transition={{ duration: 0.5, delay: 0.4 }}
         className="w-full flex flex-col mt-8 items-center justify-center"
       >
-        <h2 id="h2" className="w-[400px] ">
+        <h2 id="h2" className="w-[400px] mb-12">
           How the <span className="text-gradient">execution</span> takes place
         </h2>
 
-        <div className="mt-12">
-          <div className=" w-[950px] rounded-[20px] border-2 border-slate-400/10 bg-card-landing p-12   relative">
-            <div
+        <div className=" w-[49vw] rounded-[20px] border-2 border-slate-400/10 bg-card-landing p-12   relative">
+          {/* <div
               className="absolute -top-12 -left-20 w-72 h-80 rotate-45 bg-color rounded-full filter blur-2xl opacity-70 -z-10 "
               style={{
                 background:
                   "linear-gradient(176deg, rgba(168, 192, 255, 0.63) -6.53%, rgba(109, 109, 196, 0.63) 27.56%, rgba(63, 43, 150, 0.63) 54.34%)",
               }}
-            ></div>
+            ></div> */}
 
-            <div className="w-full h-full flex flex-row justify-between items-center">
-              <Image
-                src="/images/img-placeholder-1.png"
-                alt="execution"
-                width={280}
-                height={280}
-                className="h-[280px]"
-              />
-              <Image
-                src="/images/exec-nr-1.png"
-                alt="execution"
-                width={80}
-                height={80}
-              />
-              <div className="flex flex-col w-[280px]">
-                <p className="text-[25px]  font-semibold">Visualization</p>
-                <p className="text-md text-neutral-300">
-                  After setting clear goals, we will create a strategic
-                  execution plan that defines each step of fulfilling the goal
-                  vision and its agenda. This is the exact moment for feedback
-                  on details and the final agreement.
-                </p>
-              </div>
+          <div className="w-full h-full flex flex-row justify-between items-center">
+            <Image
+              src="/images/img-placeholder-1.png"
+              alt="execution"
+              width={280}
+              height={280}
+              className="h-[280px]"
+            />
+            <Image
+              src="/images/exec-nr-1.png"
+              alt="execution"
+              width={80}
+              height={80}
+            />
+            <div className="flex flex-col w-[280px]">
+              <p className="text-[25px]  font-semibold">Visualization</p>
+              <p className="text-md text-neutral-300">
+                After setting clear goals, we will create a strategic execution
+                plan that defines each step of fulfilling the goal vision and
+                its agenda. This is the exact moment for feedback on details and
+                the final agreement.
+              </p>
             </div>
           </div>
         </div>
@@ -68,6 +66,7 @@ const Execution = () => {
           alt="execution"
           width={570}
           height={140}
+          className="w-[29.5vw]"
         />
 
         <div className="">

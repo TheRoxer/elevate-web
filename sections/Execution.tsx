@@ -27,13 +27,13 @@ const Execution = () => {
         </h2>
 
         <div className=" w-[49vw] rounded-[20px] border-2 border-slate-400/10 bg-card-landing p-12   relative">
-          {/* <div
-              className="absolute -top-12 -left-20 w-72 h-80 rotate-45 bg-color rounded-full filter blur-2xl opacity-70 -z-10 "
-              style={{
-                background:
-                  "linear-gradient(176deg, rgba(168, 192, 255, 0.63) -6.53%, rgba(109, 109, 196, 0.63) 27.56%, rgba(63, 43, 150, 0.63) 54.34%)",
-              }}
-            ></div> */}
+          <div
+            className="absolute -top-12 -left-20 w-72 h-80 rotate-45 bg-color rounded-full filter blur-2xl opacity-70 -z-10 "
+            style={{
+              background:
+                "linear-gradient(176deg, rgba(168, 192, 255, 0.63) -6.53%, rgba(109, 109, 196, 0.63) 27.56%, rgba(63, 43, 150, 0.63) 54.34%)",
+            }}
+          ></div>
 
           <div className="w-full h-full flex flex-row justify-between items-center">
             <Image
@@ -69,40 +69,38 @@ const Execution = () => {
           className="w-[29.5vw]"
         />
 
-        <div className="">
-          <div className=" w-[950px] rounded-[20px] border-2 border-slate-400/10 bg-card-landing p-12   relative">
-            <div
-              className="absolute top-18 -right-20 w-72 h-80 rotate-45 bg-color rounded-full filter blur-2xl opacity-70 -z-10 "
-              style={{
-                background:
-                  "linear-gradient(176deg, rgba(168, 192, 255, 0.63) -6.53%, rgba(109, 109, 196, 0.63) 27.56%, rgba(63, 43, 150, 0.63) 54.34%)",
-              }}
-            ></div>
+        <div className="w-[49vw] rounded-[20px] border-2 border-slate-400/10 bg-card-landing p-12   relative">
+          <div
+            className="absolute top-18 -right-20 w-72 h-80 rotate-45 bg-color rounded-full filter blur-2xl opacity-70 -z-10 "
+            style={{
+              background:
+                "linear-gradient(176deg, rgba(168, 192, 255, 0.63) -6.53%, rgba(109, 109, 196, 0.63) 27.56%, rgba(63, 43, 150, 0.63) 54.34%)",
+            }}
+          ></div>
 
-            <div className="w-full h-full flex flex-row justify-between items-center">
-              <div className="flex flex-col w-[280px] items-end">
-                <p className="text-[25px]  font-semibold">Application</p>
-                <p className="text-md text-neutral-300 text-right">
-                  Development of the project, where we will apply the strategies
-                  and techniques that will make the project a success. This is
-                  the moment when the project starts to take its final shape
-                </p>
-              </div>
-
-              <Image
-                src="/images/exec-nr-2.png"
-                alt="execution"
-                width={80}
-                height={80}
-              />
-              <Image
-                src="/images/img-placeholder-2.png"
-                alt="execution"
-                width={280}
-                height={280}
-                className="h-[280px]"
-              />
+          <div className="w-full h-full flex flex-row justify-between items-center">
+            <div className="flex flex-col w-[280px] items-end">
+              <p className="text-[25px]  font-semibold">Application</p>
+              <p className="text-md text-neutral-300 text-right">
+                Development of the project, where we will apply the strategies
+                and techniques that will make the project a success. This is the
+                moment when the project starts to take its final shape
+              </p>
             </div>
+
+            <Image
+              src="/images/exec-nr-2.png"
+              alt="execution"
+              width={80}
+              height={80}
+            />
+            <Image
+              src="/images/img-placeholder-2.png"
+              alt="execution"
+              width={280}
+              height={280}
+              className="h-[280px]"
+            />
           </div>
         </div>
 
@@ -113,39 +111,37 @@ const Execution = () => {
           height={140}
         />
 
-        <div className="">
-          <div className=" w-[950px] rounded-[20px] border-2 border-slate-400/10 bg-card-landing p-12   relative">
-            <div
-              className="absolute top-12 -left-20 w-72 h-80 rotate-45 bg-color rounded-full filter blur-2xl opacity-70 -z-10 "
-              style={{
-                background:
-                  "linear-gradient(176deg, rgba(168, 192, 255, 0.63) -6.53%, rgba(109, 109, 196, 0.63) 27.56%, rgba(63, 43, 150, 0.63) 54.34%)",
-              }}
-            ></div>
+        <div className="w-[49vw] rounded-[20px] border-2 border-slate-400/10 bg-card-landing p-12   relative">
+          <div
+            className="absolute top-12 -left-20 w-72 h-80 rotate-45 bg-color rounded-full filter blur-2xl opacity-70 -z-10 "
+            style={{
+              background:
+                "linear-gradient(176deg, rgba(168, 192, 255, 0.63) -6.53%, rgba(109, 109, 196, 0.63) 27.56%, rgba(63, 43, 150, 0.63) 54.34%)",
+            }}
+          ></div>
 
-            <div className="w-full h-full flex flex-row justify-between items-center">
-              <Image
-                src="/images/img-placeholder-3.png"
-                alt="execution"
-                width={280}
-                height={280}
-                className="h-[280px]"
-              />
-              <Image
-                src="/images/exec-nr-3.png"
-                alt="execution"
-                width={80}
-                height={80}
-              />
-              <div className="flex flex-col w-[280px]">
-                <p className="text-[30px]  font-semibold">Finalization</p>
-                <p className="text-md text-neutral-300">
-                  The finalization of the project is the moment when we will
-                  deliver the project to the client. This is the moment when we
-                  will make the final adjustments to your website and make sure
-                  everything is perfect.
-                </p>
-              </div>
+          <div className="w-full h-full flex flex-row justify-between items-center">
+            <Image
+              src="/images/img-placeholder-3.png"
+              alt="execution"
+              width={280}
+              height={280}
+              className="h-[280px]"
+            />
+            <Image
+              src="/images/exec-nr-3.png"
+              alt="execution"
+              width={80}
+              height={80}
+            />
+            <div className="flex flex-col w-[280px]">
+              <p className="text-[30px]  font-semibold">Finalization</p>
+              <p className="text-md text-neutral-300">
+                The finalization of the project is the moment when we will
+                deliver the project to the client. This is the moment when we
+                will make the final adjustments to your website and make sure
+                everything is perfect.
+              </p>
             </div>
           </div>
         </div>

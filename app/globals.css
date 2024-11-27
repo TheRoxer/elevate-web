@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -12,6 +14,7 @@
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+ */
   scroll-behavior: smooth;
+  font-family: Outfit, sans-serif;
 }
 
 img {

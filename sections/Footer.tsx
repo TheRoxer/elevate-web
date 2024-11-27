@@ -2,8 +2,8 @@ import Image from "next/image";
 
 const Footer = () => {
   return (
-    <footer className="mt-24">
-      <hr className="w-[1200px] h-[3px]" />
+    <footer className="mt-24 max-w-[1200px] w-full">
+      <hr className="w-full h-[3px]" />
       <div className="flex justify-between mt-8 mx-4">
         <p className="text-[#6f6c85]">© 2024 Elevate. All rights reserved.</p>
         <div className="flex gap-3 ">

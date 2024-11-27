@@ -63,7 +63,7 @@ const Hero = () => {
         </div>
         <div className="relative w-[90%] px-2">
           <Image
-            className=""
+            className="w-[65vw]"
             src="/images/card.png"
             alt="line"
             width={1200}

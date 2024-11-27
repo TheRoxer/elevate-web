@@ -34,7 +34,7 @@ const Execution = () => {
   return (
     <div
       id="execution"
-      className="max-w-[1200px] w-full flex flex-col mt-4 items-center justify-center"
+      className="max-w-[1200px] w-[80vw] flex flex-col mt-4 items-center justify-center"
     >
       <div className="w-full flex flex-col mt-8 items-center justify-center">
         <h2 id="h2" className="w-[400px] mb-12">
@@ -48,7 +48,7 @@ const Execution = () => {
           variants={sectionVariants}
           className="flex flex-col items-center"
         >
-          <div className="w-[70vw] sm:w-[60vw] md:w-[90vw] lg:w-[950px] rounded-[20px] border-2 border-slate-400/10 bg-card-landing p-12 relative mb-12 ">
+          <div className="w-[70vw] sm:w-[60vw] md:w-[90vw] lg:w-[950px] rounded-[20px] border-2 border-slate-400/10 bg-card-landing p-12 relative mb-12 md:mb-0">
             <div
               className="absolute -top-12 -left-20 w-72 h-80 rotate-45 bg-color rounded-full filter blur-2xl opacity-70 -z-10"
               style={{
@@ -99,7 +99,7 @@ const Execution = () => {
           variants={sectionVariants}
           className="flex flex-col items-center"
         >
-          <div className="w-[70vw] sm:w-[60vw] md:w-[90vw] lg:w-[950px]  rounded-[20px] border-2 border-slate-400/10 bg-card-landing p-12 relative mb-12 ">
+          <div className="w-[70vw] sm:w-[60vw] md:w-[90vw] lg:w-[950px]  rounded-[20px] border-2 border-slate-400/10 bg-card-landing p-12 relative mb-12 md:mb-0">
             <div
               className="absolute top-18 -right-20 w-72 h-80 rotate-45 bg-color rounded-full filter blur-2xl opacity-70 -z-10"
               style={{

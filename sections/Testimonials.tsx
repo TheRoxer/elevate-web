@@ -21,7 +21,7 @@ const Testimonials = () => {
   return (
     <div
       id="testimonials"
-      className="max-w-[1200px] w-full flex flex-col  items-center justify-center"
+      className="max-w-[1200px] w-full flex flex-col  items-center justify-center "
     >
       <motion.div
         ref={ref}
@@ -34,7 +34,7 @@ const Testimonials = () => {
           What clients say <span className="text-gradient">about us</span>
         </h2>
         <Carousel
-          className="max-w-[1200px] mt-12 relative "
+          className="max-w-[1200px] w-[91.5vw] md:w-[70vw] lg-w-[full] mt-12 relative  "
           plugins={[
             Autoplay({
               delay: 3000,
@@ -44,7 +44,7 @@ const Testimonials = () => {
             loop: true,
           }}
         >
-          {/* <div
+          <div
             className="absolute -top-24 left-28 w-52 h-52 bg-purple-300 rounded-full mix-blend-normal filter blur-xl opacity-70 animate-blob"
             style={{
               background:
@@ -57,10 +57,10 @@ const Testimonials = () => {
               background:
                 "linear-gradient(176deg, rgba(168, 192, 255, 0.63) -6.53%, rgba(109, 109, 196, 0.63) 27.56%, rgba(63, 43, 150, 0.63) 54.34%)",
             }}
-          ></div> */}
+          ></div>
 
           <CarouselContent>
-            <CarouselItem className="basis-1/3">
+            <CarouselItem className="basis-1/1 xl:basis-1/2 2xl:basis-1/3">
               <TestimonialsCard
                 name="John Doe"
                 position="CEO at Company"
@@ -69,7 +69,7 @@ const Testimonials = () => {
                 image="/images/dude.png"
               />
             </CarouselItem>
-            <CarouselItem className="basis-1/3">
+            <CarouselItem className="basis-1/1 xl:basis-1/2 2xl:basis-1/3">
               <TestimonialsCard
                 name="John Doe"
                 position="CEO at Company"
@@ -78,7 +78,7 @@ const Testimonials = () => {
                 image="/images/dude.png"
               />
             </CarouselItem>
-            <CarouselItem className="basis-1/3">
+            <CarouselItem className="basis-1/1 xl:basis-1/2 2xl:basis-1/3">
               <TestimonialsCard
                 name="John Doe"
                 position="CEO at Company"
@@ -87,7 +87,7 @@ const Testimonials = () => {
                 image="/images/dude.png"
               />
             </CarouselItem>
-            <CarouselItem className="basis-1/3">
+            <CarouselItem className="basis-1/1 xl:basis-1/2 2xl:basis-1/3">
               <TestimonialsCard
                 name="John Doe"
                 position="CEO at Company"
@@ -96,7 +96,7 @@ const Testimonials = () => {
                 image="/images/dude.png"
               />
             </CarouselItem>
-            <CarouselItem className="basis-1/3">
+            <CarouselItem className="basis-1/1 xl:basis-1/2 2xl:basis-1/3">
               <TestimonialsCard
                 name="John Doe"
                 position="CEO at Company"
@@ -135,7 +135,7 @@ const TestimonialsCard: React.FC<TestimonialsCardProps> = ({
       rounded-[20px] border-2 border-slate-400/10 bg-card-landing p-8  
      "
     >
-      <div className="flex flex-col w-[350px] justify-between h-full">
+      <div className="flex flex-col w-[330px] justify-between h-full">
         <div className="flex flex-row items-center gap-4">
           <Avatar className="w-[55px] h-[55px]">
             <AvatarImage src={image} alt="ItzRoxer" />

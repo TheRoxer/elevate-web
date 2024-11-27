@@ -48,7 +48,7 @@ const Execution = () => {
           variants={sectionVariants}
           className="flex flex-col items-center"
         >
-          <div className="w-[49vw] rounded-[20px] border-2 border-slate-400/10 bg-card-landing p-12 relative">
+          <div className="w-[70vw] sm:w-[60vw] md:w-[90vw] lg:w-[950px] rounded-[20px] border-2 border-slate-400/10 bg-card-landing p-12 relative mb-12 ">
             <div
               className="absolute -top-12 -left-20 w-72 h-80 rotate-45 bg-color rounded-full filter blur-2xl opacity-70 -z-10"
               style={{
@@ -57,7 +57,7 @@ const Execution = () => {
               }}
             ></div>
 
-            <div className="w-full h-full flex flex-row justify-between items-center">
+            <div className="w-full h-full gap-4 flex flex-col md:flex-row justify-between items-center">
               <Image
                 src="/images/img-placeholder-1.png"
                 alt="execution"
@@ -71,9 +71,9 @@ const Execution = () => {
                 width={80}
                 height={80}
               />
-              <div className="flex flex-col w-[280px]">
+              <div className="flex flex-col w-[280px] items-center md:items-start">
                 <p className="text-[25px] font-semibold">Visualization</p>
-                <p className="text-md text-neutral-300">
+                <p className="text-md text-neutral-300 text-center md:text-left">
                   After setting clear goals, we will create a strategic
                   execution plan that defines each step of fulfilling the goal
                   vision and its agenda. This is the exact moment for feedback
@@ -88,7 +88,7 @@ const Execution = () => {
             alt="execution"
             width={570}
             height={140}
-            className="w-[29.5vw]"
+            className="hidden md:block"
           />
         </motion.div>
 
@@ -99,7 +99,7 @@ const Execution = () => {
           variants={sectionVariants}
           className="flex flex-col items-center"
         >
-          <div className="w-[49vw] rounded-[20px] border-2 border-slate-400/10 bg-card-landing p-12 relative">
+          <div className="w-[70vw] sm:w-[60vw] md:w-[90vw] lg:w-[950px]  rounded-[20px] border-2 border-slate-400/10 bg-card-landing p-12 relative mb-12 ">
             <div
               className="absolute top-18 -right-20 w-72 h-80 rotate-45 bg-color rounded-full filter blur-2xl opacity-70 -z-10"
               style={{
@@ -108,7 +108,7 @@ const Execution = () => {
               }}
             ></div>
 
-            <div className="w-full h-full flex flex-row-reverse justify-between items-center">
+            <div className="w-full h-full gap-4 flex flex-col md:flex-row-reverse justify-between items-center">
               <Image
                 src="/images/img-placeholder-2.png"
                 alt="execution"
@@ -122,9 +122,9 @@ const Execution = () => {
                 width={80}
                 height={80}
               />
-              <div className="flex flex-col w-[280px] items-end">
+              <div className="flex flex-col w-[280px] items-center md:items-end">
                 <p className="text-[25px] font-semibold">Application</p>
-                <p className="text-md text-neutral-300 text-right">
+                <p className="text-md text-neutral-300 text-center md:text-right">
                   Development of the project, where we will apply the strategies
                   and techniques that will make the project a success. This is
                   the moment when the project starts to take its final shape
@@ -138,6 +138,7 @@ const Execution = () => {
             alt="execution"
             width={570}
             height={140}
+            className="hidden md:block"
           />
         </motion.div>
 
@@ -148,7 +149,7 @@ const Execution = () => {
           variants={sectionVariants}
           className="flex flex-col items-center"
         >
-          <div className="w-[49vw] rounded-[20px] border-2 border-slate-400/10 bg-card-landing p-12 relative">
+          <div className="w-[70vw] sm:w-[60vw] md:w-[90vw] lg:w-[950px] rounded-[20px] border-2 border-slate-400/10 bg-card-landing p-12 relative mb-12 md:mb-0 ">
             <div
               className="absolute top-12 -left-20 w-72 h-80 rotate-45 bg-color rounded-full filter blur-2xl opacity-70 -z-10"
               style={{
@@ -157,7 +158,7 @@ const Execution = () => {
               }}
             ></div>
 
-            <div className="w-full h-full flex flex-row justify-between items-center">
+            <div className="w-full h-full gap-4 flex flex-col md:flex-row justify-between items-center">
               <Image
                 src="/images/img-placeholder-3.png"
                 alt="execution"
@@ -171,9 +172,9 @@ const Execution = () => {
                 width={80}
                 height={80}
               />
-              <div className="flex flex-col w-[280px]">
+              <div className="flex flex-col w-[280px] items-center md:items-start">
                 <p className="text-[30px] font-semibold">Finalization</p>
-                <p className="text-md text-neutral-300">
+                <p className="text-md text-neutral-300 text-center md:text-left">
                   The finalization of the project is the moment when we will
                   deliver the project to the client. This is the moment when we
                   will make the final adjustments to your website and make sure
@@ -189,6 +190,7 @@ const Execution = () => {
               alt="line"
               width={259.34 * 1.3}
               height={162.66 * 1.3}
+              className="hidden md:block"
             />
           </div>
         </motion.div>

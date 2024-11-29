@@ -71,7 +71,16 @@ body {
 
 @media (max-width: 840px) {
   #h1 {
-    font-size: 35px;
+    font-size: 38px;
+    line-height: 53px;
+    letter-spacing: 3.2px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 620px) {
+  #h1 {
+    font-size: 42px;
     line-height: 53px;
     letter-spacing: 3.2px;
     width: 100%;

@@ -36,7 +36,7 @@ const Hero = () => {
           />
           <div className="flex justify-start flex-col gap-7 lg:gap-[3.75rem] relative ">
             {/* max-w-[550px] lg:max-w-[750px] */}
-            <TextWrite className=" whitespace-pre-line max-w-[240.9px] sm:w-[750px] sm:max-w-[750px]">
+            <TextWrite className=" whitespace-pre-line max-w-[264px] md:max-w-[240.9px] sm:w-[750px] sm:max-w-[750px]">
               We take our job to the
               <span className="text-gradient whitespace-pre-line">
                 Next Level
@@ -63,12 +63,20 @@ const Hero = () => {
         </div>
         <div className="relative w-[90%] px-2">
           <Image
-            className="w-[65vw]"
+            className="hidden sm:block w-[85vw] lg:w-[65vw]"
             src="/images/card.png"
             alt="line"
             width={1200}
             height={472}
           ></Image>
+          <Image
+            className="bock sm:hidden w-[85vw] lg:w-[65vw]"
+            src="/images/cardSmall.png"
+            alt="line"
+            width={1200}
+            height={472}
+          ></Image>
+
           <div
             id="decorator"
             className="absolute -top-12 -right-20 w-72 h-80  bg-color rounded-full filter blur-2xl opacity-70 -z-10"

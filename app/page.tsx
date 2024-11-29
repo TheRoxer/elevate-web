@@ -10,9 +10,9 @@ export default function Home() {
     <>
       <main className="flex flex-col justify-start items-center mt-8 w-full">
         <div className="flex flex-col justify-start items-center max-w-1200px pb-8 mt-8">
-          <Navbar />
+          {/* <Navbar /> */}
           <Hero />
-          <Services />
+          {/* <Services /> */}
           {/* <Execution /> */}
           {/* <Testimonials /> */}
           {/* <Footer /> */}

@@ -26,7 +26,7 @@ const Hero = () => {
           bg-[url('/decorators/hero-pattern.svg')] bg-no-repeat bg-[top_-60px_center]
         "
       >
-        <div className="flex flex-row gap-4 md:gap-12 max-w-[950px] w-[90%] pl-4">
+        <div className="flex flex-row gap-4 md:gap-12 max-w-[950px] w-[90%] pl-2 sm:pl-4">
           <Image
             src="/decorators/line-1.png"
             alt="line"
@@ -61,7 +61,7 @@ const Hero = () => {
             ></div>
           </div>
         </div>
-        <div className="relative w-[90%] px-2">
+        <div className="relative w-[90%] px-0 sm:px-2">
           <Image
             className="hidden sm:block w-[85vw] lg:w-[65vw]"
             src="/images/card.png"

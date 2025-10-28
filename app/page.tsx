@@ -12,10 +12,10 @@ export default function Home() {
         <div className="flex flex-col justify-start items-center max-w-1200px pb-8 mt-8">
           <Navbar />
           <Hero />
-          {/* <Services />
+          <Services />
           <Execution />
           <Testimonials />
-          <Footer /> */}
+          <Footer />
         </div>
       </main>
     </>

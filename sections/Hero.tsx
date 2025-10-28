@@ -36,7 +36,7 @@ const Hero = () => {
           />
           <div className="flex justify-start flex-col gap-7 lg:gap-[3.75rem] relative ">
             {/* max-w-[550px] lg:max-w-[750px] */}
-            <TextWrite className=" whitespace-pre-line max-w-[280px] md:max-w-[240.9px] sm:w-[750px] sm:max-w-[750px]">
+            <TextWrite className=" whitespace-pre-line lg:max-w-[708px] md:max-w-[240.9px] sm:w-[750px] sm:max-w-[750px]">
               We take our job to the
               <span className="text-gradient whitespace-pre-line">
                 Next Level

@@ -1,0 +1,23 @@
+.content {
+  display: grid;
+  padding: 2rem;
+  gap: 1.5rem;
+  height: calc(100vh - 57px);
+
+  grid-template-areas:
+    "chart chart chart chart recent recent recent"
+    "wallets wallets transfers transfers transfers transfers transfers";
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.card-height {
+  max-height: calc((100vh - 57px) / 2 - 1.5rem);
+}
+
+.card-chart {
+  grid-area: chart;
+}
+
+.card-recent {
+  grid-area: recent;
+}

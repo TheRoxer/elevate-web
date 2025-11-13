@@ -22,11 +22,12 @@ img {
 }
 
 body {
-  background-color: #161623;
+  background-color: #12121c;
   color: white;
   scroll-behavior: smooth;
   overflow-x: hidden;
 }
+
 #h1 {
   color: #fff;
   font-feature-settings: "clig" off, "liga" off;
@@ -186,7 +187,7 @@ hr {
   .dark {
     --background: 224 71.4% 4.1%;
     --foreground: 210 20% 98%;
-    --card: 224 71.4% 4.1%;
+    --card: 237 23% 12%;
     --card-foreground: 210 20% 98%;
     --popover: 224 71.4% 4.1%;
     --popover-foreground: 210 20% 98%;

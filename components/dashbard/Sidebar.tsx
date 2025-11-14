@@ -174,7 +174,7 @@ const SideBar = ({
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="rounded-lg"
+                  className="rounded-lg hover:bg-[hsl(240,23%,14%)]"
                   aria-label="Settings"
                   onClick={() => {
                     router.push("/dashboard/settings");
@@ -191,7 +191,7 @@ const SideBar = ({
         ) : (
           <Button
             variant="ghost"
-            className="w-full justify-start gap-3 rounded-lg px-3"
+            className="w-full justify-start gap-3 rounded-lg px-3 hover:bg-[hsl(240,23%,14%)]"
             aria-label="Settings"
             onClick={() => {
               router.push("/dashboard/settings");
@@ -207,7 +207,7 @@ const SideBar = ({
             size={isCollapsed ? "icon" : "default"}
             className={`${
               isCollapsed ? "w-full" : "w-full justify-start gap-3 px-3"
-            } rounded-lg`}
+            } rounded-lg hover:bg-[hsl(240,23%,14%)]`}
             aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
             onClick={() => setIsCollapsed(!isCollapsed)}
           >

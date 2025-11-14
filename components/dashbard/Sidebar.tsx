@@ -2,18 +2,15 @@
 
 import {
   Book,
-  Bot,
-  Code2,
-  LifeBuoy,
-  Settings2,
-  SquareTerminal,
-  SquareUser,
   Bitcoin,
   LayoutDashboard,
   PieChart,
   Settings,
   HandCoins,
   MessageSquareText,
+  ChevronLeft,
+  ChevronRight,
+  ShoppingCart,
 } from "lucide-react";
 import {
   Tooltip,
@@ -32,6 +29,7 @@ interface NavbarLinkProps {
   activeLink?: boolean;
   href: string;
   onClick?(): void;
+  isCollapsed?: boolean;
 }
 
 function NavbarLink({
@@ -40,44 +38,78 @@ function NavbarLink({
   activeLink,
   href,
   onClick,
+  isCollapsed,
 }: NavbarLinkProps) {
   const router = useRouter();
 
+  if (isCollapsed) {
+    return (
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              className={`rounded-lg ${activeLink ? "bg-[#181826]" : ""}`}
+              aria-label={label}
+              onClick={() => {
+                router.push(href);
+              }}
+            >
+              <Icon className="size-5" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent side="right" sideOffset={5}>
+            {label}
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    );
+  }
+
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button
-            variant="ghost"
-            size="icon"
-            className={`rounded-lg ${activeLink ? "bg-muted" : ""}`}
-            aria-label="Playground"
-            onClick={() => {
-              router.push(href);
-            }}
-          >
-            <Icon className="size-5" />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent side="right" sideOffset={5}>
-          {label}
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <Button
+      variant="ghost"
+      className={`w-full justify-start gap-3 rounded-lg px-3 hover:bg-[hsl(240,23%,14%)] ${
+        activeLink ? "bg-[#181826]" : ""
+      }`}
+      aria-label={label}
+      onClick={() => {
+        router.push(href);
+      }}
+    >
+      <Icon className="size-5" />
+      <span className="text-sm font-medium">{label}</span>
+    </Button>
   );
 }
 
 const navdata = [
-  { icon: LayoutDashboard, label: "Home", href: "/dashboard/home" },
-  { icon: PieChart, label: "Monitoring", href: "/dashboard/monitoring" },
-  { icon: HandCoins, label: "Transfers", href: "/dashboard/transfers" },
+  { icon: LayoutDashboard, label: "Panel", href: "/dashboard/panel" },
+  { icon: ShoppingCart, label: "Orders", href: "/dashboard/orders" },
   { icon: MessageSquareText, label: "Chat", href: "/dashboard/chat" },
 ];
 
-const SideBar = () => {
+interface SideBarProps {
+  isCollapsed?: boolean;
+  setIsCollapsed?: (collapsed: boolean) => void;
+}
+
+const SideBar = ({
+  isCollapsed: externalIsCollapsed,
+  setIsCollapsed: externalSetIsCollapsed,
+}: SideBarProps = {}) => {
   const router = useRouter();
 
   const [activeLink, setActiveLink] = useState<string>("/dashboard/panel");
+  const [internalIsCollapsed, setInternalIsCollapsed] =
+    useState<boolean>(false);
+
+  const isCollapsed =
+    externalIsCollapsed !== undefined
+      ? externalIsCollapsed
+      : internalIsCollapsed;
+  const setIsCollapsed = externalSetIsCollapsed || setInternalIsCollapsed;
 
   useEffect(() => {
     setActiveLink(window.location.pathname);
@@ -95,45 +127,100 @@ const SideBar = () => {
       href={link.href}
       activeLink={link.href === activeLink}
       onClick={() => handleClick(navdata[index].href)}
+      isCollapsed={isCollapsed}
     />
   ));
 
   return (
-    <aside className="inset-y fixed  left-0 z-20 flex h-full flex-col border-r">
-      <div className="border-b p-2">
-        <Button
-          variant="outline"
-          size="icon"
-          aria-label="Home"
-          onClick={() => {
-            router.push("/");
-          }}
-        >
-          <Bitcoin className="size-5" />
-        </Button>
+    <aside
+      className={`inset-y fixed left-0 z-20 flex h-full flex-col border-r transition-all duration-300 ${
+        isCollapsed ? "w-16" : "w-64"
+      }`}
+      style={{ backgroundColor: "#12121c" }}
+    >
+      <div className="border-b p-4">
+        {isCollapsed ? (
+          <Button
+            variant="outline"
+            size="icon"
+            className="bg-[#181826] hover:bg-[#252538]"
+            aria-label="Home"
+            onClick={() => {
+              router.push("/");
+            }}
+          >
+            <Bitcoin className="size-5" />
+          </Button>
+        ) : (
+          <Button
+            variant="outline"
+            className="w-full justify-start gap-3 px-3 bg-[#181826] hover:bg-[#252538]"
+            aria-label="Home"
+            onClick={() => {
+              router.push("/");
+            }}
+          >
+            <Bitcoin className="size-5" />
+            <span className="text-sm font-semibold">Elevate</span>
+          </Button>
+        )}
       </div>
-      <nav className="grid gap-1 p-2">{links}</nav>
-      <nav className="mt-auto grid gap-1 p-2">
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="mt-auto rounded-lg"
-                aria-label="Account"
-                onClick={() => {
-                  router.push("/dashboard/settings");
-                }}
-              >
-                <Settings className="size-5" />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent side="right" sideOffset={5}>
-              Settings
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+      <nav className="grid gap-1 p-4">{links}</nav>
+      <nav className="mt-auto grid gap-1 p-4">
+        {isCollapsed ? (
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="rounded-lg"
+                  aria-label="Settings"
+                  onClick={() => {
+                    router.push("/dashboard/settings");
+                  }}
+                >
+                  <Settings className="size-5" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="right" sideOffset={5}>
+                Settings
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        ) : (
+          <Button
+            variant="ghost"
+            className="w-full justify-start gap-3 rounded-lg px-3"
+            aria-label="Settings"
+            onClick={() => {
+              router.push("/dashboard/settings");
+            }}
+          >
+            <Settings className="size-5" />
+            <span className="text-sm font-medium">Settings</span>
+          </Button>
+        )}
+        <div className="border-t pt-4">
+          <Button
+            variant="ghost"
+            size={isCollapsed ? "icon" : "default"}
+            className={`${
+              isCollapsed ? "w-full" : "w-full justify-start gap-3 px-3"
+            } rounded-lg`}
+            aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+            onClick={() => setIsCollapsed(!isCollapsed)}
+          >
+            {isCollapsed ? (
+              <ChevronRight className="size-5" />
+            ) : (
+              <>
+                <ChevronLeft className="size-5" />
+                <span className="text-sm font-medium">Collapse</span>
+              </>
+            )}
+          </Button>
+        </div>
       </nav>
     </aside>
   );

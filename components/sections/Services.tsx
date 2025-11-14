@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { admin, ux, web } from "../lib/icons";
+import { admin, ux, web } from "@/lib/icons";
 import Image from "next/image";
 import IconButton from "@/components/landing/IconButton";
 
@@ -35,7 +35,7 @@ const Services = () => {
           Learn about our <span className="text-gradient">services</span>
         </h2>
 
-        <div className="w-[100%] mx-auto grid grid-rows-2 grid-cols-5 gap-6 mt-12 relative ">
+        <div className="max-w-[1050px] w-[100%] mx-auto grid grid-rows-2 grid-cols-5 gap-6 mt-12 relative ">
           <div
             className="absolute -bottom-40 -right-20 w-72 h-80 rotate-45 bg-color rounded-full filter blur-2xl opacity-70 -z-10 "
             style={{

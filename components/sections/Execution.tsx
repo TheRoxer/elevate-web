@@ -61,9 +61,8 @@ const Execution = () => {
               <Image
                 src="/images/img-placeholder-1.png"
                 alt="execution"
-                width={280}
-                height={280}
-                className="h-[280px]"
+                width={220}
+                height={220}
               />
               <Image
                 src="/images/exec-nr-1.png"
@@ -86,7 +85,7 @@ const Execution = () => {
           <Image
             src="/decorators/exec-connector-1.png"
             alt="execution"
-            width={570}
+            width={637}
             height={140}
             className="hidden md:block"
           />
@@ -112,9 +111,8 @@ const Execution = () => {
               <Image
                 src="/images/img-placeholder-2.png"
                 alt="execution"
-                width={280}
-                height={280}
-                className="h-[280px]"
+                width={220}
+                height={220}
               />
               <Image
                 src="/images/exec-nr-2.png"
@@ -136,7 +134,7 @@ const Execution = () => {
           <Image
             src="/decorators/exec-connector-2.png"
             alt="execution"
-            width={570}
+            width={637}
             height={140}
             className="hidden md:block"
           />
@@ -162,9 +160,8 @@ const Execution = () => {
               <Image
                 src="/images/img-placeholder-3.png"
                 alt="execution"
-                width={280}
-                height={280}
-                className="h-[280px]"
+                width={220}
+                height={220}
               />
               <Image
                 src="/images/exec-nr-3.png"
@@ -184,11 +181,11 @@ const Execution = () => {
             </div>
           </div>
 
-          <div className="w-[565px]">
+          <div className="w-[637px]">
             <Image
               src="/decorators/line-4.png"
               alt="line"
-              width={259.34 * 1.3}
+              width={259.34 * 1.4}
               height={162.66 * 1.3}
               className="hidden md:block"
             />

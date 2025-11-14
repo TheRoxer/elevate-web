@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import { LoginForm } from "@/sections/Login";
-import { SignupForm } from "@/sections/Signup";
+import { LoginForm } from "@/components/sections/Login";
+import { SignupForm } from "@/components/sections/Signup";
 
 export const metadata: Metadata = {
   title: "Elevate | Auth",

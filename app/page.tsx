@@ -1,9 +1,9 @@
 import Navbar from "@/components/landing/Navbar";
-import Hero from "@/sections/Hero";
-import Services from "@/sections/Services";
-import Execution from "@/sections/Execution";
-import Testimonials from "@/sections/Testimonials";
-import Footer from "@/sections/Footer";
+import Hero from "@/components/sections/Hero";
+import Services from "@/components/sections/Services";
+import Execution from "@/components/sections/Execution";
+import Testimonials from "@/components/sections/Testimonials";
+import Footer from "@/components/sections/Footer";
 
 export default function Home() {
   return (

@@ -2,7 +2,7 @@
 
 import Button from "@/components/landing/Button";
 import IconButton from "@/components/landing/IconButton";
-import { github } from "../lib/icons";
+import { github } from "@/lib/icons";
 import Image from "next/image";
 import { TextWrite } from "@/components/landing/TextWrite";
 
@@ -79,7 +79,7 @@ const Hero = () => {
 
           <div
             id="decorator"
-            className="absolute -top-12 -right-20 w-72 h-80  bg-color rounded-full filter blur-2xl opacity-70 -z-10"
+            className="absolute -top-12 -right-20 w-72 h-80  bg-color rounded-full filter blur-2xl opacity-70 -z-10 animate-blob animation-delay-2000"
             style={{
               background:
                 "linear-gradient(176deg, rgba(168, 192, 255, 0.63) -6.53%, rgba(109, 109, 196, 0.63) 27.56%, rgba(63, 43, 150, 0.63) 54.34%)",
@@ -87,7 +87,7 @@ const Hero = () => {
           ></div>
           <div
             id="decorator2"
-            className="absolute -bottom-20 -left-20 w-72 h-72 bg-color rounded-full filter blur-2xl opacity-70 -z-10"
+            className="absolute -bottom-20 -left-20 w-72 h-72 bg-color rounded-full filter blur-2xl opacity-70 -z-10 animate-blob"
             style={{
               background:
                 "linear-gradient(176deg, rgba(168, 192, 255, 0.63) -6.53%, rgba(109, 109, 196, 0.63) 27.56%, rgba(63, 43, 150, 0.63) 54.34%)",

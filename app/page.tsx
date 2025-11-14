@@ -8,7 +8,7 @@ import Footer from "@/components/sections/Footer";
 export default function Home() {
   return (
     <>
-      <main className="flex flex-col justify-start items-center mt-8 w-full">
+      <main className="flex flex-col justify-start items-center mt-8 w-full overflow-auto">
         <div className="flex flex-col justify-start items-center max-w-1200px pb-8 mt-8">
           <Navbar />
           <Hero />

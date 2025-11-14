@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/tooltip";
 
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 
 interface NavbarLinkProps {
@@ -100,6 +100,7 @@ const SideBar = ({
   setIsCollapsed: externalSetIsCollapsed,
 }: SideBarProps = {}) => {
   const router = useRouter();
+  const pathname = usePathname();
 
   const [activeLink, setActiveLink] = useState<string>("/dashboard/panel");
   const [internalIsCollapsed, setInternalIsCollapsed] =
@@ -112,13 +113,8 @@ const SideBar = ({
   const setIsCollapsed = externalSetIsCollapsed || setInternalIsCollapsed;
 
   useEffect(() => {
-    setActiveLink(window.location.pathname);
-    handleClick(activeLink);
-  }, [setActiveLink, activeLink]);
-
-  const handleClick = (path: string) => {
-    setActiveLink(path);
-  };
+    setActiveLink(pathname);
+  }, [pathname]);
 
   const links = navdata.map((link, index) => (
     <NavbarLink
@@ -126,7 +122,6 @@ const SideBar = ({
       key={link.label}
       href={link.href}
       activeLink={link.href === activeLink}
-      onClick={() => handleClick(navdata[index].href)}
       isCollapsed={isCollapsed}
     />
   ));

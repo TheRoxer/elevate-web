@@ -5,13 +5,17 @@
   height: calc(100vh - 57px);
 
   grid-template-areas:
-    "chart chart chart chart recent recent recent"
-    "wallets wallets transfers transfers transfers transfers transfers";
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    "chart chart chart chart"
+    "recent recent recent recent";
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+body {
+  overflow: hidden;
 }
 
 .card-height {
-  max-height: calc((100vh - 57px) / 2 - 1.5rem);
+  max-height: calc((100vh - 57px) / 2 - 2rem);
 }
 
 .card-chart {

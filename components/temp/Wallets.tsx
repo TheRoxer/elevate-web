@@ -13,7 +13,6 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useRouter } from "next/navigation";
 
 import {
   Table,
@@ -23,25 +22,68 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
-import { orders, type Order } from "@/data/orders";
 
-// Get 5 most recent orders (sorted by deadline, closest to today first)
-const getRecentOrders = (): Order[] => {
-  const today = new Date().getTime();
-  return [...orders]
-    .sort((a, b) => {
-      const dateA = Math.abs(new Date(a.deadline).getTime() - today);
-      const dateB = Math.abs(new Date(b.deadline).getTime() - today);
-      return dateA - dateB;
-    })
-    .slice(0, 5);
+const data: ProgrammingOrder[] = [
+  {
+    id: "ORD-001",
+    clientName: "Acme Corp",
+    projectType: "Web Application",
+    status: "In Progress",
+    deadline: "2025-11-20",
+    amount: 5500,
+  },
+  {
+    id: "ORD-002",
+    clientName: "TechStart Inc",
+    projectType: "Mobile App",
+    status: "Completed",
+    deadline: "2025-11-15",
+    amount: 8200,
+  },
+  {
+    id: "ORD-003",
+    clientName: "Digital Solutions",
+    projectType: "API Development",
+    status: "In Progress",
+    deadline: "2025-11-25",
+    amount: 3400,
+  },
+  {
+    id: "ORD-004",
+    clientName: "Global Systems",
+    projectType: "Database Design",
+    status: "Pending",
+    deadline: "2025-11-18",
+    amount: 2800,
+  },
+  {
+    id: "ORD-005",
+    clientName: "Innovation Labs",
+    projectType: "E-commerce Site",
+    status: "In Progress",
+    deadline: "2025-12-01",
+    amount: 12000,
+  },
+  {
+    id: "ORD-006",
+    clientName: "Music Labs",
+    projectType: "Web Application",
+    status: "Completed",
+    deadline: "2025-12-01",
+    amount: 12000,
+  },
+];
+
+export type ProgrammingOrder = {
+  id: string;
+  clientName: string;
+  projectType: string;
+  status: "Pending" | "In Progress" | "Completed" | "Cancelled";
+  deadline: string;
+  amount: number;
 };
 
-export const getColumns = (
-  router: ReturnType<typeof useRouter>
-): ColumnDef<Order>[] => [
+export const columns: ColumnDef<ProgrammingOrder>[] = [
   {
     accessorKey: "clientName",
     header: "Client",
@@ -108,31 +150,22 @@ export const getColumns = (
   },
   {
     accessorKey: "amount",
-    header: () => <div className="text-right">Details</div>,
+    header: () => <div className="text-right">Amount</div>,
     cell: ({ row }) => {
-      return (
-        <div className="text-right">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="text-white"
-            onClick={() => {
-              router.push(`/dashboard/orders/${row.original.id}`);
-            }}
-          >
-            <ArrowRight className="h-4 w-4" />
-          </Button>
-        </div>
-      );
+      const amount = parseFloat(row.getValue("amount"));
+
+      // Format the amount as a dollar amount
+      const formatted = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+      }).format(amount);
+
+      return <div className="text-right font-medium">{formatted}</div>;
     },
   },
 ];
 
-export default function Orders() {
-  const router = useRouter();
-  const data = React.useMemo(() => getRecentOrders(), []);
-  const columns = React.useMemo(() => getColumns(router), [router]);
-
+export default function Wallets() {
   const [sorting, setSorting] = React.useState<SortingState>([
     { id: "status", desc: false },
   ]);
@@ -168,10 +201,7 @@ export default function Orders() {
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow
-                key={headerGroup.id}
-                className="hover:bg-[#1b1b2c] transition-colors"
-              >
+              <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
                     <TableHead key={header.id}>
@@ -193,7 +223,6 @@ export default function Orders() {
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  className="hover:bg-[#1b1b2c] transition-colors"
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

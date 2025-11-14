@@ -1,10 +1,8 @@
+"use client";
+
 import { Metadata } from "next";
 import "./page.css";
-
-export const metadata: Metadata = {
-  title: "Elevate | Dashboard",
-  description: "Elevate your business with our services",
-};
+import { motion } from "framer-motion";
 
 import Header from "@/components/dashbard/Header";
 import ChartCard from "@/components/dashbard/ChartCard";
@@ -16,8 +14,22 @@ export default function Panel() {
     <DashboardLayoutClient>
       <Header />
       <div className="content">
-        <ChartCard />
-        <RecentCard />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="card-chart"
+        >
+          <ChartCard />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+          className="card-recent"
+        >
+          <RecentCard />
+        </motion.div>
       </div>
     </DashboardLayoutClient>
   );

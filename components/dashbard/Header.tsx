@@ -17,7 +17,7 @@ const Header = () => {
         <h1 className="text-xl font-semibold">Home</h1>
       </div>
 
-      <div className="flex row items-center gap-4 ml-auto">
+      <div className="flex row items-center gap-4 ml-auto mr-4">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button

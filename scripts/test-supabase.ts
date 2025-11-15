@@ -47,7 +47,8 @@ async function testSupabaseConnection() {
     console.log("✅ Direct connection successful");
     console.log(`   Found ${data?.length || 0} orders\n`);
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
     console.error("❌ Direct connection failed:", errorMessage);
     console.log("\n⚠️  Make sure you have:");
     console.log("   1. Created a Supabase project");
@@ -68,7 +69,8 @@ async function testSupabaseConnection() {
       );
     }
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
     console.error("❌ Orders service failed:", errorMessage, "\n");
   }
 
@@ -82,7 +84,8 @@ async function testSupabaseConnection() {
     console.log(`   Status: ${order.status}`);
     console.log(`   Amount: $${order.amount.toLocaleString()}\n`);
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
     console.error("❌ Order detail failed:", errorMessage, "\n");
   }
 
@@ -96,7 +99,8 @@ async function testSupabaseConnection() {
       console.log(`   Sample task: ${tasks[0].text} (${tasks[0].status})\n`);
     }
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
     console.error("❌ Tasks service failed:", errorMessage, "\n");
   }
 
@@ -112,7 +116,8 @@ async function testSupabaseConnection() {
       );
     }
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
     console.error("❌ Chart data service failed:", errorMessage, "\n");
   }
 
@@ -138,7 +143,8 @@ async function testSupabaseConnection() {
     console.log("✅ Delete order working");
     console.log(`   Deleted test order: ${testOrder.id}\n`);
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
     console.error("❌ CRUD operations failed:", errorMessage, "\n");
   }
 
@@ -153,7 +159,8 @@ async function testSupabaseConnection() {
     console.log(`   Completed: ${stats.completed}`);
     console.log(`   Total Revenue: $${stats.totalRevenue.toLocaleString()}\n`);
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
     console.error("❌ Order statistics failed:", errorMessage, "\n");
   }
 

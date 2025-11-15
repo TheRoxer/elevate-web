@@ -15,7 +15,7 @@ const Services = () => {
 
   const cardVariants = {
     hidden: { opacity: 0, y: 40 },
-    visible: (delay: any) => ({
+    visible: (delay: number) => ({
       opacity: 1,
       y: 0,
       transition: {

@@ -14,6 +14,8 @@ import {
 import type { Database } from "@/types/database";
 
 type DbOrder = Database["public"]["Tables"]["orders"]["Row"];
+type DbOrderInsert = Database["public"]["Tables"]["orders"]["Insert"];
+type DbOrderUpdate = Database["public"]["Tables"]["orders"]["Update"];
 
 export class OrderServiceError extends Error {
   constructor(message: string, public code?: string, public details?: unknown) {
@@ -145,7 +147,7 @@ export class OrdersService {
         "create order input"
       );
 
-      const dbInsert = {
+      const dbInsert: DbOrderInsert = {
         client_name: validatedInput.clientName,
         client_email: validatedInput.clientEmail,
         project_type: validatedInput.projectType,
@@ -158,7 +160,7 @@ export class OrdersService {
 
       const { data, error } = await supabase
         .from("orders")
-        .insert(dbInsert as any)
+        .insert(dbInsert as never)
         .select()
         .single();
 
@@ -192,7 +194,7 @@ export class OrdersService {
         "update order input"
       );
 
-      const dbUpdate: any = {};
+      const dbUpdate: DbOrderUpdate = {};
 
       if (validatedInput.clientName !== undefined) {
         dbUpdate.client_name = validatedInput.clientName;
@@ -219,8 +221,9 @@ export class OrdersService {
         dbUpdate.notes = validatedInput.notes;
       }
 
-      const { data, error } = await (supabase.from("orders") as any)
-        .update(dbUpdate)
+      const { data, error } = await supabase
+        .from("orders")
+        .update(dbUpdate as never)
         .eq("id", validatedInput.id)
         .select()
         .single();

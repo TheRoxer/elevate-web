@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { LoginForm } from "@/components/sections/Login";
 import { SignupForm } from "@/components/sections/Signup";
 
-const Panel = ({ params }: { params: any }) => {
+const Panel = ({ params }: { params: { type: string } }) => {
   return (
     <main className="flex justify-center items-center h-screen">
       <motion.div

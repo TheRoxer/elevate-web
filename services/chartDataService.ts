@@ -41,7 +41,8 @@ export class ChartDataService {
         ];
       }
 
-      const chartData = data.map((item: any) => ({
+      type ChartDataRow = { name: string; average: number; today: number };
+      const chartData = (data as unknown as ChartDataRow[]).map((item) => ({
         name: item.name,
         average: Number(item.average),
         today: Number(item.today),

@@ -40,7 +40,7 @@ export const createClient = () => {
  * Singleton instance for client-side operations
  * Use this in client components for convenience
  */
-export const supabase = createClient();
+export const supabase = createSupabaseClient<Database>(supabaseUrl, supabaseAnonKey);
 
 /**
  * Server-side client for use in Server Components, Route Handlers, and Server Actions

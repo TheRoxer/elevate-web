@@ -11,6 +11,8 @@ import {
 import type { Database } from "@/types/database";
 
 type DbTask = Database["public"]["Tables"]["tasks"]["Row"];
+type DbTaskInsert = Database["public"]["Tables"]["tasks"]["Insert"];
+type DbTaskUpdate = Database["public"]["Tables"]["tasks"]["Update"];
 
 export class TaskServiceError extends Error {
   constructor(message: string, public code?: string, public details?: unknown) {
@@ -75,14 +77,15 @@ export class TasksService {
         "create task input"
       );
 
-      const dbInsert = {
+      const dbInsert: DbTaskInsert = {
         order_id: validatedInput.orderId,
         text: validatedInput.text,
         status: validatedInput.status,
       };
 
-      const { data, error } = await (supabase.from("tasks") as any)
-        .insert(dbInsert)
+      const { data, error } = await supabase
+        .from("tasks")
+        .insert(dbInsert as never)
         .select()
         .single();
 
@@ -116,7 +119,7 @@ export class TasksService {
         "update task input"
       );
 
-      const dbUpdate: any = {};
+      const dbUpdate: DbTaskUpdate = {};
 
       if (validatedInput.text !== undefined) {
         dbUpdate.text = validatedInput.text;
@@ -125,8 +128,9 @@ export class TasksService {
         dbUpdate.status = validatedInput.status;
       }
 
-      const { data, error } = await (supabase.from("tasks") as any)
-        .update(dbUpdate)
+      const { data, error } = await supabase
+        .from("tasks")
+        .update(dbUpdate as never)
         .eq("id", Number(validatedInput.id))
         .select()
         .single();

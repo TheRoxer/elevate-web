@@ -46,8 +46,9 @@ async function testSupabaseConnection() {
     if (error) throw error;
     console.log("✅ Direct connection successful");
     console.log(`   Found ${data?.length || 0} orders\n`);
-  } catch (error: any) {
-    console.error("❌ Direct connection failed:", error.message);
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error("❌ Direct connection failed:", errorMessage);
     console.log("\n⚠️  Make sure you have:");
     console.log("   1. Created a Supabase project");
     console.log("   2. Updated .env.local with your credentials");
@@ -66,8 +67,9 @@ async function testSupabaseConnection() {
         `   Sample order: ${orders[0].id} - ${orders[0].clientName}\n`
       );
     }
-  } catch (error: any) {
-    console.error("❌ Orders service failed:", error.message, "\n");
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error("❌ Orders service failed:", errorMessage, "\n");
   }
 
   // Test 3: Order Detail
@@ -79,8 +81,9 @@ async function testSupabaseConnection() {
     console.log(`   Client: ${order.clientName}`);
     console.log(`   Status: ${order.status}`);
     console.log(`   Amount: $${order.amount.toLocaleString()}\n`);
-  } catch (error: any) {
-    console.error("❌ Order detail failed:", error.message, "\n");
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error("❌ Order detail failed:", errorMessage, "\n");
   }
 
   // Test 4: Tasks Service
@@ -92,8 +95,9 @@ async function testSupabaseConnection() {
     if (tasks.length > 0) {
       console.log(`   Sample task: ${tasks[0].text} (${tasks[0].status})\n`);
     }
-  } catch (error: any) {
-    console.error("❌ Tasks service failed:", error.message, "\n");
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error("❌ Tasks service failed:", errorMessage, "\n");
   }
 
   // Test 5: Chart Data Service
@@ -107,8 +111,9 @@ async function testSupabaseConnection() {
         `   Sample: ${chartData[0].name} - Today: $${chartData[0].today}\n`
       );
     }
-  } catch (error: any) {
-    console.error("❌ Chart data service failed:", error.message, "\n");
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error("❌ Chart data service failed:", errorMessage, "\n");
   }
 
   // Test 6: Create & Delete (Optional)
@@ -132,8 +137,9 @@ async function testSupabaseConnection() {
     await ordersService.deleteOrder(testOrder.id);
     console.log("✅ Delete order working");
     console.log(`   Deleted test order: ${testOrder.id}\n`);
-  } catch (error: any) {
-    console.error("❌ CRUD operations failed:", error.message, "\n");
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error("❌ CRUD operations failed:", errorMessage, "\n");
   }
 
   // Test 7: Order Statistics
@@ -146,8 +152,9 @@ async function testSupabaseConnection() {
     console.log(`   In Progress: ${stats.inProgress}`);
     console.log(`   Completed: ${stats.completed}`);
     console.log(`   Total Revenue: $${stats.totalRevenue.toLocaleString()}\n`);
-  } catch (error: any) {
-    console.error("❌ Order statistics failed:", error.message, "\n");
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error("❌ Order statistics failed:", errorMessage, "\n");
   }
 
   // Final Summary

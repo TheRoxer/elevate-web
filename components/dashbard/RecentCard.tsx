@@ -6,7 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import Orders from "../temp/Orders";
+import Orders from "./Orders";
 
 const RecentCard = () => {
   return (

@@ -4,10 +4,10 @@ import { Metadata } from "next";
 import "./page.css";
 import { motion } from "framer-motion";
 
-import Header from "@/components/dashbard/Header";
-import ChartCard from "@/components/dashbard/ChartCard";
-import RecentCard from "@/components/dashbard/RecentCard";
-import DashboardLayoutClient from "@/components/dashbard/DashboardLayoutClient";
+import Header from "@/components/dashboard/Header";
+import ChartCard from "@/components/dashboard/ChartCard";
+import RecentCard from "@/components/dashboard/RecentCard";
+import DashboardLayoutClient from "@/components/dashboard/DashboardLayoutClient";
 
 export default function Panel() {
   return (

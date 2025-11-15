@@ -3,10 +3,10 @@
 import * as React from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import Header from "@/components/dashbard/Header";
-import DashboardLayoutClient from "@/components/dashbard/DashboardLayoutClient";
-import { OrdersTable } from "@/components/dashbard/OrdersTable";
-import { OrderCreateDialog } from "@/components/dashbard/OrderCreateDialog";
+import Header from "@/components/dashboard/Header";
+import DashboardLayoutClient from "@/components/dashboard/DashboardLayoutClient";
+import { OrdersTable } from "@/components/dashboard/OrdersTable";
+import { OrderCreateDialog } from "@/components/dashboard/OrderCreateDialog";
 import {
   Select,
   SelectContent,

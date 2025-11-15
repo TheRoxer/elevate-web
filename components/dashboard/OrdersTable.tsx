@@ -38,7 +38,11 @@ import { type Order } from "@/data/orders";
 import { type OrderStatus, type OrderDetail } from "@/types/schemas";
 import { OrderActionsDropdown } from "./OrderActionsDropdown";
 import { OrderEditDialog } from "./OrderEditDialog";
-import { useToast } from "@/components/ui/use-toast";
+import {
+  useDeleteOrderMutation,
+  useUpdateOrderStatusMutation,
+  useOrderDetailQuery,
+} from "@/hooks/queries/useOrdersQuery";
 
 interface OrdersTableProps {
   data: Order[];
@@ -47,7 +51,6 @@ interface OrdersTableProps {
 
 export function OrdersTable({ data, onOrderUpdate }: OrdersTableProps) {
   const router = useRouter();
-  const { toast } = useToast();
   const [sorting, setSorting] = React.useState<SortingState>([
     { id: "id", desc: false },
   ]);
@@ -59,192 +62,163 @@ export function OrdersTable({ data, onOrderUpdate }: OrdersTableProps) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false);
   const [orderToDelete, setOrderToDelete] = React.useState<string | null>(null);
-  const [isDeleting, setIsDeleting] = React.useState(false);
   const [editDialogOpen, setEditDialogOpen] = React.useState(false);
   const [orderToEdit, setOrderToEdit] = React.useState<OrderDetail | null>(
     null
   );
+  const [orderIdToFetch, setOrderIdToFetch] = React.useState<string>("");
 
-  const handleStatusChange = async (
-    orderId: string,
-    newStatus: OrderStatus
-  ) => {
-    try {
-      const { ordersService } = await import("@/services/ordersService");
+  // React Query mutations
+  const deleteOrderMutation = useDeleteOrderMutation();
+  const updateStatusMutation = useUpdateOrderStatusMutation();
 
-      await ordersService.updateOrderStatus(orderId, newStatus);
+  // Fetch order detail for editing
+  const { data: fetchedOrderDetail } = useOrderDetailQuery(orderIdToFetch);
 
-      toast({
-        title: "Status Updated",
-        description: `Order ${orderId} status changed to ${newStatus}`,
-      });
-
-      onOrderUpdate?.();
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: `Failed to update order status: ${
-          error instanceof Error ? error.message : "Unknown error"
-        }`,
-        variant: "destructive",
-      });
-    }
-  };
-
-  const handleViewDetails = (orderId: string) => {
-    router.push(`/dashboard/orders/${orderId}`);
-  };
-
-  const handleEdit = async (orderId: string) => {
-    try {
-      const { ordersService } = await import("@/services/ordersService");
-      const orderDetail = await ordersService.fetchOrderById(orderId);
-      setOrderToEdit(orderDetail);
+  // Update orderToEdit when data is fetched
+  React.useEffect(() => {
+    if (fetchedOrderDetail) {
+      setOrderToEdit(fetchedOrderDetail);
       setEditDialogOpen(true);
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: `Failed to load order details: ${
-          error instanceof Error ? error.message : "Unknown error"
-        }`,
-        variant: "destructive",
-      });
+      setOrderIdToFetch("");
     }
-  };
+  }, [fetchedOrderDetail]);
 
-  const handleDeleteClick = (orderId: string) => {
+  const handleStatusChange = React.useCallback(
+    (orderId: string, newStatus: OrderStatus) => {
+      updateStatusMutation.mutate({ orderId, status: newStatus });
+      onOrderUpdate?.();
+    },
+    [updateStatusMutation, onOrderUpdate]
+  );
+
+  const handleViewDetails = React.useCallback(
+    (orderId: string) => {
+      router.push(`/dashboard/orders/${orderId}`);
+    },
+    [router]
+  );
+
+  const handleEdit = React.useCallback((orderId: string) => {
+    setOrderIdToFetch(orderId);
+  }, []);
+
+  const handleDeleteClick = React.useCallback((orderId: string) => {
     setOrderToDelete(orderId);
     setDeleteDialogOpen(true);
-  };
+  }, []);
 
-  const handleDeleteConfirm = async () => {
+  const handleDeleteConfirm = React.useCallback(() => {
     if (!orderToDelete) return;
 
-    setIsDeleting(true);
-
-    try {
-      const { ordersService } = await import("@/services/ordersService");
-
-      await ordersService.deleteOrder(orderToDelete);
-
-      toast({
-        title: "Order Deleted",
-        description: `Order ${orderToDelete} has been deleted successfully`,
-      });
-
-      setDeleteDialogOpen(false);
-      setOrderToDelete(null);
-
-      onOrderUpdate?.();
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: `Failed to delete order: ${
-          error instanceof Error ? error.message : "Unknown error"
-        }`,
-        variant: "destructive",
-      });
-    } finally {
-      setIsDeleting(false);
-    }
-  };
-
-  const columns: ColumnDef<Order>[] = [
-    {
-      accessorKey: "id",
-      header: "Order ID",
-      cell: ({ row }) => (
-        <div className="font-medium">{row.getValue("id")}</div>
-      ),
-    },
-    {
-      accessorKey: "clientName",
-      header: "Client",
-      cell: ({ row }) => (
-        <div className="capitalize">{row.getValue("clientName")}</div>
-      ),
-    },
-    {
-      accessorKey: "projectType",
-      header: "Project Type",
-      cell: ({ row }) => <div>{row.getValue("projectType")}</div>,
-    },
-    {
-      accessorKey: "status",
-      header: "Status",
-      cell: ({ row }) => {
-        const status = row.getValue("status") as string;
-        const statusColors = {
-          Pending:
-            "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200",
-          "In Progress":
-            "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
-          Completed:
-            "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
-          Cancelled:
-            "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
-        };
-        return (
-          <div
-            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-              statusColors[status as keyof typeof statusColors]
-            }`}
-          >
-            {status}
-          </div>
-        );
+    deleteOrderMutation.mutate(orderToDelete, {
+      onSuccess: () => {
+        setDeleteDialogOpen(false);
+        setOrderToDelete(null);
+        onOrderUpdate?.();
       },
-    },
-    {
-      accessorKey: "deadline",
-      header: "Deadline",
-      cell: ({ row }) => {
-        const date = new Date(row.getValue("deadline"));
-        const formatted = new Intl.DateTimeFormat("en-US", {
-          month: "short",
-          day: "numeric",
-          year: "numeric",
-        }).format(date);
-        return <div>{formatted}</div>;
+    });
+  }, [deleteOrderMutation, orderToDelete, onOrderUpdate]);
+
+  const columns: ColumnDef<Order>[] = React.useMemo(
+    () => [
+      {
+        accessorKey: "id",
+        header: "Order ID",
+        cell: ({ row }) => (
+          <div className="font-medium">{row.getValue("id")}</div>
+        ),
       },
-    },
-    {
-      accessorKey: "amount",
-      header: () => <div className="text-left">Amount</div>,
-      cell: ({ row }) => {
-        const amount = parseFloat(row.getValue("amount"));
-        const formatted = new Intl.NumberFormat("en-US", {
-          style: "currency",
-          currency: "USD",
-        }).format(amount);
-        return <div className="text-left font-medium">{formatted}</div>;
+      {
+        accessorKey: "clientName",
+        header: "Client",
+        cell: ({ row }) => (
+          <div className="capitalize">{row.getValue("clientName")}</div>
+        ),
       },
-    },
-    {
-      id: "actions",
-      header: () => <div className="text-right mr-4">Actions</div>,
-      cell: ({ row }) => {
-        return (
-          <div className="flex items-center justify-end gap-1">
-            <OrderActionsDropdown
-              orderId={row.original.id}
-              onStatusChange={handleStatusChange}
-              onEdit={handleEdit}
-              onDelete={handleDeleteClick}
-            />
-            <Button
-              variant="ghost"
-              size="sm"
-              className="hover:bg-[#2a2a42] transition-colors"
-              onClick={() => handleViewDetails(row.original.id)}
+      {
+        accessorKey: "projectType",
+        header: "Project Type",
+        cell: ({ row }) => <div>{row.getValue("projectType")}</div>,
+      },
+      {
+        accessorKey: "status",
+        header: "Status",
+        cell: ({ row }) => {
+          const status = row.getValue("status") as string;
+          const statusColors = {
+            Pending:
+              "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200",
+            "In Progress":
+              "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
+            Completed:
+              "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
+            Cancelled:
+              "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
+          };
+          return (
+            <div
+              className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                statusColors[status as keyof typeof statusColors]
+              }`}
             >
-              <ArrowRight className="h-4 w-4" />
-            </Button>
-          </div>
-        );
+              {status}
+            </div>
+          );
+        },
       },
-    },
-  ];
+      {
+        accessorKey: "deadline",
+        header: "Deadline",
+        cell: ({ row }) => {
+          const date = new Date(row.getValue("deadline"));
+          const formatted = new Intl.DateTimeFormat("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          }).format(date);
+          return <div>{formatted}</div>;
+        },
+      },
+      {
+        accessorKey: "amount",
+        header: () => <div className="text-left">Amount</div>,
+        cell: ({ row }) => {
+          const amount = parseFloat(row.getValue("amount"));
+          const formatted = new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+          }).format(amount);
+          return <div className="text-left font-medium">{formatted}</div>;
+        },
+      },
+      {
+        id: "actions",
+        header: () => <div className="text-right mr-4">Actions</div>,
+        cell: ({ row }) => {
+          return (
+            <div className="flex items-center justify-end gap-1">
+              <OrderActionsDropdown
+                orderId={row.original.id}
+                onStatusChange={handleStatusChange}
+                onEdit={handleEdit}
+                onDelete={handleDeleteClick}
+              />
+              <Button
+                variant="ghost"
+                size="sm"
+                className="hover:bg-[#2a2a42] transition-colors"
+                onClick={() => handleViewDetails(row.original.id)}
+              >
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </div>
+          );
+        },
+      },
+    ],
+    [handleStatusChange, handleEdit, handleDeleteClick, handleViewDetails]
+  );
 
   const table = useReactTable({
     data,
@@ -355,13 +329,15 @@ export function OrdersTable({ data, onOrderUpdate }: OrdersTableProps) {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel disabled={isDeleting}>Cancel</AlertDialogCancel>
+            <AlertDialogCancel disabled={deleteOrderMutation.isPending}>
+              Cancel
+            </AlertDialogCancel>
             <AlertDialogAction
               onClick={handleDeleteConfirm}
-              disabled={isDeleting}
+              disabled={deleteOrderMutation.isPending}
               className="bg-red-500 hover:bg-red-600"
             >
-              {isDeleting ? "Deleting..." : "Delete"}
+              {deleteOrderMutation.isPending ? "Deleting..." : "Delete"}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

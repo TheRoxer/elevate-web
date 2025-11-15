@@ -17,7 +17,7 @@ interface OrderInfoCardProps {
   description?: string;
 }
 
-export function OrderInfoCard({
+export const OrderInfoCard = React.memo(function OrderInfoCard({
   order,
   title = "Order Information",
   description = "Complete details about this order",
@@ -118,4 +118,4 @@ export function OrderInfoCard({
       </CardContent>
     </Card>
   );
-}
+});

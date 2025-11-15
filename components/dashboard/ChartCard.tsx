@@ -11,7 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-const ChartCard = () => {
+const ChartCard = React.memo(() => {
   return (
     <Card className="card-chart card-height">
       <div className="flex justify-between align-middle">
@@ -28,6 +28,8 @@ const ChartCard = () => {
       </CardContent>
     </Card>
   );
-};
+});
+
+ChartCard.displayName = "ChartCard";
 
 export default ChartCard;

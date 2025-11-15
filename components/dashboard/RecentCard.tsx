@@ -1,3 +1,4 @@
+import * as React from "react";
 import {
   Card,
   CardContent,
@@ -8,7 +9,7 @@ import {
 
 import Orders from "./RecentOrders";
 
-const RecentCard = () => {
+const RecentCard = React.memo(() => {
   return (
     <Card className="card-recent card-height">
       <CardHeader className="">
@@ -22,6 +23,8 @@ const RecentCard = () => {
       </CardContent>
     </Card>
   );
-};
+});
+
+RecentCard.displayName = "RecentCard";
 
 export default RecentCard;

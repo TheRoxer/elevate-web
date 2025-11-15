@@ -13,70 +13,42 @@ import { TaskBoard } from "@/components/dashboard/TaskBoard";
 import { OrderInfoCard } from "@/components/dashboard/OrderInfoCard";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft } from "lucide-react";
-import { useOrderDetail } from "@/hooks/useOrders";
-import { useToast } from "@/components/ui/use-toast";
+import {
+  useOrderDetailQuery,
+  useUpdateOrderStatusMutation,
+  useDeleteOrderMutation,
+} from "@/hooks/queries/useOrdersQuery";
 import type { OrderStatus } from "@/types/schemas";
 
 export default function OrderDetailPage() {
   const router = useRouter();
   const params = useParams();
-  const { toast } = useToast();
   const orderId = params?.id as string;
 
-  const { order, loading, error, refetch } = useOrderDetail(orderId);
+  const {
+    data: order,
+    isLoading,
+    error,
+    refetch,
+  } = useOrderDetailQuery(orderId);
+  const updateStatusMutation = useUpdateOrderStatusMutation();
+  const deleteOrderMutation = useDeleteOrderMutation();
   const [editDialogOpen, setEditDialogOpen] = React.useState(false);
 
-  const handleStatusChange = async (
-    orderId: string,
-    newStatus: OrderStatus
-  ) => {
-    try {
-      const { ordersService } = await import("@/services/ordersService");
-
-      await ordersService.updateOrderStatus(orderId, newStatus);
-
-      toast({
-        title: "Status Updated",
-        description: `Order ${orderId} status changed to ${newStatus}`,
-      });
-
-      refetch();
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: `Failed to update order status: ${
-          error instanceof Error ? error.message : "Unknown error"
-        }`,
-        variant: "destructive",
-      });
-    }
+  const handleStatusChange = (orderId: string, newStatus: OrderStatus) => {
+    updateStatusMutation.mutate({ orderId, status: newStatus });
   };
 
   const handleEdit = () => {
     setEditDialogOpen(true);
   };
 
-  const handleDelete = async (orderId: string) => {
-    try {
-      const { ordersService } = await import("@/services/ordersService");
-
-      await ordersService.deleteOrder(orderId);
-
-      toast({
-        title: "Order Deleted",
-        description: `Order ${orderId} has been deleted successfully`,
-      });
-
-      router.push("/dashboard/orders");
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: `Failed to delete order: ${
-          error instanceof Error ? error.message : "Unknown error"
-        }`,
-        variant: "destructive",
-      });
-    }
+  const handleDelete = (orderId: string) => {
+    deleteOrderMutation.mutate(orderId, {
+      onSuccess: () => {
+        router.push("/dashboard/orders");
+      },
+    });
   };
 
   const statusColors = {
@@ -89,7 +61,7 @@ export default function OrderDetailPage() {
     Cancelled: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
   };
 
-  if (loading) {
+  if (isLoading) {
     return (
       <DashboardLayoutClient>
         <Header />
@@ -110,7 +82,7 @@ export default function OrderDetailPage() {
           <div className="text-center space-y-2">
             <p className="text-red-500 font-medium">Error loading order</p>
             <p className="text-sm text-muted-foreground">
-              {error || "Order not found"}
+              {error instanceof Error ? error.message : "Order not found"}
             </p>
             <Button onClick={() => router.push("/dashboard/orders")}>
               Back to Orders

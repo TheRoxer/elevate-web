@@ -24,7 +24,12 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Plus, GripVertical, X, AlertCircle, Loader2 } from "lucide-react";
-import { useTasks } from "@/hooks/useTasks";
+import {
+  useTasksQuery,
+  useCreateTaskMutation,
+  useUpdateTaskMutation,
+  useDeleteTaskMutation,
+} from "@/hooks/queries/useTasksQuery";
 import type { TaskStatus as DbTaskStatus } from "@/types/schemas";
 
 type TaskStatus = "pending" | "in-progress" | "completed";
@@ -46,15 +51,11 @@ export function TaskBoard({
   title = "Tasks",
   description = "Manage your project tasks",
 }: TaskBoardProps) {
-  // Always use Supabase
-  const {
-    tasks,
-    loading: isLoading,
-    error,
-    createTask,
-    updateTask,
-    deleteTask: deleteTaskFromDb,
-  } = useTasks(orderId);
+  // React Query hooks
+  const { data: tasks = [], isLoading, error } = useTasksQuery(orderId);
+  const createTaskMutation = useCreateTaskMutation(orderId);
+  const updateTaskMutation = useUpdateTaskMutation(orderId);
+  const deleteTaskMutation = useDeleteTaskMutation(orderId);
 
   const [newTaskPending, setNewTaskPending] = React.useState("");
   const [newTaskInProgress, setNewTaskInProgress] = React.useState("");
@@ -62,39 +63,28 @@ export function TaskBoard({
   const [draggedTask, setDraggedTask] = React.useState<Task | null>(null);
   const [editingTask, setEditingTask] = React.useState<Task | null>(null);
   const [editedText, setEditedText] = React.useState("");
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
 
-  const addTask = async (
+  const addTask = (
     status: TaskStatus,
     text: string,
     setter: (val: string) => void
   ) => {
     if (!text.trim()) return;
 
-    setIsSubmitting(true);
-    try {
-      await createTask({
+    createTaskMutation.mutate(
+      {
         orderId,
         text: text.trim(),
         status: status as DbTaskStatus,
-      });
-      setter("");
-    } catch (error) {
-      console.error("Failed to add task:", error);
-    } finally {
-      setIsSubmitting(false);
-    }
+      },
+      {
+        onSuccess: () => setter(""),
+      }
+    );
   };
 
-  const deleteTask = async (id: number | string) => {
-    setIsSubmitting(true);
-    try {
-      await deleteTaskFromDb(id);
-    } catch (error) {
-      console.error("Failed to delete task:", error);
-    } finally {
-      setIsSubmitting(false);
-    }
+  const deleteTask = (id: number | string) => {
+    deleteTaskMutation.mutate(id);
   };
 
   const openEditDialog = (task: Task) => {
@@ -107,21 +97,18 @@ export function TaskBoard({
     setEditedText("");
   };
 
-  const saveEditedTask = async () => {
+  const saveEditedTask = () => {
     if (!editingTask || !editedText.trim()) return;
 
-    setIsSubmitting(true);
-    try {
-      await updateTask({
+    updateTaskMutation.mutate(
+      {
         id: editingTask.id,
         text: editedText.trim(),
-      });
-      closeEditDialog();
-    } catch (error) {
-      console.error("Failed to update task:", error);
-    } finally {
-      setIsSubmitting(false);
-    }
+      },
+      {
+        onSuccess: closeEditDialog,
+      }
+    );
   };
 
   const handleDragStart = (task: Task) => {
@@ -132,21 +119,18 @@ export function TaskBoard({
     e.preventDefault();
   };
 
-  const handleDrop = async (status: TaskStatus) => {
+  const handleDrop = (status: TaskStatus) => {
     if (!draggedTask) return;
 
-    setIsSubmitting(true);
-    try {
-      await updateTask({
+    updateTaskMutation.mutate(
+      {
         id: draggedTask.id,
         status: status as DbTaskStatus,
-      });
-    } catch (error) {
-      console.error("Failed to update task status:", error);
-    } finally {
-      setDraggedTask(null);
-      setIsSubmitting(false);
-    }
+      },
+      {
+        onSuccess: () => setDraggedTask(null),
+      }
+    );
   };
 
   const getTasksByStatus = (status: TaskStatus) => {
@@ -211,9 +195,9 @@ export function TaskBoard({
           onClick={() => addTask(status, newTaskValue, setNewTaskValue)}
           size="icon"
           className="flex-shrink-0"
-          disabled={isSubmitting}
+          disabled={createTaskMutation.isPending}
         >
-          {isSubmitting ? (
+          {createTaskMutation.isPending ? (
             <Loader2 className="h-4 w-4 animate-spin" />
           ) : (
             <Plus className="h-4 w-4" />
@@ -234,7 +218,9 @@ export function TaskBoard({
           {error && (
             <Alert variant="destructive" className="mb-4">
               <AlertCircle className="h-4 w-4" />
-              <AlertDescription>{error}</AlertDescription>
+              <AlertDescription>
+                {error instanceof Error ? error.message : "Error loading tasks"}
+              </AlertDescription>
             </Alert>
           )}
 
@@ -326,15 +312,15 @@ export function TaskBoard({
             <Button
               variant="outline"
               onClick={closeEditDialog}
-              disabled={isSubmitting}
+              disabled={updateTaskMutation.isPending}
             >
               Cancel
             </Button>
             <Button
               onClick={saveEditedTask}
-              disabled={!editedText.trim() || isSubmitting}
+              disabled={!editedText.trim() || updateTaskMutation.isPending}
             >
-              {isSubmitting ? (
+              {updateTaskMutation.isPending ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   Saving...

@@ -1,6 +1,7 @@
 import { TailwindIndicator } from "@/components/util/TailwindIndicator";
 import { ThemeProvider } from "@/components/util/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
+import { QueryProvider } from "@/lib/providers/QueryProvider";
 
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
@@ -22,16 +23,18 @@ export default function RootLayout({
     <html lang="en">
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <body className={`${outfit.variable} font-sans`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <TailwindIndicator />
-          {children}
-          <Toaster />
-        </ThemeProvider>
+        <QueryProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <TailwindIndicator />
+            {children}
+            <Toaster />
+          </ThemeProvider>
+        </QueryProvider>
       </body>
     </html>
   );

@@ -25,7 +25,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { useRecentOrders } from "@/hooks/useOrders";
+import { useRecentOrdersQuery } from "@/hooks/queries/useOrdersQuery";
 import type { Order } from "@/types/schemas";
 
 export const getColumns = (
@@ -119,7 +119,7 @@ export const getColumns = (
 
 export default function Orders() {
   const router = useRouter();
-  const { orders, loading, error } = useRecentOrders(5);
+  const { data: orders = [], isLoading, error } = useRecentOrdersQuery(5);
   const columns = React.useMemo(() => getColumns(router), [router]);
 
   const [sorting, setSorting] = React.useState<SortingState>([
@@ -177,7 +177,7 @@ export default function Orders() {
             ))}
           </TableHeader>
           <TableBody>
-            {loading ? (
+            {isLoading ? (
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
@@ -192,7 +192,8 @@ export default function Orders() {
                   colSpan={columns.length}
                   className="h-24 text-center text-red-500"
                 >
-                  Error: {error}
+                  Error:{" "}
+                  {error instanceof Error ? error.message : "Unknown error"}
                 </TableCell>
               </TableRow>
             ) : table.getRowModel().rows?.length ? (

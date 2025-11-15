@@ -10,12 +10,12 @@ import {
   CartesianGrid,
   Label,
 } from "recharts";
-import { useChartData } from "@/hooks/useChartData";
+import { useChartDataQuery } from "@/hooks/queries/useChartDataQuery";
 
 export default function Chart() {
-  const { data, loading, error } = useChartData();
+  const { data, isLoading, error } = useChartDataQuery();
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="h-[calc((100vh-57px)/2-9rem)] flex items-center justify-center">
         <p className="text-muted-foreground">Loading chart data...</p>
@@ -26,7 +26,10 @@ export default function Chart() {
   if (error) {
     return (
       <div className="h-[calc((100vh-57px)/2-9rem)] flex items-center justify-center">
-        <p className="text-red-500">Error: {error}</p>
+        <p className="text-red-500">
+          Error:{" "}
+          {error instanceof Error ? error.message : "Failed to load chart data"}
+        </p>
       </div>
     );
   }

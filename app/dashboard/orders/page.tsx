@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Search, Plus, Loader2 } from "lucide-react";
-import { useOrders } from "@/hooks/useOrders";
+import { useOrdersQuery } from "@/hooks/queries/useOrdersQuery";
 import type { OrderStatus } from "@/types/schemas";
 
 export default function OrdersPage() {
@@ -49,7 +49,12 @@ export default function OrdersPage() {
     return result;
   }, [statusFilter, searchQuery]);
 
-  const { orders, loading, error, refetch } = useOrders(filters);
+  const {
+    data: orders = [],
+    isLoading,
+    error,
+    refetch,
+  } = useOrdersQuery(filters);
 
   const filteredData = React.useMemo(() => {
     // Client-side search filter (if not handled by backend)
@@ -62,6 +67,14 @@ export default function OrdersPage() {
         order.projectType.toLowerCase().includes(searchQuery.toLowerCase())
     );
   }, [orders, searchQuery]);
+
+  const handleRefetch = React.useCallback(() => {
+    refetch();
+  }, [refetch]);
+
+  const handleCreateDialogChange = React.useCallback((open: boolean) => {
+    setCreateDialogOpen(open);
+  }, []);
 
   return (
     <DashboardLayoutClient>
@@ -117,7 +130,7 @@ export default function OrdersPage() {
             </CardHeader>
 
             <CardContent className="flex-1 overflow-auto">
-              {loading ? (
+              {isLoading ? (
                 <div className="flex items-center justify-center h-full">
                   <Loader2 className="h-8 w-8 animate-spin text-primary" />
                 </div>
@@ -127,14 +140,19 @@ export default function OrdersPage() {
                     <p className="text-red-500 font-medium">
                       Error loading orders
                     </p>
-                    <p className="text-sm text-muted-foreground">{error}</p>
-                    <Button onClick={() => refetch()} variant="outline">
+                    <p className="text-sm text-muted-foreground">
+                      {error instanceof Error ? error.message : "Unknown error"}
+                    </p>
+                    <Button onClick={handleRefetch} variant="outline">
                       Try Again
                     </Button>
                   </div>
                 </div>
               ) : (
-                <OrdersTable data={filteredData} onOrderUpdate={refetch} />
+                <OrdersTable
+                  data={filteredData}
+                  onOrderUpdate={handleRefetch}
+                />
               )}
             </CardContent>
           </Card>
@@ -143,8 +161,8 @@ export default function OrdersPage() {
 
       <OrderCreateDialog
         open={createDialogOpen}
-        onOpenChange={setCreateDialogOpen}
-        onSuccess={refetch}
+        onOpenChange={handleCreateDialogChange}
+        onSuccess={handleRefetch}
       />
     </DashboardLayoutClient>
   );

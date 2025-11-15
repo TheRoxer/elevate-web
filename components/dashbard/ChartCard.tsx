@@ -15,8 +15,8 @@ const ChartCard = () => {
   return (
     <Card className="card-chart card-height">
       <div className="flex justify-between align-middle">
-        <CardHeader className="ml-5 mt-3 pr-0">
-          <CardTitle className="text-2xl">Total Income</CardTitle>
+        <CardHeader className="">
+          <CardTitle className="">Total Income</CardTitle>
           <CardDescription className="hidden lg:flex">
             Lorem ipsum dolor sit amet.
           </CardDescription>

@@ -23,16 +23,31 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { ArrowRight } from "lucide-react";
 import { type Order } from "@/data/orders";
+import { type OrderStatus, type OrderDetail } from "@/types/schemas";
 import { OrderActionsDropdown } from "./OrderActionsDropdown";
+import { OrderEditDialog } from "./OrderEditDialog";
+import { useToast } from "@/components/ui/use-toast";
 
 interface OrdersTableProps {
   data: Order[];
+  onOrderUpdate?: () => void;
 }
 
-export function OrdersTable({ data }: OrdersTableProps) {
+export function OrdersTable({ data, onOrderUpdate }: OrdersTableProps) {
   const router = useRouter();
+  const { toast } = useToast();
   const [sorting, setSorting] = React.useState<SortingState>([
     { id: "id", desc: false },
   ]);
@@ -42,24 +57,96 @@ export function OrdersTable({ data }: OrdersTableProps) {
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
+  const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false);
+  const [orderToDelete, setOrderToDelete] = React.useState<string | null>(null);
+  const [isDeleting, setIsDeleting] = React.useState(false);
+  const [editDialogOpen, setEditDialogOpen] = React.useState(false);
+  const [orderToEdit, setOrderToEdit] = React.useState<OrderDetail | null>(
+    null
+  );
 
-  const handleStatusChange = (orderId: string, newStatus: string) => {
-    console.log(`Changing order ${orderId} status to ${newStatus}`);
-    // TODO: Implement status update logic
+  const handleStatusChange = async (
+    orderId: string,
+    newStatus: OrderStatus
+  ) => {
+    try {
+      const { ordersService } = await import("@/services/ordersService");
+
+      await ordersService.updateOrderStatus(orderId, newStatus);
+
+      toast({
+        title: "Status Updated",
+        description: `Order ${orderId} status changed to ${newStatus}`,
+      });
+
+      onOrderUpdate?.();
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: `Failed to update order status: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`,
+        variant: "destructive",
+      });
+    }
   };
 
   const handleViewDetails = (orderId: string) => {
     router.push(`/dashboard/orders/${orderId}`);
   };
 
-  const handleEdit = (orderId: string) => {
-    console.log(`Editing order ${orderId}`);
-    // TODO: Implement edit logic
+  const handleEdit = async (orderId: string) => {
+    try {
+      const { ordersService } = await import("@/services/ordersService");
+      const orderDetail = await ordersService.fetchOrderById(orderId);
+      setOrderToEdit(orderDetail);
+      setEditDialogOpen(true);
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: `Failed to load order details: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`,
+        variant: "destructive",
+      });
+    }
   };
 
-  const handleDelete = (orderId: string) => {
-    console.log(`Deleting order ${orderId}`);
-    // TODO: Implement delete logic
+  const handleDeleteClick = (orderId: string) => {
+    setOrderToDelete(orderId);
+    setDeleteDialogOpen(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (!orderToDelete) return;
+
+    setIsDeleting(true);
+
+    try {
+      const { ordersService } = await import("@/services/ordersService");
+
+      await ordersService.deleteOrder(orderToDelete);
+
+      toast({
+        title: "Order Deleted",
+        description: `Order ${orderToDelete} has been deleted successfully`,
+      });
+
+      setDeleteDialogOpen(false);
+      setOrderToDelete(null);
+
+      onOrderUpdate?.();
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: `Failed to delete order: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`,
+        variant: "destructive",
+      });
+    } finally {
+      setIsDeleting(false);
+    }
   };
 
   const columns: ColumnDef<Order>[] = [
@@ -143,7 +230,7 @@ export function OrdersTable({ data }: OrdersTableProps) {
               orderId={row.original.id}
               onStatusChange={handleStatusChange}
               onEdit={handleEdit}
-              onDelete={handleDelete}
+              onDelete={handleDeleteClick}
             />
             <Button
               variant="ghost"
@@ -179,82 +266,113 @@ export function OrdersTable({ data }: OrdersTableProps) {
   });
 
   return (
-    <div className="space-y-4">
-      <div className="rounded-md border">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id} className="hover:bg-[#1b1b2c]">
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  );
-                })}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                  className="hover:bg-[#1b1b2c] transition-colors"
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
+    <>
+      <div className="space-y-4">
+        <div className="rounded-md border">
+          <Table>
+            <TableHeader>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id} className="hover:bg-[#1b1b2c]">
+                  {headerGroup.headers.map((header) => {
+                    return (
+                      <TableHead key={header.id}>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                      </TableHead>
+                    );
+                  })}
                 </TableRow>
-              ))
-            ) : (
-              <TableRow className="hover:bg-[#1b1b2c]">
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  No orders found.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
+              ))}
+            </TableHeader>
+            <TableBody>
+              {table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                    className="hover:bg-[#1b1b2c] transition-colors"
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow className="hover:bg-[#1b1b2c]">
+                  <TableCell
+                    colSpan={columns.length}
+                    className="h-24 text-center"
+                  >
+                    No orders found.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
+
+        <div className="flex items-center justify-between">
+          <div className="text-sm text-muted-foreground">
+            Showing {table.getRowModel().rows.length} of {data.length} order(s)
+          </div>
+          <div className="flex items-center space-x-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => table.previousPage()}
+              disabled={!table.getCanPreviousPage()}
+            >
+              Previous
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => table.nextPage()}
+              disabled={!table.getCanNextPage()}
+            >
+              Next
+            </Button>
+          </div>
+        </div>
       </div>
 
-      <div className="flex items-center justify-between">
-        <div className="text-sm text-muted-foreground">
-          Showing {table.getRowModel().rows.length} of {data.length} order(s)
-        </div>
-        <div className="flex items-center space-x-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            Previous
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            Next
-          </Button>
-        </div>
-      </div>
-    </div>
+      <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete order{" "}
+              {orderToDelete} and remove all associated data.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={isDeleting}>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleDeleteConfirm}
+              disabled={isDeleting}
+              className="bg-red-500 hover:bg-red-600"
+            >
+              {isDeleting ? "Deleting..." : "Delete"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      <OrderEditDialog
+        order={orderToEdit}
+        open={editDialogOpen}
+        onOpenChange={setEditDialogOpen}
+        onSuccess={onOrderUpdate}
+      />
+    </>
   );
 }

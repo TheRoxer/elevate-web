@@ -1,5 +1,6 @@
 import { TailwindIndicator } from "@/components/util/TailwindIndicator";
 import { ThemeProvider } from "@/components/util/theme-provider";
+import { Toaster } from "@/components/ui/toaster";
 
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
@@ -29,6 +30,7 @@ export default function RootLayout({
         >
           <TailwindIndicator />
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

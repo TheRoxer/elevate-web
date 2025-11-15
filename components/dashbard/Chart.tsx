@@ -8,50 +8,29 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
-  Legend,
-  ReferenceLine,
   Label,
 } from "recharts";
-
-const data = [
-  {
-    name: "Mon",
-    average: 400,
-    today: 240,
-  },
-  {
-    name: "Tue",
-    average: 300,
-    today: 139,
-  },
-  {
-    name: "Wed",
-    average: 200,
-    today: 980,
-  },
-  {
-    name: "Thu",
-    average: 278,
-    today: 390,
-  },
-  {
-    name: "Fri",
-    average: 189,
-    today: 480,
-  },
-  {
-    name: "Sat",
-    average: 239,
-    today: 380,
-  },
-  {
-    name: "Sun",
-    average: 349,
-    today: 430,
-  },
-];
+import { useChartData } from "@/hooks/useChartData";
 
 export default function Chart() {
+  const { data, loading, error } = useChartData();
+
+  if (loading) {
+    return (
+      <div className="h-[calc((100vh-57px)/2-9rem)] flex items-center justify-center">
+        <p className="text-muted-foreground">Loading chart data...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="h-[calc((100vh-57px)/2-9rem)] flex items-center justify-center">
+        <p className="text-red-500">Error: {error}</p>
+      </div>
+    );
+  }
+
   return (
     <div>
       <div className="h-[calc((100vh-57px)/2-9rem)] ">
@@ -66,7 +45,6 @@ export default function Chart() {
               bottom: 55,
             }}
           >
-            {/* Grid for better readability */}
             <CartesianGrid
               strokeDasharray="3 3"
               stroke="hsl(var(--muted-foreground))"
@@ -74,7 +52,6 @@ export default function Chart() {
               vertical={false}
             />
 
-            {/* X-Axis with time labels */}
             <XAxis
               dataKey="name"
               stroke="hsl(var(--muted-foreground))"
@@ -83,7 +60,6 @@ export default function Chart() {
               axisLine={false}
             />
 
-            {/* Y-Axis with income values */}
             <YAxis
               stroke="hsl(var(--muted-foreground))"
               fontSize={12}

@@ -12,53 +12,116 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { Plus, GripVertical, X } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Plus, GripVertical, X, AlertCircle, Loader2 } from "lucide-react";
+import { useTasks } from "@/hooks/useTasks";
+import type { TaskStatus as DbTaskStatus } from "@/types/schemas";
 
 type TaskStatus = "pending" | "in-progress" | "completed";
 
 export interface Task {
-  id: number;
+  id: number | string;
   text: string;
   status: TaskStatus;
 }
 
 interface TaskBoardProps {
-  initialTasks?: Task[];
-  onTasksChange?: (tasks: Task[]) => void;
+  orderId: string; // Required - always uses Supabase
   title?: string;
   description?: string;
 }
 
 export function TaskBoard({
-  initialTasks = [],
-  onTasksChange,
+  orderId,
   title = "Tasks",
   description = "Manage your project tasks",
 }: TaskBoardProps) {
-  const [tasks, setTasks] = React.useState<Task[]>(initialTasks);
+  // Always use Supabase
+  const {
+    tasks,
+    loading: isLoading,
+    error,
+    createTask,
+    updateTask,
+    deleteTask: deleteTaskFromDb,
+  } = useTasks(orderId);
+
   const [newTaskPending, setNewTaskPending] = React.useState("");
   const [newTaskInProgress, setNewTaskInProgress] = React.useState("");
   const [newTaskCompleted, setNewTaskCompleted] = React.useState("");
   const [draggedTask, setDraggedTask] = React.useState<Task | null>(null);
+  const [editingTask, setEditingTask] = React.useState<Task | null>(null);
+  const [editedText, setEditedText] = React.useState("");
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
 
-  // Notify parent of task changes
-  React.useEffect(() => {
-    onTasksChange?.(tasks);
-  }, [tasks, onTasksChange]);
-
-  const addTask = (
+  const addTask = async (
     status: TaskStatus,
     text: string,
     setter: (val: string) => void
   ) => {
-    if (text.trim()) {
-      setTasks([...tasks, { id: Date.now(), text: text.trim(), status }]);
+    if (!text.trim()) return;
+
+    setIsSubmitting(true);
+    try {
+      await createTask({
+        orderId,
+        text: text.trim(),
+        status: status as DbTaskStatus,
+      });
       setter("");
+    } catch (error) {
+      console.error("Failed to add task:", error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
-  const deleteTask = (id: number) => {
-    setTasks(tasks.filter((task) => task.id !== id));
+  const deleteTask = async (id: number | string) => {
+    setIsSubmitting(true);
+    try {
+      await deleteTaskFromDb(id);
+    } catch (error) {
+      console.error("Failed to delete task:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const openEditDialog = (task: Task) => {
+    setEditingTask(task);
+    setEditedText(task.text);
+  };
+
+  const closeEditDialog = () => {
+    setEditingTask(null);
+    setEditedText("");
+  };
+
+  const saveEditedTask = async () => {
+    if (!editingTask || !editedText.trim()) return;
+
+    setIsSubmitting(true);
+    try {
+      await updateTask({
+        id: editingTask.id,
+        text: editedText.trim(),
+      });
+      closeEditDialog();
+    } catch (error) {
+      console.error("Failed to update task:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleDragStart = (task: Task) => {
@@ -69,14 +132,20 @@ export function TaskBoard({
     e.preventDefault();
   };
 
-  const handleDrop = (status: TaskStatus) => {
-    if (draggedTask) {
-      setTasks(
-        tasks.map((task) =>
-          task.id === draggedTask.id ? { ...task, status } : task
-        )
-      );
+  const handleDrop = async (status: TaskStatus) => {
+    if (!draggedTask) return;
+
+    setIsSubmitting(true);
+    try {
+      await updateTask({
+        id: draggedTask.id,
+        status: status as DbTaskStatus,
+      });
+    } catch (error) {
+      console.error("Failed to update task status:", error);
+    } finally {
       setDraggedTask(null);
+      setIsSubmitting(false);
     }
   };
 
@@ -108,13 +177,17 @@ export function TaskBoard({
             key={task.id}
             draggable
             onDragStart={() => handleDragStart(task)}
-            className="group p-3 rounded-lg bg-[#1b1b2c] hover:bg-[#2a2a42] transition-colors cursor-move"
+            onClick={() => openEditDialog(task)}
+            className="group p-3 rounded-lg bg-[#1b1b2c] hover:bg-[#2a2a42] transition-colors cursor-pointer"
           >
             <div className="flex items-start gap-2">
               <GripVertical className="h-4 w-4 text-muted-foreground flex-shrink-0 mt-0.5" />
               <p className="text-sm flex-1 break-words">{task.text}</p>
               <button
-                onClick={() => deleteTask(task.id)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  deleteTask(task.id);
+                }}
                 className="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-600 flex-shrink-0 transition-opacity"
               >
                 <X className="h-4 w-4" />
@@ -138,50 +211,141 @@ export function TaskBoard({
           onClick={() => addTask(status, newTaskValue, setNewTaskValue)}
           size="icon"
           className="flex-shrink-0"
+          disabled={isSubmitting}
         >
-          <Plus className="h-4 w-4" />
+          {isSubmitting ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <Plus className="h-4 w-4" />
+          )}
         </Button>
       </div>
     </div>
   );
 
   return (
-    <Card className="flex-1 flex flex-col min-h-0 overflow-hidden">
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-        <CardDescription>{description}</CardDescription>
-      </CardHeader>
-      <CardContent className="flex-1 flex flex-col overflow-hidden min-h-0">
-        <div className="flex-1 flex gap-3 overflow-hidden min-h-0">
-          {renderColumn(
-            "pending",
-            "Pending",
-            "text-yellow-500",
-            newTaskPending,
-            setNewTaskPending
+    <>
+      <Card className="flex-1 flex flex-col min-h-0 overflow-hidden">
+        <CardHeader>
+          <CardTitle>{title}</CardTitle>
+          <CardDescription>{description}</CardDescription>
+        </CardHeader>
+        <CardContent className="flex-1 flex flex-col overflow-hidden min-h-0">
+          {error && (
+            <Alert variant="destructive" className="mb-4">
+              <AlertCircle className="h-4 w-4" />
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
           )}
 
-          <Separator orientation="vertical" className="h-auto" />
+          {isLoading ? (
+            <div className="flex-1 flex items-center justify-center">
+              <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+            </div>
+          ) : (
+            <div className="flex-1 flex gap-3 overflow-hidden min-h-0">
+              {renderColumn(
+                "pending",
+                "Pending",
+                "text-yellow-500",
+                newTaskPending,
+                setNewTaskPending
+              )}
 
-          {renderColumn(
-            "in-progress",
-            "In Progress",
-            "text-blue-500",
-            newTaskInProgress,
-            setNewTaskInProgress
+              <Separator orientation="vertical" className="h-auto" />
+
+              {renderColumn(
+                "in-progress",
+                "In Progress",
+                "text-blue-500",
+                newTaskInProgress,
+                setNewTaskInProgress
+              )}
+
+              <Separator orientation="vertical" className="h-auto" />
+
+              {renderColumn(
+                "completed",
+                "Completed",
+                "text-green-500",
+                newTaskCompleted,
+                setNewTaskCompleted
+              )}
+            </div>
           )}
+        </CardContent>
+      </Card>
 
-          <Separator orientation="vertical" className="h-auto" />
-
-          {renderColumn(
-            "completed",
-            "Completed",
-            "text-green-500",
-            newTaskCompleted,
-            setNewTaskCompleted
-          )}
-        </div>
-      </CardContent>
-    </Card>
+      <Dialog open={!!editingTask} onOpenChange={closeEditDialog}>
+        <DialogContent className="sm:max-w-[525px]">
+          <DialogHeader>
+            <DialogTitle>Edit Task</DialogTitle>
+            <DialogDescription>
+              Make changes to your task here. Click save when you&apos;re done.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid gap-2">
+              <Label htmlFor="task-text">Task Description</Label>
+              <Textarea
+                id="task-text"
+                value={editedText}
+                onChange={(e) => setEditedText(e.target.value)}
+                placeholder="Enter task description..."
+                className="min-h-[100px]"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && e.ctrlKey) {
+                    saveEditedTask();
+                  }
+                }}
+              />
+            </div>
+            {editingTask && (
+              <div className="flex items-center gap-2">
+                <Label>Status:</Label>
+                <Badge
+                  variant="secondary"
+                  className={
+                    editingTask.status === "pending"
+                      ? "text-yellow-500"
+                      : editingTask.status === "in-progress"
+                      ? "text-blue-500"
+                      : "text-green-500"
+                  }
+                >
+                  {editingTask.status === "pending"
+                    ? "Pending"
+                    : editingTask.status === "in-progress"
+                    ? "In Progress"
+                    : "Completed"}
+                </Badge>
+              </div>
+            )}
+          </div>
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={closeEditDialog}
+              disabled={isSubmitting}
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={saveEditedTask}
+              disabled={!editedText.trim() || isSubmitting}
+            >
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Saving...
+                </>
+              ) : (
+                "Save Changes"
+              )}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }

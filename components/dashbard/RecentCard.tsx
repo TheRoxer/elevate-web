@@ -6,13 +6,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import Orders from "./Orders";
+import Orders from "./RecentOrders";
 
 const RecentCard = () => {
   return (
     <Card className="card-recent card-height">
-      <CardHeader className="ml-5 mt-3">
-        <CardTitle className="text-2xl">Recent orders</CardTitle>
+      <CardHeader className="">
+        <CardTitle className="">Recent orders</CardTitle>
         <CardDescription className="hidden lg:flex">
           Lorem ipsum dolor sit amet.
         </CardDescription>

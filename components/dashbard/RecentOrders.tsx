@@ -25,19 +25,8 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { orders, type Order } from "@/data/orders";
-
-// Get 5 most recent orders (sorted by deadline, closest to today first)
-const getRecentOrders = (): Order[] => {
-  const today = new Date().getTime();
-  return [...orders]
-    .sort((a, b) => {
-      const dateA = Math.abs(new Date(a.deadline).getTime() - today);
-      const dateB = Math.abs(new Date(b.deadline).getTime() - today);
-      return dateA - dateB;
-    })
-    .slice(0, 5);
-};
+import { useRecentOrders } from "@/hooks/useOrders";
+import type { Order } from "@/types/schemas";
 
 export const getColumns = (
   router: ReturnType<typeof useRouter>
@@ -130,7 +119,7 @@ export const getColumns = (
 
 export default function Orders() {
   const router = useRouter();
-  const data = React.useMemo(() => getRecentOrders(), []);
+  const { orders, loading, error } = useRecentOrders(5);
   const columns = React.useMemo(() => getColumns(router), [router]);
 
   const [sorting, setSorting] = React.useState<SortingState>([
@@ -144,7 +133,7 @@ export default function Orders() {
   const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useReactTable({
-    data,
+    data: orders,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -188,7 +177,25 @@ export default function Orders() {
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
+            {loading ? (
+              <TableRow>
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
+                  Loading...
+                </TableCell>
+              </TableRow>
+            ) : error ? (
+              <TableRow>
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center text-red-500"
+                >
+                  Error: {error}
+                </TableCell>
+              </TableRow>
+            ) : table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
@@ -211,7 +218,7 @@ export default function Orders() {
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  No recent orders.
                 </TableCell>
               </TableRow>
             )}

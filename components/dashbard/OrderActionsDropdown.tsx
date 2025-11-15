@@ -14,10 +14,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { MoreVertical, FileEdit, Trash2, ListChecks } from "lucide-react";
+import { type OrderStatus } from "@/types/schemas";
 
 interface OrderActionsDropdownProps {
   orderId: string;
-  onStatusChange: (orderId: string, newStatus: string) => void;
+  onStatusChange: (orderId: string, newStatus: OrderStatus) => void;
   onEdit: (orderId: string) => void;
   onDelete: (orderId: string) => void;
 }
@@ -49,22 +50,22 @@ export function OrderActionsDropdown({
           </DropdownMenuSubTrigger>
           <DropdownMenuSubContent>
             <DropdownMenuItem
-              onClick={() => onStatusChange(orderId, "pending")}
+              onClick={() => onStatusChange(orderId, "Pending")}
             >
               Pending
             </DropdownMenuItem>
             <DropdownMenuItem
-              onClick={() => onStatusChange(orderId, "in-progress")}
+              onClick={() => onStatusChange(orderId, "In Progress")}
             >
               In Progress
             </DropdownMenuItem>
             <DropdownMenuItem
-              onClick={() => onStatusChange(orderId, "completed")}
+              onClick={() => onStatusChange(orderId, "Completed")}
             >
               Completed
             </DropdownMenuItem>
             <DropdownMenuItem
-              onClick={() => onStatusChange(orderId, "cancelled")}
+              onClick={() => onStatusChange(orderId, "Cancelled")}
             >
               Cancelled
             </DropdownMenuItem>

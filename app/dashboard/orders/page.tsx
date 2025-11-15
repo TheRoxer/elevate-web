@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import Header from "@/components/dashbard/Header";
 import DashboardLayoutClient from "@/components/dashbard/DashboardLayoutClient";
 import { OrdersTable } from "@/components/dashbard/OrdersTable";
+import { OrderCreateDialog } from "@/components/dashbard/OrderCreateDialog";
 import {
   Select,
   SelectContent,
@@ -16,34 +17,51 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Search, Plus } from "lucide-react";
-import { orders as data } from "@/data/orders";
+import { Search, Plus, Loader2 } from "lucide-react";
+import { useOrders } from "@/hooks/useOrders";
+import type { OrderStatus } from "@/types/schemas";
 
 export default function OrdersPage() {
   const router = useRouter();
   const [statusFilter, setStatusFilter] = React.useState<string>("all");
   const [searchQuery, setSearchQuery] = React.useState<string>("");
+  const [createDialogOpen, setCreateDialogOpen] = React.useState(false);
 
-  const filteredData = React.useMemo(() => {
-    let filtered = data;
+  // Use the useOrders hook with filters
+  const filters = React.useMemo(() => {
+    const result: { status?: OrderStatus; searchQuery?: string } = {};
 
     if (statusFilter !== "all") {
-      filtered = filtered.filter(
-        (order) => order.status.toLowerCase().replace(" ", "-") === statusFilter
-      );
+      // Map lowercase filter values to proper OrderStatus values
+      const statusMap: Record<string, OrderStatus> = {
+        pending: "Pending",
+        "in-progress": "In Progress",
+        completed: "Completed",
+        cancelled: "Cancelled",
+      };
+      result.status = statusMap[statusFilter];
     }
 
     if (searchQuery) {
-      filtered = filtered.filter(
-        (order) =>
-          order.clientName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          order.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          order.projectType.toLowerCase().includes(searchQuery.toLowerCase())
-      );
+      result.searchQuery = searchQuery;
     }
 
-    return filtered;
+    return result;
   }, [statusFilter, searchQuery]);
+
+  const { orders, loading, error, refetch } = useOrders(filters);
+
+  const filteredData = React.useMemo(() => {
+    // Client-side search filter (if not handled by backend)
+    if (!searchQuery) return orders;
+
+    return orders.filter(
+      (order) =>
+        order.clientName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        order.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        order.projectType.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [orders, searchQuery]);
 
   return (
     <DashboardLayoutClient>
@@ -66,7 +84,7 @@ export default function OrdersPage() {
                 </div>
                 <Button
                   className="bg-primary hover:bg-primary/90"
-                  onClick={() => router.push("/dashboard/order/new")}
+                  onClick={() => setCreateDialogOpen(true)}
                 >
                   <Plus className="mr-2 h-4 w-4" />
                   New Order
@@ -99,11 +117,35 @@ export default function OrdersPage() {
             </CardHeader>
 
             <CardContent className="flex-1 overflow-auto">
-              <OrdersTable data={filteredData} />
+              {loading ? (
+                <div className="flex items-center justify-center h-full">
+                  <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                </div>
+              ) : error ? (
+                <div className="flex items-center justify-center h-full">
+                  <div className="text-center space-y-2">
+                    <p className="text-red-500 font-medium">
+                      Error loading orders
+                    </p>
+                    <p className="text-sm text-muted-foreground">{error}</p>
+                    <Button onClick={() => refetch()} variant="outline">
+                      Try Again
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                <OrdersTable data={filteredData} onOrderUpdate={refetch} />
+              )}
             </CardContent>
           </Card>
         </motion.div>
       </div>
+
+      <OrderCreateDialog
+        open={createDialogOpen}
+        onOpenChange={setCreateDialogOpen}
+        onSuccess={refetch}
+      />
     </DashboardLayoutClient>
   );
 }

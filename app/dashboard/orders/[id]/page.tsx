@@ -8,45 +8,75 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/dashbard/Header";
 import DashboardLayoutClient from "@/components/dashbard/DashboardLayoutClient";
 import { OrderActionsDropdown } from "@/components/dashbard/OrderActionsDropdown";
-import { TaskBoard, type Task } from "@/components/dashbard/TaskBoard";
+import { OrderEditDialog } from "@/components/dashbard/OrderEditDialog";
+import { TaskBoard } from "@/components/dashbard/TaskBoard";
 import { OrderInfoCard } from "@/components/dashbard/OrderInfoCard";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft } from "lucide-react";
-import { getOrderById } from "@/data/orders";
+import { useOrderDetail } from "@/hooks/useOrders";
+import { useToast } from "@/components/ui/use-toast";
+import type { OrderStatus } from "@/types/schemas";
 
 export default function OrderDetailPage() {
   const router = useRouter();
   const params = useParams();
+  const { toast } = useToast();
   const orderId = params?.id as string;
 
-  const order = getOrderById(orderId);
+  const { order, loading, error, refetch } = useOrderDetail(orderId);
+  const [editDialogOpen, setEditDialogOpen] = React.useState(false);
 
-  const [tasks, setTasks] = React.useState<Task[]>([
-    { id: 1, text: "Review project requirements", status: "pending" },
-    { id: 2, text: "Create initial mockups", status: "in-progress" },
-    { id: 3, text: "Client review meeting", status: "pending" },
-    { id: 4, text: "Development phase", status: "completed" },
-  ]);
+  const handleStatusChange = async (
+    orderId: string,
+    newStatus: OrderStatus
+  ) => {
+    try {
+      const { ordersService } = await import("@/services/ordersService");
 
-  const handleStatusChange = (orderId: string, newStatus: string) => {
-    console.log(`Changing order ${orderId} status to ${newStatus}`);
-    // TODO: Implement status update logic
+      await ordersService.updateOrderStatus(orderId, newStatus);
+
+      toast({
+        title: "Status Updated",
+        description: `Order ${orderId} status changed to ${newStatus}`,
+      });
+
+      refetch();
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: `Failed to update order status: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`,
+        variant: "destructive",
+      });
+    }
   };
 
-  const handleEdit = (orderId: string) => {
-    console.log(`Editing order ${orderId}`);
-    // TODO: Implement edit logic
+  const handleEdit = () => {
+    setEditDialogOpen(true);
   };
 
-  const handleDelete = (orderId: string) => {
-    console.log(`Deleting order ${orderId}`);
-    // TODO: Implement delete logic and redirect
-    router.push("/dashboard/orders");
-  };
+  const handleDelete = async (orderId: string) => {
+    try {
+      const { ordersService } = await import("@/services/ordersService");
 
-  const handleTasksChange = (updatedTasks: Task[]) => {
-    setTasks(updatedTasks);
-    // TODO: Persist tasks to backend
+      await ordersService.deleteOrder(orderId);
+
+      toast({
+        title: "Order Deleted",
+        description: `Order ${orderId} has been deleted successfully`,
+      });
+
+      router.push("/dashboard/orders");
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: `Failed to delete order: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`,
+        variant: "destructive",
+      });
+    }
   };
 
   const statusColors = {
@@ -58,6 +88,38 @@ export default function OrderDetailPage() {
       "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
     Cancelled: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
   };
+
+  if (loading) {
+    return (
+      <DashboardLayoutClient>
+        <Header />
+        <div className="flex items-center justify-center h-full">
+          <div className="text-center">
+            <p className="text-muted-foreground">Loading order details...</p>
+          </div>
+        </div>
+      </DashboardLayoutClient>
+    );
+  }
+
+  if (error || !order) {
+    return (
+      <DashboardLayoutClient>
+        <Header />
+        <div className="flex items-center justify-center h-full">
+          <div className="text-center space-y-2">
+            <p className="text-red-500 font-medium">Error loading order</p>
+            <p className="text-sm text-muted-foreground">
+              {error || "Order not found"}
+            </p>
+            <Button onClick={() => router.push("/dashboard/orders")}>
+              Back to Orders
+            </Button>
+          </div>
+        </div>
+      </DashboardLayoutClient>
+    );
+  }
 
   return (
     <DashboardLayoutClient>
@@ -110,8 +172,7 @@ export default function OrderDetailPage() {
             className="w-2/3 flex flex-col min-h-0"
           >
             <TaskBoard
-              initialTasks={tasks}
-              onTasksChange={handleTasksChange}
+              orderId={orderId}
               title="Tasks"
               description="Manage your project tasks"
             />
@@ -126,6 +187,13 @@ export default function OrderDetailPage() {
             <OrderInfoCard order={order} />
           </motion.div>
         </div>
+
+        <OrderEditDialog
+          order={order}
+          open={editDialogOpen}
+          onOpenChange={setEditDialogOpen}
+          onSuccess={refetch}
+        />
       </div>
     </DashboardLayoutClient>
   );

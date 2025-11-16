@@ -3,6 +3,7 @@
 import * as React from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import { useAdminOnly } from "@/hooks/useAdminOnly";
 import Header from "@/components/dashboard/Header";
 import DashboardLayoutClient from "@/components/dashboard/DashboardLayoutClient";
 import { OrdersTable } from "@/components/dashboard/OrdersTable";
@@ -23,6 +24,7 @@ import type { OrderStatus } from "@/types/schemas";
 
 export default function OrdersPage() {
   const router = useRouter();
+  const { loading: authLoading } = useAdminOnly();
   const [statusFilter, setStatusFilter] = React.useState<string>("all");
   const [searchQuery, setSearchQuery] = React.useState<string>("");
   const [createDialogOpen, setCreateDialogOpen] = React.useState(false);
@@ -75,6 +77,19 @@ export default function OrdersPage() {
   const handleCreateDialogChange = React.useCallback((open: boolean) => {
     setCreateDialogOpen(open);
   }, []);
+
+  // if (authLoading) {
+  //   return (
+  //     <DashboardLayoutClient>
+  //       <div className="flex items-center justify-center min-h-screen">
+  //         <div className="text-center">
+  //           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+  //           <p className="text-muted-foreground">Loading...</p>
+  //         </div>
+  //       </div>
+  //     </DashboardLayoutClient>
+  //   );
+  // }
 
   return (
     <DashboardLayoutClient>

@@ -11,7 +11,9 @@ import {
   ChevronLeft,
   ChevronRight,
   ShoppingCart,
+  Users,
 } from "lucide-react";
+import { useAuthContext } from "@/lib/providers/AuthProvider";
 import {
   Tooltip,
   TooltipContent,
@@ -84,10 +86,27 @@ function NavbarLink({
   );
 }
 
-const navdata = [
-  { icon: LayoutDashboard, label: "Panel", href: "/dashboard/panel" },
-  { icon: ShoppingCart, label: "Orders", href: "/dashboard/orders" },
-  { icon: MessageSquareText, label: "Chat", href: "/dashboard/chat" },
+// All available navigation items
+const allNavData = [
+  {
+    icon: LayoutDashboard,
+    label: "Panel",
+    href: "/dashboard/panel",
+    adminOnly: true,
+  },
+  {
+    icon: ShoppingCart,
+    label: "Orders",
+    href: "/dashboard/orders",
+    adminOnly: true,
+  },
+  {
+    icon: MessageSquareText,
+    label: "Chat",
+    href: "/dashboard/chat",
+    adminOnly: false,
+  },
+  { icon: Users, label: "Users", href: "/dashboard/users", adminOnly: true },
 ];
 
 interface SideBarProps {
@@ -101,6 +120,7 @@ const SideBar = ({
 }: SideBarProps = {}) => {
   const router = useRouter();
   const pathname = usePathname();
+  const { isAdmin, loading } = useAuthContext();
 
   const [activeLink, setActiveLink] = useState<string>("/dashboard/panel");
   const [internalIsCollapsed, setInternalIsCollapsed] =
@@ -115,6 +135,11 @@ const SideBar = ({
   useEffect(() => {
     setActiveLink(pathname);
   }, [pathname]);
+
+  // Filter navigation items based on user role
+  const navdata = loading
+    ? []
+    : allNavData.filter((item) => !item.adminOnly || isAdmin);
 
   const links = navdata.map((link, index) => (
     <NavbarLink
@@ -169,7 +194,9 @@ const SideBar = ({
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="rounded-lg hover:bg-[hsl(240,23%,14%)]"
+                  className={`rounded-lg hover:bg-[hsl(240,23%,14%)] ${
+                    activeLink === "/dashboard/settings" ? "bg-[#181826]" : ""
+                  }`}
                   aria-label="Settings"
                   onClick={() => {
                     router.push("/dashboard/settings");
@@ -186,7 +213,9 @@ const SideBar = ({
         ) : (
           <Button
             variant="ghost"
-            className="w-full justify-start gap-3 rounded-lg px-3 hover:bg-[hsl(240,23%,14%)]"
+            className={`w-full justify-start gap-3 rounded-lg px-3 hover:bg-[hsl(240,23%,14%)] ${
+              activeLink === "/dashboard/settings" ? "bg-[#181826]" : ""
+            }`}
             aria-label="Settings"
             onClick={() => {
               router.push("/dashboard/settings");

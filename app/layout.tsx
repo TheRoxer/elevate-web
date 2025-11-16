@@ -2,7 +2,9 @@ import { TailwindIndicator } from "@/components/util/TailwindIndicator";
 import { ThemeProvider } from "@/components/util/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { QueryProvider } from "@/lib/providers/QueryProvider";
+import { AuthProvider } from "@/lib/providers/AuthProvider";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
@@ -25,17 +27,20 @@ export default function RootLayout({
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <body className={`${outfit.variable} font-sans`}>
         <QueryProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <TailwindIndicator />
-            {children}
-            <Toaster />
-            <SpeedInsights />
-          </ThemeProvider>
+          <AuthProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="dark"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <TailwindIndicator />
+              {children}
+              <Toaster />
+              <SpeedInsights />
+              <Analytics />
+            </ThemeProvider>
+          </AuthProvider>
         </QueryProvider>
       </body>
     </html>

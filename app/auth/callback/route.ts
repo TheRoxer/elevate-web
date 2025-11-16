@@ -1,0 +1,43 @@
+/**
+ * OAuth Callback Route Handler
+ *
+ * Handles the OAuth callback from providers like Google.
+ * Exchanges the code for a session and redirects to the dashboard.
+ */
+
+import { createClient } from "@/lib/supabase";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+
+export async function GET(request: NextRequest) {
+  const requestUrl = new URL(request.url);
+  const code = requestUrl.searchParams.get("code");
+  const origin = requestUrl.origin;
+
+  if (code) {
+    const supabase = createClient();
+
+    try {
+      const { error } = await supabase.auth.exchangeCodeForSession(code);
+
+      if (error) {
+        console.error("Error exchanging code for session:", error);
+        // Redirect to sign in with error
+        return NextResponse.redirect(
+          `${origin}/auth/signin?error=authentication_failed`
+        );
+      }
+
+      // Successfully authenticated - redirect to dashboard
+      return NextResponse.redirect(`${origin}/dashboard/panel`);
+    } catch (err) {
+      console.error("Unexpected error in OAuth callback:", err);
+      return NextResponse.redirect(
+        `${origin}/auth/signin?error=unexpected_error`
+      );
+    }
+  }
+
+  // No code provided - redirect to sign in
+  return NextResponse.redirect(`${origin}/auth/signin`);
+}

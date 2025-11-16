@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -7,11 +9,40 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import Image from "next/image";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useAuthContext } from "@/lib/providers/AuthProvider";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const Header = () => {
+  const { profile, signOut } = useAuthContext();
+  const router = useRouter();
+
+  const getUserInitials = () => {
+    if (profile?.full_name) {
+      return profile.full_name
+        .split(" ")
+        .map((n) => n[0])
+        .join("")
+        .toUpperCase()
+        .slice(0, 2);
+    }
+    return profile?.email?.slice(0, 2).toUpperCase() || "U";
+  };
+
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      toast.success("Logged out successfully");
+      router.push("/");
+    } catch (error) {
+      toast.error("Failed to logout");
+      console.error("Logout error:", error);
+    }
+  };
+
   return (
-    <header className="sticky top-0 z-10 flex h-[69px] items-center gap-1 border-b  px-5">
+    <header className="sticky top-0 z-10 flex h-[69px] items-center gap-1 border-b bg-[#12121c] px-5">
       <div className="flex row gap-4 justify-center items-center">
         <div className="w-[3.5px] h-[21px] rounded-[18px] bg-[#4a18d2]"></div>
         <h1 className="text-xl font-semibold">Home</h1>
@@ -25,22 +56,31 @@ const Header = () => {
               size="icon"
               className="overflow-hidden rounded-full ml-auto"
             >
-              <Image
-                src="/images/dude.png"
-                width={36}
-                height={36}
-                alt="Avatar"
-                className="overflow-hidden rounded-full "
-              />
+              <Avatar className="h-9 w-9">
+                <AvatarImage
+                  src={profile?.avatar_url || undefined}
+                  alt={profile?.full_name || profile?.email || "User"}
+                />
+                <AvatarFallback>{getUserInitials()}</AvatarFallback>
+              </Avatar>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuLabel>
+              <div className="flex flex-col space-y-1">
+                <p className="text-sm font-medium leading-none">
+                  {profile?.full_name || "User"}
+                </p>
+                <p className="text-xs leading-none text-muted-foreground">
+                  {profile?.email}
+                </p>
+              </div>
+            </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>Settings</DropdownMenuItem>
             <DropdownMenuItem>Support</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Logout</DropdownMenuItem>
+            <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

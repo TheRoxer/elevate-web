@@ -203,126 +203,126 @@ export default function ChatPage() {
               className="w-3/4"
             >
               <Card className="h-full flex flex-col">
-            <CardHeader className="border-b">
-              <CardTitle className="flex items-center gap-2">
-                <Bot className="h-5 w-5" />
-                {contacts.find((c) => c.id === selectedContact)?.name ||
-                  "Chat Assistant"}
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="flex-1 flex flex-col p-0">
-              {/* Messages Container */}
-              <ScrollArea className="flex-1 p-4">
-                <div className="space-y-4">
-                  {messages.map((message) => (
-                    <motion.div
-                      key={message.id}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className={`flex gap-3 ${
-                        message.sender === "user" ? "flex-row-reverse" : ""
-                      }`}
-                    >
-                      <Avatar className="h-8 w-8">
-                        <AvatarImage
-                          src={
-                            message.sender === "user"
-                              ? profile?.avatar_url || undefined
-                              : undefined
-                          }
-                        />
-                        <AvatarFallback
-                          className={
-                            message.sender === "bot"
-                              ? "bg-primary text-primary-foreground"
-                              : ""
-                          }
-                        >
-                          {message.sender === "bot" ? (
-                            <Bot className="h-4 w-4" />
-                          ) : (
-                            getUserInitials()
-                          )}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div
-                        className={`flex flex-col gap-1 max-w-[70%] ${
-                          message.sender === "user" ? "items-end" : ""
-                        }`}
-                      >
-                        <div
-                          className={`rounded-lg px-4 py-2 ${
-                            message.sender === "user"
-                              ? "bg-primary text-primary-foreground"
-                              : "bg-muted"
+                <CardHeader className="border-b">
+                  <CardTitle className="flex items-center gap-2">
+                    <Bot className="h-5 w-5" />
+                    {contacts.find((c) => c.id === selectedContact)?.name ||
+                      "Chat Assistant"}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="flex-1 flex flex-col p-0">
+                  {/* Messages Container */}
+                  <ScrollArea className="flex-1 p-4">
+                    <div className="space-y-4">
+                      {messages.map((message) => (
+                        <motion.div
+                          key={message.id}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className={`flex gap-3 ${
+                            message.sender === "user" ? "flex-row-reverse" : ""
                           }`}
                         >
-                          <p className="text-sm">{message.text}</p>
-                        </div>
-                        <span className="text-xs text-muted-foreground px-1">
-                          {message.timestamp.toLocaleTimeString([], {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          })}
-                        </span>
-                      </div>
-                    </motion.div>
-                  ))}
-
-                  {isTyping && (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      className="flex gap-3"
-                    >
-                      <Avatar className="h-8 w-8">
-                        <AvatarFallback className="bg-primary text-primary-foreground">
-                          <Bot className="h-4 w-4" />
-                        </AvatarFallback>
-                      </Avatar>
-                      <div className="bg-muted rounded-lg px-4 py-2">
-                        <div className="flex gap-1">
-                          <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" />
+                          <Avatar className="h-8 w-8">
+                            <AvatarImage
+                              src={
+                                message.sender === "user"
+                                  ? profile?.avatar_url || undefined
+                                  : undefined
+                              }
+                            />
+                            <AvatarFallback
+                              className={
+                                message.sender === "bot"
+                                  ? "bg-primary text-primary-foreground"
+                                  : ""
+                              }
+                            >
+                              {message.sender === "bot" ? (
+                                <Bot className="h-4 w-4" />
+                              ) : (
+                                getUserInitials()
+                              )}
+                            </AvatarFallback>
+                          </Avatar>
                           <div
-                            className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"
-                            style={{ animationDelay: "0.2s" }}
-                          />
-                          <div
-                            className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"
-                            style={{ animationDelay: "0.4s" }}
-                          />
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
+                            className={`flex flex-col gap-1 max-w-[70%] ${
+                              message.sender === "user" ? "items-end" : ""
+                            }`}
+                          >
+                            <div
+                              className={`rounded-lg px-4 py-2 ${
+                                message.sender === "user"
+                                  ? "bg-primary text-primary-foreground"
+                                  : "bg-muted"
+                              }`}
+                            >
+                              <p className="text-sm">{message.text}</p>
+                            </div>
+                            <span className="text-xs text-muted-foreground px-1">
+                              {message.timestamp.toLocaleTimeString([], {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                              })}
+                            </span>
+                          </div>
+                        </motion.div>
+                      ))}
 
-                  <div ref={messagesEndRef} />
-                </div>
-              </ScrollArea>
+                      {isTyping && (
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          className="flex gap-3"
+                        >
+                          <Avatar className="h-8 w-8">
+                            <AvatarFallback className="bg-primary text-primary-foreground">
+                              <Bot className="h-4 w-4" />
+                            </AvatarFallback>
+                          </Avatar>
+                          <div className="bg-muted rounded-lg px-4 py-2">
+                            <div className="flex gap-1">
+                              <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" />
+                              <div
+                                className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"
+                                style={{ animationDelay: "0.2s" }}
+                              />
+                              <div
+                                className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"
+                                style={{ animationDelay: "0.4s" }}
+                              />
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
 
-              {/* Input Area */}
-              <div className="border-t p-4">
-                <form onSubmit={handleSendMessage} className="flex gap-2">
-                  <Input
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                    placeholder="Type your message..."
-                    className="flex-1"
-                    disabled={isTyping}
-                  />
-                  <Button
-                    type="submit"
-                    size="icon"
-                    disabled={isTyping || !inputValue.trim()}
-                  >
-                    <Send className="h-4 w-4" />
-                  </Button>
-                </form>
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
+                      <div ref={messagesEndRef} />
+                    </div>
+                  </ScrollArea>
+
+                  {/* Input Area */}
+                  <div className="border-t p-4">
+                    <form onSubmit={handleSendMessage} className="flex gap-2">
+                      <Input
+                        value={inputValue}
+                        onChange={(e) => setInputValue(e.target.value)}
+                        placeholder="Type your message..."
+                        className="flex-1"
+                        disabled={isTyping}
+                      />
+                      <Button
+                        type="submit"
+                        size="icon"
+                        disabled={isTyping || !inputValue.trim()}
+                      >
+                        <Send className="h-4 w-4" />
+                      </Button>
+                    </form>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
           </div>
         </div>
       </div>

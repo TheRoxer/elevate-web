@@ -4,9 +4,7 @@ import {
   Book,
   Bitcoin,
   LayoutDashboard,
-  PieChart,
   Settings,
-  HandCoins,
   MessageSquareText,
   ChevronLeft,
   ChevronRight,
@@ -20,6 +18,7 @@ import {
   TooltipTrigger,
   TooltipProvider,
 } from "@/components/ui/tooltip";
+import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
 import { useRouter, usePathname } from "next/navigation";
@@ -180,7 +179,12 @@ const SideBar = ({
               router.push("/");
             }}
           >
-            <Bitcoin className="size-5" />
+            <Image
+              src="/icons/Icon.png"
+              alt="Elevate Logo"
+              width={16}
+              height={16}
+            />
             <span className="text-sm font-semibold">Elevate</span>
           </Button>
         )}

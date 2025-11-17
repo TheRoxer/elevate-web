@@ -238,7 +238,10 @@ export function TaskBoard({
                 setNewTaskPending
               )}
 
-              <Separator orientation="vertical" className="hidden sm:block h-auto" />
+              <Separator
+                orientation="vertical"
+                className="hidden sm:block h-auto"
+              />
 
               {renderColumn(
                 "in-progress",
@@ -248,7 +251,10 @@ export function TaskBoard({
                 setNewTaskInProgress
               )}
 
-              <Separator orientation="vertical" className="hidden sm:block h-auto" />
+              <Separator
+                orientation="vertical"
+                className="hidden sm:block h-auto"
+              />
 
               {renderColumn(
                 "completed",

@@ -29,7 +29,7 @@ export default function DashboardLayoutClient({
   const mobileOpen = isHydrated ? mobileMenuOpen : false;
 
   return (
-    <div className="grid h-screen w-full overflow-hidden">
+    <div className="grid min-h-screen w-full">
       {/* Desktop Sidebar - Hidden on mobile (md = 768px) */}
       <div className="hidden md:block">
         <SideBar isCollapsed={collapsed} setIsCollapsed={toggleSidebar} />
@@ -65,7 +65,7 @@ export default function DashboardLayoutClient({
       </Sheet>
 
       <div
-        className={`flex flex-col h-screen transition-all duration-300 ${
+        className={`flex flex-col min-h-screen transition-all duration-300 ${
           collapsed ? "md:ml-16" : "md:ml-64"
         }`}
       >

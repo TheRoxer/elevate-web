@@ -145,7 +145,7 @@ export function TaskBoard({
     setNewTaskValue: (val: string) => void
   ) => (
     <div
-      className="flex-1 min-w-[200px] flex flex-col min-h-0"
+      className="flex-1 min-w-[280px] sm:min-w-[200px] flex flex-col min-h-0 sm:min-h-[300px]"
       onDragOver={handleDragOver}
       onDrop={() => handleDrop(status)}
     >
@@ -229,7 +229,7 @@ export function TaskBoard({
               <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
             </div>
           ) : (
-            <div className="flex-1 flex gap-3 overflow-hidden min-h-0">
+            <div className="flex-1 flex flex-col sm:flex-row gap-4 sm:gap-3 overflow-y-auto sm:overflow-y-hidden sm:overflow-x-auto min-h-0">
               {renderColumn(
                 "pending",
                 "Pending",
@@ -238,7 +238,7 @@ export function TaskBoard({
                 setNewTaskPending
               )}
 
-              <Separator orientation="vertical" className="h-auto" />
+              <Separator orientation="vertical" className="hidden sm:block h-auto" />
 
               {renderColumn(
                 "in-progress",
@@ -248,7 +248,7 @@ export function TaskBoard({
                 setNewTaskInProgress
               )}
 
-              <Separator orientation="vertical" className="h-auto" />
+              <Separator orientation="vertical" className="hidden sm:block h-auto" />
 
               {renderColumn(
                 "completed",

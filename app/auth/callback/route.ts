@@ -41,13 +41,16 @@ export async function GET(request: NextRequest) {
           .eq("id", user.id)
           .single();
 
+        // Ensure TypeScript knows the shape of the profile object
+        const role = (profile as { role?: string } | null)?.role;
+
         const redirectPath =
-          profile?.role === "admin"
+          role === "admin"
             ? `${origin}/dashboard/panel`
             : `${origin}/dashboard/chat`;
 
         logger.info("OAuth callback redirect", {
-          role: profile?.role,
+          role,
           path: redirectPath,
         });
         return NextResponse.redirect(redirectPath);

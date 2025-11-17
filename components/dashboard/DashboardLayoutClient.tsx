@@ -23,10 +23,10 @@ export default function DashboardLayoutClient({
   const collapsed = isHydrated ? sidebarCollapsed : false;
 
   return (
-    <div className="grid h-screen w-full">
+    <div className="grid h-screen w-full overflow-hidden">
       <SideBar isCollapsed={collapsed} setIsCollapsed={toggleSidebar} />
       <div
-        className={`flex flex-col transition-all duration-300 ${
+        className={`flex flex-col h-screen transition-all duration-300 ${
           collapsed ? "ml-16" : "ml-64"
         }`}
       >

@@ -6,6 +6,7 @@
  */
 
 import { supabase } from "@/lib/supabase";
+import { logger } from "@/lib/logger";
 import { Profile, ProfileSchema, UpdateUserRoleData } from "@/types/auth";
 import type { Database } from "@/types/database";
 
@@ -29,7 +30,7 @@ export class UsersService {
       // Validate and parse all profiles
       return data.map((profile) => ProfileSchema.parse(profile));
     } catch (err) {
-      console.error("Error fetching users:", err);
+      logger.error("Error fetching users", err);
       throw err;
     }
   }
@@ -53,7 +54,7 @@ export class UsersService {
 
       return ProfileSchema.parse(data);
     } catch (err) {
-      console.error("Error fetching user:", err);
+      logger.error("Error fetching user", err);
       return null;
     }
   }
@@ -135,7 +136,7 @@ export class UsersService {
 
       return data.map((profile) => ProfileSchema.parse(profile));
     } catch (err) {
-      console.error("Error searching users:", err);
+      logger.error("Error searching users", err);
       throw err;
     }
   }
@@ -159,7 +160,7 @@ export class UsersService {
 
       return data.map((profile) => ProfileSchema.parse(profile));
     } catch (err) {
-      console.error("Error fetching users by role:", err);
+      logger.error("Error fetching users by role", err);
       throw err;
     }
   }
@@ -189,7 +190,7 @@ export class UsersService {
 
       return stats;
     } catch (err) {
-      console.error("Error fetching user stats:", err);
+      logger.error("Error fetching user stats", err);
       return { total: 0, admins: 0, users: 0 };
     }
   }

@@ -8,6 +8,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
+import { logger } from "@/lib/logger";
 import { authService } from "@/services/authService";
 import type { Profile } from "@/types/auth";
 import type { User } from "@supabase/supabase-js";
@@ -31,7 +32,7 @@ export const useAuth = () => {
           setLoading(false);
         }
       } catch (error) {
-        console.error("Error initializing auth:", error);
+        logger.error("Error initializing auth", error);
         setLoading(false);
       }
     };
@@ -42,7 +43,7 @@ export const useAuth = () => {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (event, session) => {
-      console.log("Auth state changed:", event);
+      logger.auth("Auth state changed", undefined, { event });
       setUser(session?.user ?? null);
 
       if (session?.user) {
@@ -63,7 +64,7 @@ export const useAuth = () => {
       const userProfile = await authService.getCurrentProfile();
       setProfile(userProfile);
     } catch (error) {
-      console.error("Error loading profile:", error);
+      logger.error("Error loading profile", error);
       setProfile(null);
     } finally {
       setLoading(false);
@@ -77,7 +78,7 @@ export const useAuth = () => {
       setProfile(null);
       router.push("/");
     } catch (error) {
-      console.error("Error signing out:", error);
+      logger.error("Error signing out", error);
     }
   };
 

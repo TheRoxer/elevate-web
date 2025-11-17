@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { logger } from "@/lib/logger";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -37,7 +38,7 @@ const Header = () => {
       router.push("/");
     } catch (error) {
       toast.error("Failed to logout");
-      console.error("Logout error:", error);
+      logger.error("Logout error", error);
     }
   };
 

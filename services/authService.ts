@@ -6,6 +6,7 @@
  */
 
 import { supabase } from "@/lib/supabase";
+import { logger } from "@/lib/logger";
 import {
   SignUpData,
   SignInData,
@@ -149,7 +150,7 @@ export class AuthService {
         .single();
 
       if (error) {
-        console.error("Failed to fetch profile:", error);
+        logger.error("Failed to fetch profile", error);
         return null;
       }
 
@@ -158,7 +159,7 @@ export class AuthService {
       // Validate and parse the profile data
       return ProfileSchema.parse(data);
     } catch (err) {
-      console.error("Error getting current profile:", err);
+      logger.error("Error getting current profile", err);
       return null;
     }
   }

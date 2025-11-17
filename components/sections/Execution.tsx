@@ -49,18 +49,27 @@ const Execution = () => {
           initial="hidden"
           animate={inView1 ? "visible" : "hidden"}
           variants={sectionVariants}
-          className="flex flex-col items-center"
+          className="flex flex-col items-center relative"
         >
-          <div className="w-full sm:w-[70vw] md:w-[90vw] lg:w-[950px] rounded-[20px] border-2 border-slate-400/10 bg-card-landing p-6 sm:p-8 md:p-12 relative mb-8 sm:mb-12 md:mb-0">
+          <div
+            className="hidden md:block absolute -top-12 -left-20 w-72 h-80 rotate-45 bg-color rounded-full filter blur-2xl opacity-70 -z-10"
+            style={{
+              background:
+                "linear-gradient(176deg, rgba(168, 192, 255, 0.63) -6.53%, rgba(109, 109, 196, 0.63) 27.56%, rgba(63, 43, 150, 0.63) 54.34%)",
+            }}
+          ></div>
+
+          <div className="group w-full sm:w-[70vw] md:w-[90vw] lg:w-[950px] rounded-[20px] border-2 border-slate-400/10 bg-card-landing p-6 sm:p-8 md:p-12 relative mb-8 sm:mb-12 md:mb-0 cursor-pointer overflow-hidden">
+            {/* Hover gradient overlay */}
             <div
-              className="hidden md:block absolute -top-12 -left-20 w-72 h-80 rotate-45 bg-color rounded-full filter blur-2xl opacity-70 -z-10"
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[20px]"
               style={{
                 background:
-                  "linear-gradient(176deg, rgba(168, 192, 255, 0.63) -6.53%, rgba(109, 109, 196, 0.63) 27.56%, rgba(63, 43, 150, 0.63) 54.34%)",
+                  "linear-gradient(135deg, rgba(168, 192, 255, 0.15) 0%, rgba(109, 109, 196, 0.15) 50%, rgba(63, 43, 150, 0.15) 100%)",
               }}
-            ></div>
+            />
 
-            <div className="w-full h-full gap-4 sm:gap-6 flex flex-col md:flex-row justify-between items-center">
+            <div className="w-full h-full gap-4 sm:gap-6 flex flex-col md:flex-row justify-between items-center relative z-10">
               <Image
                 src="/images/img-placeholder-1.png"
                 alt="execution"
@@ -75,7 +84,7 @@ const Execution = () => {
                 height={80}
                 className="w-[60px] h-[60px] sm:w-[70px] sm:h-[70px] md:w-[80px] md:h-[80px]"
               />
-              <div className="flex flex-col w-full sm:w-[280px] items-center md:items-start">
+              <div className="flex flex-col w-full sm:w-[280px] items-center md:items-start group-hover:-translate-y-2 transition-transform duration-300">
                 <p className="text-[22px] sm:text-[25px] font-semibold">
                   Visualization
                 </p>
@@ -103,18 +112,27 @@ const Execution = () => {
           initial="hidden"
           animate={inView2 ? "visible" : "hidden"}
           variants={sectionVariants}
-          className="flex flex-col items-center"
+          className="flex flex-col items-center relative"
         >
-          <div className="w-full sm:w-[70vw] md:w-[90vw] lg:w-[950px] rounded-[20px] border-2 border-slate-400/10 bg-card-landing p-6 sm:p-8 md:p-12 relative mb-8 sm:mb-12 md:mb-0">
+          <div
+            className="hidden md:block absolute top-18 -right-20 w-72 h-80 rotate-45 bg-color rounded-full filter blur-2xl opacity-70 -z-10"
+            style={{
+              background:
+                "linear-gradient(176deg, rgba(168, 192, 255, 0.63) -6.53%, rgba(109, 109, 196, 0.63) 27.56%, rgba(63, 43, 150, 0.63) 54.34%)",
+            }}
+          ></div>
+
+          <div className="group w-full sm:w-[70vw] md:w-[90vw] lg:w-[950px] rounded-[20px] border-2 border-slate-400/10 bg-card-landing p-6 sm:p-8 md:p-12 relative mb-8 sm:mb-12 md:mb-0 cursor-pointer overflow-hidden">
+            {/* Hover gradient overlay */}
             <div
-              className="hidden md:block absolute top-18 -right-20 w-72 h-80 rotate-45 bg-color rounded-full filter blur-2xl opacity-70 -z-10"
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[20px]"
               style={{
                 background:
-                  "linear-gradient(176deg, rgba(168, 192, 255, 0.63) -6.53%, rgba(109, 109, 196, 0.63) 27.56%, rgba(63, 43, 150, 0.63) 54.34%)",
+                  "linear-gradient(135deg, rgba(168, 192, 255, 0.15) 0%, rgba(109, 109, 196, 0.15) 50%, rgba(63, 43, 150, 0.15) 100%)",
               }}
-            ></div>
+            />
 
-            <div className="w-full h-full gap-4 sm:gap-6 flex flex-col md:flex-row-reverse justify-between items-center">
+            <div className="w-full h-full gap-4 sm:gap-6 flex flex-col md:flex-row-reverse justify-between items-center relative z-10">
               <Image
                 src="/images/img-placeholder-2.png"
                 alt="execution"
@@ -129,7 +147,7 @@ const Execution = () => {
                 height={80}
                 className="w-[60px] h-[60px] sm:w-[70px] sm:h-[70px] md:w-[80px] md:h-[80px]"
               />
-              <div className="flex flex-col w-full sm:w-[280px] items-center md:items-end">
+              <div className="flex flex-col w-full sm:w-[280px] items-center md:items-end group-hover:-translate-y-2 transition-transform duration-300">
                 <p className="text-[22px] sm:text-[25px] font-semibold">
                   Application
                 </p>
@@ -156,18 +174,27 @@ const Execution = () => {
           initial="hidden"
           animate={inView3 ? "visible" : "hidden"}
           variants={sectionVariants}
-          className="flex flex-col items-center"
+          className="flex flex-col items-center relative"
         >
-          <div className="w-full sm:w-[70vw] md:w-[90vw] lg:w-[950px] rounded-[20px] border-2 border-slate-400/10 bg-card-landing p-6 sm:p-8 md:p-12 relative mb-8 sm:mb-12 md:mb-0 ">
+          <div
+            className="hidden md:block absolute top-12 -left-20 w-72 h-80 rotate-45 bg-color rounded-full filter blur-2xl opacity-70 -z-10"
+            style={{
+              background:
+                "linear-gradient(176deg, rgba(168, 192, 255, 0.63) -6.53%, rgba(109, 109, 196, 0.63) 27.56%, rgba(63, 43, 150, 0.63) 54.34%)",
+            }}
+          ></div>
+
+          <div className="group w-full sm:w-[70vw] md:w-[90vw] lg:w-[950px] rounded-[20px] border-2 border-slate-400/10 bg-card-landing p-6 sm:p-8 md:p-12 relative mb-8 sm:mb-12 md:mb-0 cursor-pointer overflow-hidden">
+            {/* Hover gradient overlay */}
             <div
-              className="hidden md:block absolute top-12 -left-20 w-72 h-80 rotate-45 bg-color rounded-full filter blur-2xl opacity-70 -z-10"
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[20px]"
               style={{
                 background:
-                  "linear-gradient(176deg, rgba(168, 192, 255, 0.63) -6.53%, rgba(109, 109, 196, 0.63) 27.56%, rgba(63, 43, 150, 0.63) 54.34%)",
+                  "linear-gradient(135deg, rgba(168, 192, 255, 0.15) 0%, rgba(109, 109, 196, 0.15) 50%, rgba(63, 43, 150, 0.15) 100%)",
               }}
-            ></div>
+            />
 
-            <div className="w-full h-full gap-4 sm:gap-6 flex flex-col md:flex-row justify-between items-center">
+            <div className="w-full h-full gap-4 sm:gap-6 flex flex-col md:flex-row justify-between items-center relative z-10">
               <Image
                 src="/images/img-placeholder-3.png"
                 alt="execution"
@@ -182,7 +209,7 @@ const Execution = () => {
                 height={80}
                 className="w-[60px] h-[60px] sm:w-[70px] sm:h-[70px] md:w-[80px] md:h-[80px]"
               />
-              <div className="flex flex-col w-full sm:w-[280px] items-center md:items-start">
+              <div className="flex flex-col w-full sm:w-[280px] items-center md:items-start group-hover:-translate-y-2 transition-transform duration-300">
                 <p className="text-[25px] sm:text-[30px] font-semibold">
                   Finalization
                 </p>

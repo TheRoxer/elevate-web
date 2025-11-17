@@ -57,12 +57,21 @@ const Services = () => {
             animate={inView ? "visible" : "hidden"}
             custom={0.4}
             variants={cardVariants}
-            className={`col-span-1 md:col-span-5 h-[280px] sm:h-[310px] rounded-[20px] border-2 border-slate-400/10 p-5 sm:p-6 
-              bg-[#201d2c97] md:bg-[#201d2c00] md:bg-[url(/images/services-bg-1.png)] bg-cover bg-center bg-no-repeat`}
+            className={`group col-span-1 md:col-span-5 h-[280px] sm:h-[310px] rounded-[20px] border-2 border-slate-400/10 p-5 sm:p-6 
+              bg-[#201d2c97] md:bg-[#201d2c00] md:bg-[url(/images/services-bg-1.png)] bg-cover bg-center bg-no-repeat
+              relative overflow-hidden cursor-pointer`}
           >
-            <div className="flex flex-col gap-2 space h-full justify-between">
+            {/* Hover gradient overlay */}
+            <div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[20px]"
+              style={{
+                background:
+                  "linear-gradient(135deg, rgba(168, 192, 255, 0.15) 0%, rgba(109, 109, 196, 0.15) 50%, rgba(63, 43, 150, 0.15) 100%)",
+              }}
+            />
+            <div className="flex flex-col gap-2 space h-full justify-between relative z-10">
               <IconButton icon={web} target="_blank" />
-              <div className="w-full max-w-[300px] xl:max-w-[400px]">
+              <div className="w-full max-w-[300px] xl:max-w-[400px] group-hover:-translate-y-2 transition-transform duration-300">
                 <p className="text-[22px] sm:text-[25px] font-semibold">
                   Web Development
                 </p>
@@ -80,12 +89,21 @@ const Services = () => {
             animate={inView ? "visible" : "hidden"}
             custom={0.6}
             variants={cardVariants}
-            className={`col-span-1 md:col-span-3 h-[280px] sm:h-[310px] rounded-[20px] border-2 border-slate-400/10 p-5 sm:p-6 
-              bg-[#201d2cc8] md:bg-[#201d2c00] md:bg-[url(/images/services-bg-2.png)] bg-cover bg-center bg-no-repeat`}
+            className={`group col-span-1 md:col-span-3 h-[280px] sm:h-[310px] rounded-[20px] border-2 border-slate-400/10 p-5 sm:p-6 
+              bg-[#201d2cc8] md:bg-[#201d2c00] md:bg-[url(/images/services-bg-2.png)] bg-cover bg-center bg-no-repeat
+              relative overflow-hidden cursor-pointer`}
           >
-            <div className="flex flex-col gap-2 space h-full justify-between">
+            {/* Hover gradient overlay */}
+            <div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[20px]"
+              style={{
+                background:
+                  "linear-gradient(135deg, rgba(168, 192, 255, 0.15) 0%, rgba(109, 109, 196, 0.15) 50%, rgba(63, 43, 150, 0.15) 100%)",
+              }}
+            />
+            <div className="flex flex-col gap-2 space h-full justify-between relative z-10">
               <IconButton icon={ux} target="_blank" />
-              <div className="w-full max-w-[270px] sm:max-w-[350px]">
+              <div className="w-full max-w-[270px] sm:max-w-[350px] group-hover:-translate-y-2 transition-transform duration-300">
                 <p className="text-[22px] sm:text-[25px] font-semibold">
                   UI/UX Design
                 </p>
@@ -103,12 +121,21 @@ const Services = () => {
             animate={inView ? "visible" : "hidden"}
             custom={0.8}
             variants={cardVariants}
-            className={`col-span-1 md:col-span-2 h-[280px] sm:h-[310px] rounded-[20px] border-2 border-slate-400/10 p-5 sm:p-6 
-              bg-[#201d2cc8] md:bg-[#201d2c00] md:bg-[url(/images/services-bg-3.png)] bg-cover bg-center bg-no-repeat`}
+            className={`group col-span-1 md:col-span-2 h-[280px] sm:h-[310px] rounded-[20px] border-2 border-slate-400/10 p-5 sm:p-6 
+              bg-[#201d2cc8] md:bg-[#201d2c00] md:bg-[url(/images/services-bg-3.png)] bg-cover bg-center bg-no-repeat
+              relative overflow-hidden cursor-pointer`}
           >
-            <div className="flex flex-col gap-2 space h-full justify-between">
+            {/* Hover gradient overlay */}
+            <div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[20px]"
+              style={{
+                background:
+                  "linear-gradient(135deg, rgba(168, 192, 255, 0.15) 0%, rgba(109, 109, 196, 0.15) 50%, rgba(63, 43, 150, 0.15) 100%)",
+              }}
+            />
+            <div className="flex flex-col gap-2 space h-full justify-between relative z-10">
               <IconButton icon={admin} target="_blank" />
-              <div className="w-full max-w-[210px] xl:max-w-[350px]">
+              <div className="w-full max-w-[210px] xl:max-w-[350px] group-hover:-translate-y-2 transition-transform duration-300">
                 <p className="text-[22px] sm:text-[25px] font-semibold">
                   Administration
                 </p>

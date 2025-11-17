@@ -57,13 +57,22 @@ export class AuthService {
     error: SupabaseAuthError | null;
   }> {
     try {
-      const { error } = await supabase.auth.signInWithPassword({
+      const { data: authData, error } = await supabase.auth.signInWithPassword({
         email: data.email,
         password: data.password,
       });
 
+      if (!error && authData.session) {
+        logger.info("User signed in successfully", {
+          userId: authData.user?.id,
+        });
+      } else if (error) {
+        logger.warn("Sign in failed", { error: error.message });
+      }
+
       return { error };
     } catch (err) {
+      logger.error("Sign in error", err);
       throw new AuthError("Failed to sign in");
     }
   }

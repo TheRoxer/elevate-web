@@ -6,6 +6,7 @@
  */
 
 import { createClient } from "@/lib/supabase";
+import { logger } from "@/lib/logger";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
@@ -21,7 +22,7 @@ export async function GET(request: NextRequest) {
       const { error } = await supabase.auth.exchangeCodeForSession(code);
 
       if (error) {
-        console.error("Error exchanging code for session:", error);
+        logger.error("Error exchanging code for session", error);
         // Redirect to sign in with error
         return NextResponse.redirect(
           `${origin}/auth/signin?error=authentication_failed`
@@ -31,7 +32,7 @@ export async function GET(request: NextRequest) {
       // Successfully authenticated - redirect to dashboard
       return NextResponse.redirect(`${origin}/dashboard/panel`);
     } catch (err) {
-      console.error("Unexpected error in OAuth callback:", err);
+      logger.error("Unexpected error in OAuth callback", err);
       return NextResponse.redirect(
         `${origin}/auth/signin?error=unexpected_error`
       );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { authService } from "@/services/authService";
 import { SignInDataSchema, type SignInData } from "@/types/auth";
 import { toast } from "sonner";
+import { useAuthContext } from "@/lib/providers/AuthProvider";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -36,9 +37,11 @@ export function LoginForm() {
   const onSubmit = async (data: SignInData) => {
     setLoading(true);
     try {
+      console.log("[LOGIN] Starting sign in...");
       const { error } = await authService.signIn(data);
 
       if (error) {
+        console.log("[LOGIN] Sign in error:", error.message);
         // Check if error is due to email not confirmed
         if (error.message.toLowerCase().includes("email not confirmed")) {
           toast.error(
@@ -48,13 +51,23 @@ export function LoginForm() {
         } else {
           toast.error(error.message || "Failed to sign in");
         }
+        setLoading(false);
       } else {
+        console.log("[LOGIN] Sign in successful, checking user role...");
+
+        // Check user role and redirect accordingly
+        const profile = await authService.getCurrentProfile();
+        const redirectPath =
+          profile?.role === "admin" ? "/dashboard/panel" : "/dashboard/chat";
+
+        console.log("[LOGIN] Redirecting to:", redirectPath);
         toast.success("Logged in successfully");
-        router.push("/dashboard/chat");
+        // Use window.location for full page reload to ensure auth state is fresh
+        window.location.href = redirectPath;
       }
     } catch (err) {
+      console.error("[LOGIN] Unexpected error:", err);
       toast.error("An unexpected error occurred");
-    } finally {
       setLoading(false);
     }
   };

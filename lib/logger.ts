@@ -71,6 +71,13 @@ class Logger {
   }
 
   auth(event: string, userId?: string, context?: LogContext): void {
+    // Always log auth events for debugging
+    console.log(`[AUTH] ${event}`, {
+      userId,
+      timestamp: new Date().toISOString(),
+      ...context,
+    });
+
     this.info(`Auth: ${event}`, {
       userId,
       ...context,

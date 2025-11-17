@@ -22,11 +22,13 @@ img {
 }
 
 body {
-  background-color: #12121c;
+  background-color: #0d0d14;
   color: white;
   scroll-behavior: smooth;
   overflow-x: hidden;
 }
+
+/* 12121c */
 
 #h1 {
   color: #fff;

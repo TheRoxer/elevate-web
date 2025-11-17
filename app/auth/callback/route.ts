@@ -29,8 +29,32 @@ export async function GET(request: NextRequest) {
         );
       }
 
-      // Successfully authenticated - redirect to dashboard
-      return NextResponse.redirect(`${origin}/dashboard/panel`);
+      // Successfully authenticated - check user role and redirect accordingly
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (user) {
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("role")
+          .eq("id", user.id)
+          .single();
+
+        const redirectPath =
+          profile?.role === "admin"
+            ? `${origin}/dashboard/panel`
+            : `${origin}/dashboard/chat`;
+
+        logger.info("OAuth callback redirect", {
+          role: profile?.role,
+          path: redirectPath,
+        });
+        return NextResponse.redirect(redirectPath);
+      }
+
+      // Fallback to chat if no user found
+      return NextResponse.redirect(`${origin}/dashboard/chat`);
     } catch (err) {
       logger.error("Unexpected error in OAuth callback", err);
       return NextResponse.redirect(

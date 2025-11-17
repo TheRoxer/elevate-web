@@ -57,6 +57,8 @@ export class AuthService {
     error: SupabaseAuthError | null;
   }> {
     try {
+      logger.info("Attempting sign in", { email: data.email });
+
       const { data: authData, error } = await supabase.auth.signInWithPassword({
         email: data.email,
         password: data.password,
@@ -65,6 +67,8 @@ export class AuthService {
       if (!error && authData.session) {
         logger.info("User signed in successfully", {
           userId: authData.user?.id,
+          hasSession: !!authData.session,
+          hasUser: !!authData.user,
         });
       } else if (error) {
         logger.warn("Sign in failed", { error: error.message });
@@ -150,7 +154,9 @@ export class AuthService {
     try {
       const { user } = await this.getCurrentUser();
 
-      if (!user) return null;
+      if (!user) {
+        return null;
+      }
 
       const { data, error } = await supabase
         .from("profiles")
@@ -159,11 +165,43 @@ export class AuthService {
         .single();
 
       if (error) {
+        if (error.code === "PGRST116") {
+          // Profile doesn't exist - create it
+          logger.warn("Profile not found, creating new profile", {
+            userId: user.id,
+          });
+
+          const newProfile = {
+            id: user.id,
+            email: user.email!,
+            full_name: user.user_metadata?.full_name || "",
+            role: "user" as const,
+          };
+
+          const { data: createdProfile, error: createError } = await supabase
+            .from("profiles")
+            .insert(newProfile)
+            .select()
+            .single();
+
+          if (createError) {
+            logger.error("Failed to create profile", createError);
+            return null;
+          }
+
+          logger.info("Profile created successfully", {
+            userId: createdProfile.id,
+          });
+          return ProfileSchema.parse(createdProfile);
+        }
+
         logger.error("Failed to fetch profile", error);
         return null;
       }
 
-      if (!data) return null;
+      if (!data) {
+        return null;
+      }
 
       // Validate and parse the profile data
       return ProfileSchema.parse(data);

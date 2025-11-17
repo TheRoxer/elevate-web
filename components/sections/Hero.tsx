@@ -19,7 +19,7 @@ const Hero = () => {
     <div className="max-w-[1200px] w-full flex flex-col mt-12 sm:mt-16 items-center justify-start min-h-screen px-4 sm:px-0">
       {/* LightRays Background */}
       <div className="absolute top-0 left-0 w-full h-screen -z-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#12121c] pointer-events-none z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0d0d14] pointer-events-none z-10"></div>
         <LightRays
           raysOrigin="top-center"
           raysColor="#A8C0FF"

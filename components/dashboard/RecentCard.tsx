@@ -11,14 +11,14 @@ import Orders from "./RecentOrders";
 
 const RecentCard = React.memo(() => {
   return (
-    <Card className="card-recent card-height">
-      <CardHeader className="">
-        <CardTitle className="">Recent orders</CardTitle>
-        <CardDescription className="hidden lg:flex">
+    <Card className="card-height flex flex-col">
+      <CardHeader className="pb-4">
+        <CardTitle className="text-lg sm:text-xl">Recent orders</CardTitle>
+        <CardDescription className="hidden sm:flex text-xs sm:text-sm">
           Lorem ipsum dolor sit amet.
         </CardDescription>
       </CardHeader>
-      <CardContent className="">
+      <CardContent className="flex-1 overflow-auto pb-4">
         <Orders />
       </CardContent>
     </Card>

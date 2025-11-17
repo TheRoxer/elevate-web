@@ -40,14 +40,22 @@ export const getColumns = (
   },
   {
     accessorKey: "projectType",
-    header: "Project Type",
-    cell: ({ row }) => <div>{row.getValue("projectType")}</div>,
+    header: () => <div className="hidden sm:table-cell">Project Type</div>,
+    cell: ({ row }) => (
+      <div className="hidden sm:table-cell">{row.getValue("projectType")}</div>
+    ),
   },
   {
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => {
       const status = row.getValue("status") as string;
+      const statusDotColors = {
+        Pending: "bg-yellow-500",
+        "In Progress": "bg-blue-500",
+        Completed: "bg-green-500",
+        Cancelled: "bg-red-500",
+      };
       const statusColors = {
         Pending:
           "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200",
@@ -58,13 +66,25 @@ export const getColumns = (
         Cancelled: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
       };
       return (
-        <div
-          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-            statusColors[status as keyof typeof statusColors]
-          }`}
-        >
-          {status}
-        </div>
+        <>
+          {/* Colored dot for mobile */}
+          <div className="sm:hidden flex items-center justify-center">
+            <div
+              className={`w-3 h-3 rounded-full ${
+                statusDotColors[status as keyof typeof statusDotColors]
+              }`}
+              title={status}
+            />
+          </div>
+          {/* Full badge for larger screens */}
+          <div
+            className={`hidden sm:inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+              statusColors[status as keyof typeof statusColors]
+            }`}
+          >
+            {status}
+          </div>
+        </>
       );
     },
     sortingFn: (rowA, rowB) => {
@@ -84,7 +104,7 @@ export const getColumns = (
   },
   {
     accessorKey: "deadline",
-    header: "Deadline",
+    header: () => <div className="hidden sm:table-cell">Deadline</div>,
     cell: ({ row }) => {
       const date = new Date(row.getValue("deadline"));
       const formatted = new Intl.DateTimeFormat("en-US", {
@@ -92,7 +112,7 @@ export const getColumns = (
         day: "numeric",
         year: "numeric",
       }).format(date);
-      return <div>{formatted}</div>;
+      return <div className="hidden sm:table-cell">{formatted}</div>;
     },
   },
   {

@@ -31,6 +31,7 @@ interface NavbarLinkProps {
   href: string;
   onClick?(): void;
   isCollapsed?: boolean;
+  onNavigate?: () => void;
 }
 
 function NavbarLink({
@@ -40,8 +41,14 @@ function NavbarLink({
   href,
   onClick,
   isCollapsed,
+  onNavigate,
 }: NavbarLinkProps) {
   const router = useRouter();
+
+  const handleClick = () => {
+    router.push(href);
+    onNavigate?.();
+  };
 
   if (isCollapsed) {
     return (
@@ -53,9 +60,7 @@ function NavbarLink({
               size="icon"
               className={`rounded-lg ${activeLink ? "bg-[#181826]" : ""}`}
               aria-label={label}
-              onClick={() => {
-                router.push(href);
-              }}
+              onClick={handleClick}
             >
               <Icon className="size-5" />
             </Button>
@@ -75,9 +80,7 @@ function NavbarLink({
         activeLink ? "bg-[#181826]" : ""
       }`}
       aria-label={label}
-      onClick={() => {
-        router.push(href);
-      }}
+      onClick={handleClick}
     >
       <Icon className="size-5" />
       <span className="text-sm font-medium">{label}</span>
@@ -111,11 +114,15 @@ const allNavData = [
 interface SideBarProps {
   isCollapsed?: boolean;
   setIsCollapsed?: (collapsed: boolean) => void;
+  isMobile?: boolean;
+  onNavigate?: () => void;
 }
 
 const SideBar = ({
   isCollapsed: externalIsCollapsed,
   setIsCollapsed: externalSetIsCollapsed,
+  isMobile = false,
+  onNavigate,
 }: SideBarProps = {}) => {
   const router = useRouter();
   const pathname = usePathname();
@@ -147,6 +154,7 @@ const SideBar = ({
       href={link.href}
       activeLink={link.href === activeLink}
       isCollapsed={isCollapsed}
+      onNavigate={onNavigate}
     />
   ));
 
@@ -166,6 +174,7 @@ const SideBar = ({
             aria-label="Home"
             onClick={() => {
               router.push("/");
+              onNavigate?.();
             }}
           >
             <Bitcoin className="size-5" />
@@ -177,6 +186,7 @@ const SideBar = ({
             aria-label="Home"
             onClick={() => {
               router.push("/");
+              onNavigate?.();
             }}
           >
             <Image
@@ -204,6 +214,7 @@ const SideBar = ({
                   aria-label="Settings"
                   onClick={() => {
                     router.push("/dashboard/settings");
+                    onNavigate?.();
                   }}
                 >
                   <Settings className="size-5" />
@@ -223,32 +234,36 @@ const SideBar = ({
             aria-label="Settings"
             onClick={() => {
               router.push("/dashboard/settings");
+              onNavigate?.();
             }}
           >
             <Settings className="size-5" />
             <span className="text-sm font-medium">Settings</span>
           </Button>
         )}
-        <div className="border-t pt-4">
-          <Button
-            variant="ghost"
-            size={isCollapsed ? "icon" : "default"}
-            className={`${
-              isCollapsed ? "w-full" : "w-full justify-start gap-3 px-3"
-            } rounded-lg hover:bg-[hsl(240,23%,14%)]`}
-            aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-            onClick={() => setIsCollapsed(!isCollapsed)}
-          >
-            {isCollapsed ? (
-              <ChevronRight className="size-5" />
-            ) : (
-              <>
-                <ChevronLeft className="size-5" />
-                <span className="text-sm font-medium">Collapse</span>
-              </>
-            )}
-          </Button>
-        </div>
+        {/* Hide collapse button on mobile */}
+        {!isMobile && (
+          <div className="border-t pt-4">
+            <Button
+              variant="ghost"
+              size={isCollapsed ? "icon" : "default"}
+              className={`${
+                isCollapsed ? "w-full" : "w-full justify-start gap-3 px-3"
+              } rounded-lg hover:bg-[hsl(240,23%,14%)]`}
+              aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+              onClick={() => setIsCollapsed(!isCollapsed)}
+            >
+              {isCollapsed ? (
+                <ChevronRight className="size-5" />
+              ) : (
+                <>
+                  <ChevronLeft className="size-5" />
+                  <span className="text-sm font-medium">Collapse</span>
+                </>
+              )}
+            </Button>
+          </div>
+        )}
       </nav>
     </aside>
   );

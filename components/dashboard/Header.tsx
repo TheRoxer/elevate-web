@@ -43,13 +43,13 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-10 flex min-h-[69px] h-[69px] items-center gap-1 border-b bg-[#12121c] px-5">
-      <div className="flex row gap-4 justify-center items-center">
+    <header className="sticky top-0 z-10 flex min-h-[69px] h-[69px] items-center gap-1 border-b bg-[#12121c] px-3 sm:px-5">
+      <div className="flex flex-row gap-2 sm:gap-4 justify-center items-center ml-12 md:ml-0">
         <div className="w-[3.5px] h-[21px] rounded-[18px] bg-[#4a18d2]"></div>
-        <h1 className="text-xl font-semibold">Home</h1>
+        <h1 className="text-lg sm:text-xl font-semibold">Elevate Dashboard</h1>
       </div>
 
-      <div className="flex row items-center gap-4 ml-auto mr-4">
+      <div className="flex flex-row items-center gap-2 sm:gap-4 ml-auto mr-2 sm:mr-4">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button

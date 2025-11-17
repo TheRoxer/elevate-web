@@ -11,9 +11,21 @@ import {
   Label,
 } from "recharts";
 import { useChartDataQuery } from "@/hooks/queries/useChartDataQuery";
+import { useEffect, useState } from "react";
 
 export default function Chart() {
   const { data, isLoading, error } = useChartDataQuery();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   if (isLoading) {
     return (
@@ -36,7 +48,7 @@ export default function Chart() {
 
   return (
     <div>
-      <div className="h-[calc((100vh-57px)/2-9rem)] ">
+      <div className="h-[calc((100vh-57px)/2-9rem)] -ml-20 sm:ml-0 -mb-10 sm:mb-0">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={data}
@@ -68,18 +80,20 @@ export default function Chart() {
               fontSize={12}
               tickLine={false}
               axisLine={false}
-              tickFormatter={(value) => `$${value}`}
+              tickFormatter={(value) => (isMobile ? "" : `$${value}`)}
             >
-              <Label
-                value="Income ($)"
-                angle={-90}
-                position="insideLeft"
-                style={{
-                  textAnchor: "middle",
-                  fill: "hsl(var(--muted-foreground))",
-                  fontSize: 12,
-                }}
-              />
+              {!isMobile && (
+                <Label
+                  value="Income ($)"
+                  angle={-90}
+                  position="insideLeft"
+                  style={{
+                    textAnchor: "middle",
+                    fill: "hsl(var(--muted-foreground))",
+                    fontSize: 12,
+                  }}
+                />
+              )}
             </YAxis>
 
             <Tooltip

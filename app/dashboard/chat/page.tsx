@@ -8,6 +8,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Send, Bot, User, Search } from "lucide-react";
 import { useAuthContext } from "@/lib/providers/AuthProvider";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -125,25 +132,27 @@ export default function ChatPage() {
     <DashboardLayoutClient>
       <Header />
       <div className="flex-1 overflow-auto">
-        <div className="p-6">
-          <div className="flex gap-4 h-[calc(100vh-69px-3rem)]">
-            {/* Contacts Sidebar - 1/4 width */}
+        <div className="p-3 sm:p-4 lg:p-6">
+          <div className="flex flex-col md:flex-row gap-3 sm:gap-4 h-[calc(100vh-69px-1.5rem)] sm:h-[calc(100vh-69px-2rem)] lg:h-[calc(100vh-69px-3rem)]">
+            {/* Contacts Sidebar - Hidden on mobile, shows on md+ */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.4 }}
-              className="w-1/4"
+              className="hidden md:block md:w-1/3 lg:w-1/4"
             >
               <Card className="h-full flex flex-col">
-                <CardHeader className="border-b">
-                  <CardTitle className="text-lg">Contacts</CardTitle>
+                <CardHeader className="border-b pb-3">
+                  <CardTitle className="text-base sm:text-lg">
+                    Contacts
+                  </CardTitle>
                   <div className="relative mt-2">
                     <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                     <Input
                       placeholder="Search contacts..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-9"
+                      className="pl-9 text-sm"
                     />
                   </div>
                 </CardHeader>
@@ -153,11 +162,11 @@ export default function ChatPage() {
                       <button
                         key={contact.id}
                         onClick={() => setSelectedContact(contact.id)}
-                        className={`w-full flex items-center gap-3 p-3 rounded-lg hover:bg-accent transition-colors ${
+                        className={`w-full flex items-center gap-3 p-2 sm:p-3 rounded-lg hover:bg-accent transition-colors ${
                           selectedContact === contact.id ? "bg-accent" : ""
                         }`}
                       >
-                        <Avatar className="h-10 w-10">
+                        <Avatar className="h-8 w-8 sm:h-10 sm:w-10">
                           <AvatarImage src={contact.avatar} />
                           <AvatarFallback
                             className={
@@ -167,7 +176,7 @@ export default function ChatPage() {
                             }
                           >
                             {contact.id === "bot" ? (
-                              <Bot className="h-5 w-5" />
+                              <Bot className="h-4 w-4 sm:h-5 sm:w-5" />
                             ) : (
                               getContactInitials(contact.name)
                             )}
@@ -175,7 +184,7 @@ export default function ChatPage() {
                         </Avatar>
                         <div className="flex-1 text-left overflow-hidden">
                           <div className="flex items-center justify-between">
-                            <p className="text-sm font-medium truncate">
+                            <p className="text-xs sm:text-sm font-medium truncate">
                               {contact.name}
                             </p>
                             {contact.unread && contact.unread > 0 && (
@@ -195,36 +204,67 @@ export default function ChatPage() {
               </Card>
             </motion.div>
 
-            {/* Chat Window - 3/4 width */}
+            {/* Chat Window - Full width on mobile, 2/3 on md, 3/4 on lg */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.1 }}
-              className="w-3/4"
+              className="flex-1 md:w-2/3 lg:w-3/4"
             >
               <Card className="h-full flex flex-col">
-                <CardHeader className="border-b">
-                  <CardTitle className="flex items-center gap-2">
-                    <Bot className="h-5 w-5" />
-                    {contacts.find((c) => c.id === selectedContact)?.name ||
-                      "Chat Assistant"}
-                  </CardTitle>
+                <CardHeader className="border-b p-3 sm:p-4 md:p-6">
+                  <div className="flex items-center gap-3">
+                    <Bot className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+                    <Select
+                      value={selectedContact || undefined}
+                      onValueChange={setSelectedContact}
+                    >
+                      <SelectTrigger className="flex-1 border-0 p-0 h-auto font-semibold text-base sm:text-lg focus:ring-0 focus:ring-offset-0">
+                        <SelectValue placeholder="Select a chat" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {contacts.map((contact) => (
+                          <SelectItem key={contact.id} value={contact.id}>
+                            <div className="flex items-center gap-2">
+                              <Avatar className="h-6 w-6">
+                                <AvatarImage src={contact.avatar} />
+                                <AvatarFallback
+                                  className={
+                                    contact.id === "bot"
+                                      ? "bg-primary text-primary-foreground text-xs"
+                                      : "text-xs"
+                                  }
+                                >
+                                  {contact.id === "bot" ? (
+                                    <Bot className="h-3 w-3" />
+                                  ) : (
+                                    getContactInitials(contact.name)
+                                  )}
+                                </AvatarFallback>
+                              </Avatar>
+                              <span>{contact.name}</span>
+                            </div>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </CardHeader>
                 <CardContent className="flex-1 flex flex-col p-0">
                   {/* Messages Container */}
-                  <ScrollArea className="flex-1 p-4">
-                    <div className="space-y-4">
+                  <ScrollArea className="flex-1 p-3 sm:p-4">
+                    <div className="space-y-3 sm:space-y-4">
                       {messages.map((message) => (
                         <motion.div
                           key={message.id}
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.3 }}
-                          className={`flex gap-3 ${
+                          className={`flex gap-2 sm:gap-3 ${
                             message.sender === "user" ? "flex-row-reverse" : ""
                           }`}
                         >
-                          <Avatar className="h-8 w-8">
+                          <Avatar className="h-7 w-7 sm:h-8 sm:w-8 flex-shrink-0">
                             <AvatarImage
                               src={
                                 message.sender === "user"
@@ -240,27 +280,29 @@ export default function ChatPage() {
                               }
                             >
                               {message.sender === "bot" ? (
-                                <Bot className="h-4 w-4" />
+                                <Bot className="h-3 w-3 sm:h-4 sm:w-4" />
                               ) : (
                                 getUserInitials()
                               )}
                             </AvatarFallback>
                           </Avatar>
                           <div
-                            className={`flex flex-col gap-1 max-w-[70%] ${
+                            className={`flex flex-col gap-1 max-w-[75%] sm:max-w-[70%] ${
                               message.sender === "user" ? "items-end" : ""
                             }`}
                           >
                             <div
-                              className={`rounded-lg px-4 py-2 ${
+                              className={`rounded-lg px-3 py-2 sm:px-4 sm:py-2 ${
                                 message.sender === "user"
                                   ? "bg-primary text-primary-foreground"
                                   : "bg-muted"
                               }`}
                             >
-                              <p className="text-sm">{message.text}</p>
+                              <p className="text-xs sm:text-sm break-words">
+                                {message.text}
+                              </p>
                             </div>
-                            <span className="text-xs text-muted-foreground px-1">
+                            <span className="text-[10px] sm:text-xs text-muted-foreground px-1">
                               {message.timestamp.toLocaleTimeString([], {
                                 hour: "2-digit",
                                 minute: "2-digit",
@@ -274,22 +316,22 @@ export default function ChatPage() {
                         <motion.div
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
-                          className="flex gap-3"
+                          className="flex gap-2 sm:gap-3"
                         >
-                          <Avatar className="h-8 w-8">
+                          <Avatar className="h-7 w-7 sm:h-8 sm:w-8">
                             <AvatarFallback className="bg-primary text-primary-foreground">
-                              <Bot className="h-4 w-4" />
+                              <Bot className="h-3 w-3 sm:h-4 sm:w-4" />
                             </AvatarFallback>
                           </Avatar>
-                          <div className="bg-muted rounded-lg px-4 py-2">
+                          <div className="bg-muted rounded-lg px-3 py-2 sm:px-4 sm:py-2">
                             <div className="flex gap-1">
-                              <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" />
+                              <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-muted-foreground rounded-full animate-bounce" />
                               <div
-                                className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"
+                                className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-muted-foreground rounded-full animate-bounce"
                                 style={{ animationDelay: "0.2s" }}
                               />
                               <div
-                                className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"
+                                className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-muted-foreground rounded-full animate-bounce"
                                 style={{ animationDelay: "0.4s" }}
                               />
                             </div>
@@ -302,21 +344,22 @@ export default function ChatPage() {
                   </ScrollArea>
 
                   {/* Input Area */}
-                  <div className="border-t p-4">
+                  <div className="border-t p-3 sm:p-4">
                     <form onSubmit={handleSendMessage} className="flex gap-2">
                       <Input
                         value={inputValue}
                         onChange={(e) => setInputValue(e.target.value)}
                         placeholder="Type your message..."
-                        className="flex-1"
+                        className="flex-1 text-sm"
                         disabled={isTyping}
                       />
                       <Button
                         type="submit"
                         size="icon"
+                        className="h-9 w-9 sm:h-10 sm:w-10"
                         disabled={isTyping || !inputValue.trim()}
                       >
-                        <Send className="h-4 w-4" />
+                        <Send className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                       </Button>
                     </form>
                   </div>

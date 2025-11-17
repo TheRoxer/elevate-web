@@ -122,40 +122,42 @@ export default function UsersManagementPage() {
   return (
     <DashboardLayoutClient>
       <Header />
-      <div className="container mx-auto p-6 space-y-6">
+      <div className="container mx-auto p-4 sm:p-6 space-y-4 sm:space-y-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="flex items-center justify-between"
+          className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2"
         >
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
               User Management
             </h1>
-            <p className="text-muted-foreground">
+            <p className="text-sm sm:text-base text-muted-foreground">
               Manage user accounts and permissions
             </p>
           </div>
         </motion.div>
 
         {/* Stats Cards */}
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-2 sm:gap-4 grid-cols-3 sm:grid-cols-3">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.1 }}
           >
             <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 p-3 sm:p-6">
+                <CardTitle className="text-xs sm:text-sm font-medium">
                   Total Users
                 </CardTitle>
-                <Users className="h-4 w-4 text-muted-foreground" />
+                <Users className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
               </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{stats?.total ?? 0}</div>
+              <CardContent className="p-3 sm:p-6 pt-0">
+                <div className="text-xl sm:text-2xl font-bold">
+                  {stats?.total ?? 0}
+                </div>
               </CardContent>
             </Card>
           </motion.div>
@@ -166,12 +168,16 @@ export default function UsersManagementPage() {
             transition={{ duration: 0.4, delay: 0.2 }}
           >
             <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Admins</CardTitle>
-                <Shield className="h-4 w-4 text-muted-foreground" />
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 p-3 sm:p-6">
+                <CardTitle className="text-xs sm:text-sm font-medium">
+                  Admins
+                </CardTitle>
+                <Shield className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
               </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{stats?.admins ?? 0}</div>
+              <CardContent className="p-3 sm:p-6 pt-0">
+                <div className="text-xl sm:text-2xl font-bold">
+                  {stats?.admins ?? 0}
+                </div>
               </CardContent>
             </Card>
           </motion.div>
@@ -182,14 +188,16 @@ export default function UsersManagementPage() {
             transition={{ duration: 0.4, delay: 0.3 }}
           >
             <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">
-                  Regular Users
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 p-3 sm:p-6">
+                <CardTitle className="text-xs sm:text-sm font-medium">
+                  Users
                 </CardTitle>
-                <UserCog className="h-4 w-4 text-muted-foreground" />
+                <UserCog className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
               </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{stats?.users ?? 0}</div>
+              <CardContent className="p-3 sm:p-6 pt-0">
+                <div className="text-xl sm:text-2xl font-bold">
+                  {stats?.users ?? 0}
+                </div>
               </CardContent>
             </Card>
           </motion.div>
@@ -223,32 +231,44 @@ export default function UsersManagementPage() {
                   <p className="text-muted-foreground">No users found</p>
                 </div>
               ) : (
-                <div className="rounded-md border">
+                <div className="rounded-md border overflow-x-auto">
                   <Table>
                     <TableHeader>
                       <TableRow>
                         <TableHead>Email</TableHead>
-                        <TableHead>Full Name</TableHead>
+                        <TableHead className="hidden md:table-cell">
+                          Full Name
+                        </TableHead>
                         <TableHead>Role</TableHead>
-                        <TableHead>Created</TableHead>
+                        <TableHead className="hidden lg:table-cell">
+                          Created
+                        </TableHead>
                         <TableHead className="text-right">Actions</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {users.map((user: Profile) => (
                         <TableRow key={user.id}>
-                          <TableCell className="font-medium">
-                            {user.email}
+                          <TableCell className="font-medium text-sm">
+                            <span className="sm:hidden">
+                              {user.full_name || user.email}
+                            </span>
+                            <span className="hidden sm:inline">
+                              {user.email}
+                            </span>
                           </TableCell>
-                          <TableCell>{user.full_name || "—"}</TableCell>
+                          <TableCell className="hidden md:table-cell text-sm">
+                            {user.full_name || "—"}
+                          </TableCell>
                           <TableCell>
-                            <div className="flex items-center gap-2">
+                            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
                               <Badge
-                                variant={
+                                variant="outline"
+                                className={`text-xs hidden sm:inline-flex ${
                                   user.role === "admin"
-                                    ? "default"
-                                    : "secondary"
-                                }
+                                    ? "bg-[#6d28d9] text-white border-[#6d28d9]"
+                                    : ""
+                                }`}
                               >
                                 {user.role}
                               </Badge>
@@ -259,7 +279,7 @@ export default function UsersManagementPage() {
                                 }
                                 disabled={updatingUserId === user.id}
                               >
-                                <SelectTrigger className="w-[120px]">
+                                <SelectTrigger className="w-[100px] sm:w-[120px] h-8 text-xs">
                                   <SelectValue />
                                 </SelectTrigger>
                                 <SelectContent>
@@ -269,7 +289,7 @@ export default function UsersManagementPage() {
                               </Select>
                             </div>
                           </TableCell>
-                          <TableCell>
+                          <TableCell className="hidden lg:table-cell text-sm">
                             {format(new Date(user.created_at), "MMM dd, yyyy")}
                           </TableCell>
                           <TableCell className="text-right">
@@ -278,9 +298,10 @@ export default function UsersManagementPage() {
                                 <Button
                                   variant="ghost"
                                   size="icon"
+                                  className="h-8 w-8"
                                   disabled={deletingUserId === user.id}
                                 >
-                                  <Trash2 className="h-4 w-4 text-destructive" />
+                                  <Trash2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-destructive" />
                                 </Button>
                               </AlertDialogTrigger>
                               <AlertDialogContent>

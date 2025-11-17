@@ -94,7 +94,7 @@ export default function OrdersPage() {
   return (
     <DashboardLayoutClient>
       <Header />
-      <div className="flex-1 p-8">
+      <div className="flex-1 p-4 sm:p-6 lg:p-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -103,15 +103,17 @@ export default function OrdersPage() {
         >
           <Card className="h-full flex flex-col">
             <CardHeader className="space-y-4">
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
-                  <h1 className="text-3xl font-bold tracking-tight">Orders</h1>
-                  <p className="text-muted-foreground">
+                  <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
+                    Orders
+                  </h1>
+                  <p className="text-sm sm:text-base text-muted-foreground">
                     Manage and track all your project orders
                   </p>
                 </div>
                 <Button
-                  className="bg-primary hover:bg-primary/90"
+                  className="bg-primary hover:bg-primary/90 w-full sm:w-auto"
                   onClick={() => setCreateDialogOpen(true)}
                 >
                   <Plus className="mr-2 h-4 w-4" />
@@ -119,18 +121,18 @@ export default function OrdersPage() {
                 </Button>
               </div>
 
-              <div className="flex items-center gap-4">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
                 <div className="relative flex-1">
                   <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                   <Input
-                    placeholder="Search by client, order ID, or project type..."
+                    placeholder="Search orders..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="pl-10"
                   />
                 </div>
                 <Select value={statusFilter} onValueChange={setStatusFilter}>
-                  <SelectTrigger className="w-[180px]">
+                  <SelectTrigger className="w-full sm:w-[180px]">
                     <SelectValue placeholder="Filter by status" />
                   </SelectTrigger>
                   <SelectContent>

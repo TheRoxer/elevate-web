@@ -13,17 +13,17 @@ import {
 
 const ChartCard = React.memo(() => {
   return (
-    <Card className="card-chart card-height">
+    <Card className="card-height flex flex-col">
       <div className="flex justify-between align-middle">
-        <CardHeader className="">
-          <CardTitle className="">Total Income</CardTitle>
-          <CardDescription className="hidden lg:flex">
+        <CardHeader className="pb-4">
+          <CardTitle className="text-lg sm:text-xl">Total Income</CardTitle>
+          <CardDescription className="hidden sm:flex text-xs sm:text-sm">
             Lorem ipsum dolor sit amet.
           </CardDescription>
         </CardHeader>
       </div>
 
-      <CardContent>
+      <CardContent className="flex-1 overflow-auto pb-4">
         <Chart />
       </CardContent>
     </Card>

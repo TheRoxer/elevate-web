@@ -29,12 +29,12 @@ export default function Panel() {
   return (
     <DashboardLayoutClient>
       <Header />
-      <div className="content">
+      <div className="flex flex-col gap-4 p-4 md:p-6 lg:p-8 overflow-auto h-[calc(100vh-69px)]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="card-chart"
+          className="w-full"
         >
           <ChartCard />
         </motion.div>
@@ -42,7 +42,7 @@ export default function Panel() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.2 }}
-          className="card-recent"
+          className="w-full"
         >
           <RecentCard />
         </motion.div>

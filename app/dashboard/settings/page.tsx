@@ -280,7 +280,7 @@ export default function SettingsPage() {
                       size="sm"
                       onClick={handleAvatarClick}
                       disabled={isUploadingAvatar}
-                      className="mt-2"
+                      className="mt-2 bg-[#1f2937] text-white hover:bg-[#1f2937]/90 border-[#1f2937]"
                     >
                       <Upload className="h-4 w-4 mr-2" />
                       {isUploadingAvatar ? "Uploading..." : "Upload Photo"}
@@ -412,8 +412,7 @@ export default function SettingsPage() {
                   <Button
                     type="submit"
                     disabled={isUpdatingPassword}
-                    className="w-full sm:w-auto"
-                    variant="secondary"
+                    className="w-full sm:w-auto bg-[#6d28d9] text-white hover:bg-[#6d28d9]/90"
                   >
                     {isUpdatingPassword ? (
                       <>

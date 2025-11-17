@@ -1,27 +1,18 @@
-.content {
-  display: grid;
-  padding: 2rem;
-  gap: 1.5rem;
-  height: calc(100vh - 57px);
-
-  grid-template-areas:
-    "chart chart chart chart"
-    "recent recent recent recent";
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-}
-
-body {
-  overflow: hidden;
-}
+/* Responsive styles now handled by Tailwind classes */
 
 .card-height {
-  max-height: calc((100vh - 57px) / 2 - 2rem);
+  /* Responsive card heights */
+  max-height: 400px;
 }
 
-.card-chart {
-  grid-area: chart;
+@media (min-width: 768px) {
+  .card-height {
+    max-height: 500px;
+  }
 }
 
-.card-recent {
-  grid-area: recent;
+@media (min-width: 1024px) {
+  .card-height {
+    max-height: calc((100vh - 69px - 4rem) / 2 - 1rem);
+  }
 }

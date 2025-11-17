@@ -14,6 +14,11 @@ interface UIState {
   setSidebarCollapsed: (collapsed: boolean) => void;
   toggleSidebar: () => void;
 
+  // Mobile menu state
+  mobileMenuOpen: boolean;
+  setMobileMenuOpen: (open: boolean) => void;
+  toggleMobileMenu: () => void;
+
   // Order filters
   orderFilters: {
     status?: string;
@@ -36,6 +41,12 @@ export const useUIStore = create<UIState>()(
       setSidebarCollapsed: (collapsed) => set({ sidebarCollapsed: collapsed }),
       toggleSidebar: () =>
         set((state) => ({ sidebarCollapsed: !state.sidebarCollapsed })),
+
+      // Mobile menu
+      mobileMenuOpen: false,
+      setMobileMenuOpen: (open) => set({ mobileMenuOpen: open }),
+      toggleMobileMenu: () =>
+        set((state) => ({ mobileMenuOpen: !state.mobileMenuOpen })),
 
       // Filters
       orderFilters: {},

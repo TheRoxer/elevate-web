@@ -5,6 +5,7 @@ import IconButton from "@/components/landing/IconButton";
 import { github } from "@/lib/icons";
 import Image from "next/image";
 import { TextWrite } from "@/components/landing/TextWrite";
+import LightRays from "@/components/ui/lightRays";
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -16,15 +17,28 @@ const Hero = () => {
 
   return (
     <div className="max-w-[1200px] w-full flex flex-col mt-12 sm:mt-16 items-center justify-start min-h-screen px-4 sm:px-0">
+      {/* LightRays Background */}
+      <div className="absolute top-0 left-0 w-full h-screen -z-20 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#12121c] pointer-events-none z-10"></div>
+        <LightRays
+          raysOrigin="top-center"
+          raysColor="#A8C0FF"
+          raysSpeed={1.5}
+          lightSpread={0.8}
+          rayLength={1.2}
+          followMouse={true}
+          mouseInfluence={0.1}
+          noiseAmount={0.1}
+          distortion={0.05}
+        />
+      </div>
+
       <motion.div
         ref={ref}
         initial={{ opacity: 0 }}
         animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
         transition={{ duration: 0.75 }}
-        className="
-          w-full flex flex-col mt-4 sm:mt-8 items-center justify-center 
-          bg-[url('/decorators/hero-pattern.svg')] bg-no-repeat bg-[top_-30px_center] sm:bg-[top_-60px_center] bg-[length:80%] sm:bg-auto
-        "
+        className="w-full flex flex-col mt-4 sm:mt-8 items-center justify-center"
       >
         <div className="flex flex-row gap-3 sm:gap-4 md:gap-12 max-w-[950px] w-full sm:w-[90%] pl-2 sm:pl-4">
           <Image

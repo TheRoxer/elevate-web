@@ -42,7 +42,13 @@ export const createClient = () => {
  */
 export const supabase = createSupabaseClient<Database>(
   supabaseUrl,
-  supabaseAnonKey
+  supabaseAnonKey,
+  {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+    },
+  }
 );
 
 /**

@@ -171,18 +171,22 @@ export class AuthService {
             userId: user.id,
           });
 
-          const newProfile = {
-            id: user.id,
-            email: user.email!,
-            full_name: user.user_metadata?.full_name || "",
-            role: "user" as const,
-          };
+          const newProfile: Database["public"]["Tables"]["profiles"]["Insert"] =
+            {
+              id: user.id,
+              email: user.email!,
+              full_name: user.user_metadata?.full_name || null,
+              role: "user",
+            };
 
-          const { data: createdProfile, error: createError } = await supabase
+          const { data: createdProfile, error: createError } = (await supabase
             .from("profiles")
-            .insert(newProfile)
+            .insert(newProfile as any)
             .select()
-            .single();
+            .single()) as {
+            data: Database["public"]["Tables"]["profiles"]["Row"] | null;
+            error: any;
+          };
 
           if (createError) {
             logger.error("Failed to create profile", createError);
@@ -190,7 +194,7 @@ export class AuthService {
           }
 
           logger.info("Profile created successfully", {
-            userId: createdProfile.id,
+            userId: createdProfile?.id,
           });
           return ProfileSchema.parse(createdProfile);
         }

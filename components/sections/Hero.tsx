@@ -15,35 +15,65 @@ const Hero = () => {
   });
 
   return (
-    <div className="max-w-[1200px] w-full flex flex-col mt-16 items-center justify-start min-h-screen">
+    <div className="max-w-[1200px] w-full flex flex-col mt-12 sm:mt-16 items-center justify-start min-h-screen px-4 sm:px-0">
       <motion.div
         ref={ref}
         initial={{ opacity: 0 }}
         animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
         transition={{ duration: 0.75 }}
         className="
-          w-full flex flex-col mt-8 items-center justify-center 
-          bg-[url('/decorators/hero-pattern.svg')] bg-no-repeat bg-[top_-60px_center]
+          w-full flex flex-col mt-4 sm:mt-8 items-center justify-center 
+          bg-[url('/decorators/hero-pattern.svg')] bg-no-repeat bg-[top_-30px_center] sm:bg-[top_-60px_center] bg-[length:80%] sm:bg-auto
         "
       >
-        <div className="flex flex-row gap-4 md:gap-12 max-w-[950px] w-[90%] pl-2 sm:pl-4">
+        <div className="flex flex-row gap-3 sm:gap-4 md:gap-12 max-w-[950px] w-full sm:w-[90%] pl-2 sm:pl-4">
           <Image
             src="/decorators/line-1.png"
             alt="line"
             width={37}
             height={363}
-            className="mt-5 w-[28.6px] h-[285.4] lg:w-[37px] lg:h-[363px]"
+            className="hidden sm:block mt-3 sm:mt-5 w-[20px] h-[200px] sm:w-[28.6px] sm:h-[285.4px] lg:w-[37px] lg:h-[363px]"
           />
-          <div className="flex justify-start flex-col gap-7 lg:gap-[3.75rem] relative ">
-            {/* max-w-[550px] lg:max-w-[750px] */}
-            <TextWrite className=" whitespace-pre-line lg:max-w-[708px] md:max-w-[240.9px] sm:w-[750px] sm:max-w-[750px]">
-              We take our job to the
-              <span className="text-gradient whitespace-pre-line">
-                Next Level
-              </span>
-            </TextWrite>
+          <div className="flex justify-start sm:justify-start flex-col gap-4 sm:gap-7 lg:gap-[3.75rem] relative w-full items-center sm:items-start">
+            <div className="flex flex-col gap-2 sm:items-start items-center">
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : -10 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className=" mb-2"
+              >
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-slate-400/20 bg-slate-800/30 backdrop-blur-sm">
+                  <div className="relative flex items-center justify-center">
+                    <div
+                      className="absolute w-3 h-3 rounded-full animate-ping opacity-75"
+                      style={{
+                        background:
+                          "linear-gradient(109deg, rgba(168, 192, 255, 0.9) 12.88%, rgba(90, 82, 177, 0.9) 60.68%, rgba(63, 43, 150, 0.9) 87.02%)",
+                      }}
+                    ></div>
+                    <div
+                      className="relative w-2 h-2 rounded-full"
+                      style={{
+                        background:
+                          "linear-gradient(109deg, rgba(168, 192, 255, 1) 12.88%, rgba(90, 82, 177, 1) 60.68%, rgba(63, 43, 150, 1) 87.02%)",
+                      }}
+                    ></div>
+                  </div>
+                  <span className="text-sm text-neutral-300 font-medium">
+                    Creating Your Dreams
+                  </span>
+                </div>
+              </motion.div>
 
-            <div className="flex flex-row gap-5">
+              <TextWrite className="whitespace-pre-line max-w-[320px] sm:max-w-[750px] lg:max-w-[708px] text-center sm:text-left">
+                We take our job to the
+                <span className="text-gradient whitespace-pre-line">
+                  Next Level
+                </span>
+              </TextWrite>
+            </div>
+
+            <div className="flex flex-row gap-3 sm:gap-5 justify-center sm:justify-start">
               <Button>Learn More</Button>
               <IconButton
                 icon={github}
@@ -53,7 +83,7 @@ const Hero = () => {
             </div>
 
             <div
-              className="absolute -top-12 -left-32 w-72 h-80 rotate-45 bg-color rounded-full filter blur-2xl opacity-60 -z-10 "
+              className="hidden sm:block absolute -top-12 -left-32 w-72 h-80 rotate-45 bg-color rounded-full filter blur-2xl opacity-60 -z-10 "
               style={{
                 background:
                   "linear-gradient(176deg, rgba(168, 192, 255, 0.63) -6.53%, rgba(109, 109, 196, 0.63) 27.56%, rgba(63, 43, 150, 0.63) 54.34%)",
@@ -61,7 +91,7 @@ const Hero = () => {
             ></div>
           </div>
         </div>
-        <div className="relative w-[90%] px-0 sm:px-2">
+        <div className="relative w-full sm:w-[90%] px-0 sm:px-2 mt-6 sm:mt-0">
           <Image
             className="hidden sm:block w-[85vw] lg:w-[65vw]"
             src="/images/card.png"
@@ -70,7 +100,7 @@ const Hero = () => {
             height={472}
           ></Image>
           <Image
-            className="bock sm:hidden w-[85vw] lg:w-[65vw]"
+            className="block sm:hidden w-full max-w-[95vw]"
             src="/images/cardSmall.png"
             alt="line"
             width={1200}
@@ -79,7 +109,7 @@ const Hero = () => {
 
           <div
             id="decorator"
-            className="absolute -top-12 -right-20 w-72 h-80  bg-color rounded-full filter blur-2xl opacity-70 -z-10 animate-blob animation-delay-2000"
+            className="absolute -top-12 -right-10 sm:-right-20 w-48 h-48 sm:w-72 sm:h-80 bg-color rounded-full filter blur-2xl opacity-70 -z-10 animate-blob animation-delay-2000"
             style={{
               background:
                 "linear-gradient(176deg, rgba(168, 192, 255, 0.63) -6.53%, rgba(109, 109, 196, 0.63) 27.56%, rgba(63, 43, 150, 0.63) 54.34%)",
@@ -87,7 +117,7 @@ const Hero = () => {
           ></div>
           <div
             id="decorator2"
-            className="absolute -bottom-20 -left-20 w-72 h-72 bg-color rounded-full filter blur-2xl opacity-70 -z-10 animate-blob"
+            className="absolute -bottom-10 sm:-bottom-20 -left-10 sm:-left-20 w-48 h-48 sm:w-72 sm:h-72 bg-color rounded-full filter blur-2xl opacity-70 -z-10 animate-blob"
             style={{
               background:
                 "linear-gradient(176deg, rgba(168, 192, 255, 0.63) -6.53%, rgba(109, 109, 196, 0.63) 27.56%, rgba(63, 43, 150, 0.63) 54.34%)",

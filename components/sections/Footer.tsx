@@ -2,11 +2,13 @@ import Image from "next/image";
 
 const Footer = () => {
   return (
-    <footer className="mt-24 max-w-[1200px] w-full">
+    <footer className="mt-16 sm:mt-24 max-w-[1200px] w-full px-4 sm:px-0">
       <hr className="w-full h-[3px]" />
-      <div className="flex justify-between mt-8 mx-4">
-        <p className="text-[#6f6c85]">© 2024 Elevate. All rights reserved.</p>
-        <div className="flex gap-3 ">
+      <div className="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0 mt-6 sm:mt-8 mx-4">
+        <p className="text-[#6f6c85] text-sm sm:text-base text-center sm:text-left">
+          © 2024 Elevate. All rights reserved.
+        </p>
+        <div className="flex gap-3 sm:gap-4">
           <a href="#" className=" hover:text-[#ff4c60]">
             <Image
               src="/icons/socials/discord.svg"

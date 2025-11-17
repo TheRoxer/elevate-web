@@ -40,8 +40,8 @@ const Navbar = () => {
 
   return (
     <div
-      className={`flex justify-between items-center p-6 fixed top-4 w-[calc(100%-2rem)] xl:w-[calc(64%+2rem)] 
-        transition-colors duration-600 ease-in rounded-[20px] border-2 border-b-2 z-50 backdrop-blur  ${
+      className={`flex justify-between items-center p-4 sm:p-6 fixed top-2 sm:top-4 w-[calc(100%-1rem)] sm:w-[calc(100%-2rem)] xl:w-[calc(64%+2rem)] 
+        transition-colors duration-600 ease-in rounded-[15px] sm:rounded-[20px] border-2 border-b-2 z-50 backdrop-blur  ${
           scrolled
             ? "bg-card-landing  border-slate-400/10 "
             : "border-transparent"
@@ -53,11 +53,11 @@ const Navbar = () => {
           alt="logo"
           width={219.6}
           height={45.6}
-          className="w-[183px] h-[38] md:w-[219.6px] md:h-[45.6px]"
+          className="w-[140px] h-[29px] sm:w-[183px] sm:h-[38px] md:w-[219.6px] md:h-[45.6px]"
         ></Image>
       </a>
 
-      <ul className="justify-center items-center gap-5 hidden lg:flex">
+      <ul className="justify-center items-center gap-4 lg:gap-5 hidden lg:flex">
         <li>
           <a
             href="/#"
@@ -92,11 +92,18 @@ const Navbar = () => {
         </li>
       </ul>
 
-      <div className="flex justify-center items-center gap-[35px]">
-        <Button href="/auth/signin" unstyled className="hidden md:flex">
+      <div className="flex justify-center items-center gap-2 sm:gap-4 md:gap-[35px]">
+        <Button
+          href="/auth/signin"
+          unstyled
+          className="hidden md:flex text-sm sm:text-base"
+        >
           Login
         </Button>
-        <Button href="/#services" className="hidden sm:flex">
+        <Button
+          href="/#services"
+          className="hidden sm:flex text-sm sm:text-base px-4 sm:px-6"
+        >
           Learn More
         </Button>
         <Sheet>
